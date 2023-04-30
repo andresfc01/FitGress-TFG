@@ -7,10 +7,10 @@ import BotonLogout from "../botonLogout/botonLogout";
 
 export default function App() {
   const { user } = useContext(AppContext);
-
   return (
     <>
-      <nav className={styles.header}>
+      {user?.ima}
+      <nav>
         <ul>
           <li>
             <Link to={""}>Home</Link>

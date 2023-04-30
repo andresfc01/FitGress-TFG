@@ -31,20 +31,12 @@ const Form = () => {
       .string()
       .required("Debe de seleccionar un objetivo físico")
       .label("Objetivo físico"),
-    /* image: yup
-      .mixed()
-      .required("Debe de subir una foto de perfil")
-      .test(
-        "fileSize",
-        "El archivo es muy grande",
-        (value) => value && value[0] && value[0].size <= 2000000
-      )
-      .test(
+    image: yup.mixed(),
+    /* .test(
         "fileType",
         "Debe de ser un archivo de imagen",
         (value) => value && value[0] && value[0].type.startsWith("image/")
-      ),  */
-    objetivoPeso: yup
+      ) */ objetivoPeso: yup
       .number()
       .required("Debe de indicar su peso objetivo")
       .label("Peso objetivo"),
@@ -61,11 +53,18 @@ const Form = () => {
   const { userRegister, registerUser } = useRegister();
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [objetivoFisico, setObjetivoFisico] = useState("Mantenimiento");
+  const [objetivoPeso, setObjetivoPeso] = useState(70);
+  const [image, setImage] = useState("");
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     // Puedes validar el tipo y tamaño del archivo aquí
     setSelectedFile(selectedFile);
+    setImage(URL.createObjectURL(event.target.files[0]));
     console.log(selectedFile);
   };
 
@@ -80,8 +79,14 @@ const Form = () => {
   }, [userRegister]);
 
   const onSubmit = (data) => {
-    console.log("Enviando ...");
-    registerUser(data);
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("objetivoFisico", objetivoFisico);
+    formData.append("objetivoPeso", objetivoPeso);
+    formData.append("image", selectedFile);
+    registerUser(formData);
   };
 
   return (
@@ -90,7 +95,13 @@ const Form = () => {
         {userRegister?.message}
       </p>
       <label htmlFor="username">Nombre de usuario:</label>
-      <input type="text" id="username" {...register("username")} />
+      <input
+        type="text"
+        id="username"
+        {...register("username")}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
       <p
         className="msgError"
         style={{ display: errors.username ? "block" : "none" }}
@@ -99,7 +110,13 @@ const Form = () => {
       </p>
 
       <label htmlFor="email">Correo electrónico:</label>
-      <input type="text" id="email" {...register("email")} />
+      <input
+        type="text"
+        id="email"
+        {...register("email")}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <p
         className="msgError"
         style={{ display: errors.email ? "block" : "none" }}
@@ -108,7 +125,13 @@ const Form = () => {
       </p>
 
       <label htmlFor="password">Contraseña:</label>
-      <input type="password" id="password" {...register("password")} />
+      <input
+        type="password"
+        id="password"
+        {...register("password")}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <p
         className="msgError"
         style={{ display: errors.password ? "block" : "none" }}
@@ -130,7 +153,12 @@ const Form = () => {
       </p>
 
       <label htmlFor="objetivoFisico">Objetivo físico:</label>
-      <select id="objetivoFisico" {...register("objetivoFisico")}>
+      <select
+        id="objetivoFisico"
+        {...register("objetivoFisico")}
+        value={objetivoFisico}
+        onChange={(e) => setObjetivoFisico(e.target.value)}
+      >
         <option value="Mantenimiento">Mantenimiento</option>
         <option value="Perdida grasa">Pérdida de peso</option>
         <option value="Ganancia de peso">Ganancia de masa muscular</option>
@@ -142,6 +170,21 @@ const Form = () => {
         {errors.objetivoFisico?.message}
       </p>
 
+      <label htmlFor="objetivoPeso">Meta de peso:</label>
+      <input
+        type="number"
+        id="objetivoPeso"
+        {...register("objetivoPeso")}
+        value={objetivoPeso}
+        onChange={(e) => setObjetivoPeso(e.target.value)}
+      />
+      <p
+        className="msgError"
+        style={{ display: errors.objetivoPeso ? "block" : "none" }}
+      >
+        {errors.objetivoPeso?.message}
+      </p>
+
       {/* <input type="file" id="image"  {...register("image")}  /> */}
       <input type="file" onChange={handleFileChange} id="image" />
       <p
@@ -150,15 +193,7 @@ const Form = () => {
       >
         {errors.image?.message}
       </p>
-
-      <label htmlFor="objetivoPeso">Meta de peso:</label>
-      <input type="number" id="objetivoPeso" {...register("objetivoPeso")} />
-      <p
-        className="msgError"
-        style={{ display: errors.objetivoPeso ? "block" : "none" }}
-      >
-        {errors.objetivoPeso?.message}
-      </p>
+      {selectedFile && <img src={image} />}
 
       <button type="submit">Registrarme</button>
     </form>

@@ -6,17 +6,14 @@ export const useRegister = () => {
   const [userRegister, setUserRegister] = useState({});
 
   const postFormData = async (formData) => {
+    console.log("DATOS : ", formData.get("image"));
     const response = await fetch(URL_REGISTER, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      body: formData,
     });
     const userObj = {
       ...userRegister,
       status: response.status,
-      role: ["user"],
     };
 
     userObj.status = response.status;

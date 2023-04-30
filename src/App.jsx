@@ -35,13 +35,15 @@ function App() {
       <QueryClientProvider client={client}>
         <BrowserRouter>
           <Header />
-          <Routes>
-            <Route path="/" element={<h1>BASE</h1>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/plantillas" element={<Plantillas />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/*" element={<h1>PAG NO</h1>} />
-          </Routes>
+          <div id="App">
+            <Routes>
+              <Route path="/" element={<h1>BASE</h1>} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/plantillas" element={<Plantillas />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/*" element={<h1>PAG NO</h1>} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </QueryClientProvider>
     </AppContext.Provider>
