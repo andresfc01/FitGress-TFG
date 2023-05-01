@@ -22,7 +22,6 @@ export default function Ejercicios() {
 
   const handleClickGrupo = (ev) => {
     if (grupoMuscular !== ev.target.id) {
-      console.log("no mismoooooooooo");
       setGrupoMuscular(ev.target.id);
     } else {
       setGrupoMuscular("");
@@ -49,9 +48,15 @@ export default function Ejercicios() {
             ))}
           </div>
           <div className={style.ejercicios}>
-            {ejercicios.map((ejercicio) => (
-              <Ejercicio key={ejercicio._id} ejercicio={ejercicio} />
-            ))}
+            {ejercicios.length == 0 ? (
+              <p>No se han encontrado resultados</p>
+            ) : (
+              <>
+                {ejercicios.map((ejercicio) => (
+                  <Ejercicio key={ejercicio._id} ejercicio={ejercicio} />
+                ))}
+              </>
+            )}
           </div>
         </>
       )}
