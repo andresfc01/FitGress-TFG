@@ -1,7 +1,86 @@
 .ejercicios {
+  margin: 2rem 0;
   width: 90%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 1rem;
   justify-items: center;
+}
+.gruposMusculares {
+  width: 85%;
+  padding: 1rem 1rem;
+  margin: 2rem 0;
+  background-color: var(--color-secondary);
+
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s;
+}
+
+.grupoMuscular {
+  padding: 0.5rem;
+  width: 5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  margin: 0;
+  background-color: var(--background-alt);
+  border: 1px solid var(--selection);
+
+  animation: show 0.5s ease;
+}
+
+.grupoSelected{
+  background: var(--selection);
+  border-color: var(--text-bright);
+}
+
+.grupoMuscular:hover {
+  background: var(--selection);
+}
+
+.grupoMuscular img {
+  height: 7rem;
+}
+.grupoMuscular h4 {
+  margin: 0.5rem 0;
+}
+
+@-webkit-keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
