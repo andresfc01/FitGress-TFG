@@ -3,6 +3,8 @@ import Ejercicio from "../../components/ejercicio/ejercicio";
 import style from "./styles.module.css";
 import { searchEjercicios } from "../../services/ejercicios";
 import { useEjercicios } from "../../hooks/useEjercicios";
+import { Audio } from "react-loader-spinner";
+import Loader from "../../components/loader/loaders";
 
 export default function Ejercicios() {
   const {
@@ -37,7 +39,7 @@ export default function Ejercicios() {
         onChange={handleOnChange}
       />
       {loading ? (
-        <h1>Cargado</h1>
+        <Loader />
       ) : (
         <>
           <div>
