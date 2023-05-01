@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { searchEjercicios } from "../services/ejercicios";
+import { searchGruposMusculares } from "../services/gruposMusculares";
 
 export function useEjercicios({ busqueda, sort }) {
   const [ejercicios, setEjercicios] = useState([]);
+  const [grupoMuscular, setGrupoMuscular] = useState("");
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
   const allEjercicios = useRef([]);
+  const allGrupos = useRef([]);
+  const previousGrupo = useRef(grupoMuscular);
 
   async function fetchEjercicios() {
     var newEjercicios = await searchEjercicios();
@@ -17,8 +22,17 @@ export function useEjercicios({ busqueda, sort }) {
     allEjercicios.current = newEjercicios;
   }
 
+  async function fetchGruposMusculares() {
+    var newGrupos = await searchGruposMusculares();
+    allGrupos.current = newGrupos;
+  }
+
   useEffect(() => {
+    setLoading(true);
     fetchEjercicios();
+
+    fetchGruposMusculares();
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -29,9 +43,39 @@ export function useEjercicios({ busqueda, sort }) {
 
       setEjercicios(filteredEjercicios);
     } else {
-      fetchEjercicios();
+      var newEjercicios = allEjercicios.current;
+      if (sort) {
+        newEjercicios = newEjercicios.sort((a, b) =>
+          a.nombre.localeCompare(b.nombre)
+        );
+      }
+
+      setEjercicios(newEjercicios);
     }
   }, [search]);
 
-  return { ejercicios, setSearch };
+  useEffect(() => {
+    //si no esta vacio filtro por grupo
+    if (grupoMuscular !== "") {
+      const filteredEjercicios = allEjercicios.current.filter(
+        (ejercicio) => ejercicio.grupoMuscular == grupoMuscular
+      );
+      setEjercicios(filteredEjercicios);
+      //si esta vacio
+    } else {
+      //si no tiene todos los ejercicios se los asigno
+      if (ejercicios != allEjercicios.current) {
+        setEjercicios(allEjercicios.current);
+      }
+    }
+  }, [grupoMuscular]);
+
+  return {
+    ejercicios,
+    setSearch,
+    gruposMusculares: allGrupos,
+    grupoMuscular,
+    setGrupoMuscular,
+    loading,
+  };
 }

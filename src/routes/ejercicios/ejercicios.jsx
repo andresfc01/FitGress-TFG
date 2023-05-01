@@ -5,10 +5,28 @@ import { searchEjercicios } from "../../services/ejercicios";
 import { useEjercicios } from "../../hooks/useEjercicios";
 
 export default function Ejercicios() {
-  const { ejercicios, setSearch } = useEjercicios({ search: "", sort: true });
-
+  const {
+    ejercicios,
+    setSearch,
+    gruposMusculares,
+    grupoMuscular,
+    setGrupoMuscular,
+    loading,
+  } = useEjercicios({
+    search: "",
+    sort: true,
+  });
   const handleOnChange = (ev) => {
     setSearch(ev.target.value);
+  };
+
+  const handleClickGrupo = (ev) => {
+    if (grupoMuscular !== ev.target.id) {
+      console.log("no mismoooooooooo");
+      setGrupoMuscular(ev.target.id);
+    } else {
+      setGrupoMuscular("");
+    }
   };
 
   return (
@@ -19,11 +37,24 @@ export default function Ejercicios() {
         placeholder="Press de banca, sentadilla..."
         onChange={handleOnChange}
       />
-      <div className={style.ejercicios}>
-        {ejercicios.map((ejercicio) => (
-          <Ejercicio ejercicio={ejercicio} />
-        ))}
-      </div>
+      {loading ? (
+        <h1>Cargado</h1>
+      ) : (
+        <>
+          <div>
+            {gruposMusculares.current.map((grupo) => (
+              <span key={grupo._id} id={grupo._id} onClick={handleClickGrupo}>
+                {grupo.nombre}
+              </span>
+            ))}
+          </div>
+          <div className={style.ejercicios}>
+            {ejercicios.map((ejercicio) => (
+              <Ejercicio key={ejercicio._id} ejercicio={ejercicio} />
+            ))}
+          </div>
+        </>
+      )}
     </>
   );
 }
