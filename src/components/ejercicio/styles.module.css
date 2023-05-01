@@ -1,2 +1,24 @@
 .ejercicio {
+  background: var(--color-secondary);
+  color: var(--color-terciary);
+  border-radius: 1rem;
+
+  padding: 1rem;
+  max-width: 18rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.ejercicio video {
+  max-width: inherit;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+
+.ejercicio h2{
+    margin: 0;
+    padding: 0;
 }

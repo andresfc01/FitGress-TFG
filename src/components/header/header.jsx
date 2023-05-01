@@ -18,6 +18,9 @@ export default function App() {
           <li>
             <Link to={"plantillas"}>Plantillas</Link>
           </li>
+          <li>
+            <Link to={"ejercicios"}>Ejercicios</Link>
+          </li>
           {!user && (
             <>
               <li>

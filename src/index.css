@@ -37,6 +37,8 @@
   :root {
     --background-body: #202b38;
     --background-header: #11161d;
+    --color-secondary: #263143;
+    --color-terciary: #a2a2a2;
     --background: #161f27;
     --background-alt: #1a242f;
     --selection: #1c76c5;

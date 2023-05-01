@@ -4,6 +4,7 @@ import Header from "./components/header/header";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import Plantillas from "./routes/plantillas/plantillas";
+import Ejercicios from "./routes/ejercicios/ejercicios";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
@@ -40,6 +41,7 @@ function App() {
               <Route path="/" element={<h1>BASE</h1>} />
               <Route path="/login" element={<Login />} />
               <Route path="/plantillas" element={<Plantillas />} />
+              <Route path="/ejercicios" element={<Ejercicios />} />
               <Route path="/register" element={<Register />} />
               <Route path="/*" element={<h1>PAG NO</h1>} />
             </Routes>
