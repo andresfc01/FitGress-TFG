@@ -8,6 +8,7 @@ import Ejercicios from "./routes/ejercicios/ejercicios";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
+import NuevaPlantilla from "./routes/nuevaPlantilla/nuevaPlantilla";
 
 export const AppContext = createContext();
 
@@ -38,10 +39,18 @@ function App() {
           <Header />
           <div id="App">
             <Routes>
-              <Route path="/" element={<h1>BASE</h1>} />
+              <Route
+                path="/"
+                element={
+                  <button>
+                    <Link to="/nuevaPlantilla">Nueva Plantilla</Link>
+                  </button>
+                }
+              />
               <Route path="/login" element={<Login />} />
               <Route path="/plantillas" element={<Plantillas />} />
               <Route path="/ejercicios" element={<Ejercicios />} />
+              <Route path="/nuevaPlantilla" element={<NuevaPlantilla />} />
               <Route path="/register" element={<Register />} />
               <Route path="/*" element={<h1>PAG NO</h1>} />
             </Routes>
