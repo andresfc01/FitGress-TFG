@@ -15,9 +15,8 @@ export default function NuevaPlantilla() {
     handleChangeNombre,
     handleDiasSemana,
     onOptionChangeDificultad,
+    handleChangeImage,
   } = useNuevaPlantillaDatos();
-
-  console.log(diasSemana);
 
   return (
     <>
@@ -32,7 +31,8 @@ export default function NuevaPlantilla() {
       />
 
       <label htmlFor="">Imagen</label>
-      <input type="file" name="" id="" />
+      <input type="file" name="" id="" onChange={handleChangeImage} />
+      {image && <img src={image} />}
 
       <label htmlFor="">Dia/s de la Semana</label>
       <ul className={style.diasSemana}>

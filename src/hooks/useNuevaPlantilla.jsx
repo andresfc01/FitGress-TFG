@@ -9,6 +9,13 @@ export function useNuevaPlantillaDatos() {
   const [dificultad, setDificultad] = useState(1);
   const enumDias = ["L", "M", "X", "J", "V", "S", "D"];
 
+  const handleChangeImage = (e) => {
+    const selectedFile = e.target.files[0];
+    // Puedes validar el tipo y tamaño del archivo aquí
+    //setImage(selectedFile);
+    setImage(URL.createObjectURL(e.target.files[0]));
+  };
+
   const handleChangePrivado = (val) => {
     setPrivado(val);
   };
@@ -32,7 +39,6 @@ export function useNuevaPlantillaDatos() {
   const onOptionChangeDificultad = (ev) => {
     const value = parseInt(ev.target.value);
     setDificultad(value);
-    console.log(value);
   };
 
   return {
@@ -47,6 +53,7 @@ export function useNuevaPlantillaDatos() {
     handleChangePrivado,
     handleChangeNombre,
     handleDiasSemana,
+    handleChangeImage,
     onOptionChangeDificultad,
     errors,
   };

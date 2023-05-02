@@ -64,7 +64,7 @@ const Form = () => {
     const selectedFile = e.target.files[0];
     // Puedes validar el tipo y tamaño del archivo aquí
     setSelectedFile(selectedFile);
-    setImage(URL.createObjectURL(event.target.files[0]));
+    setImage(URL.createObjectURL(e.target.files[0]));
   };
 
   useEffect(() => {
