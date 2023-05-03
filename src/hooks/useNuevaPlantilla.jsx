@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { contextPlantilla } from "../routes/nuevaPlantilla/nuevaPlantilla";
 
 export function useNuevaPlantillaDatos() {
   const [privado, setPrivado] = useState(false);
@@ -8,6 +9,29 @@ export function useNuevaPlantillaDatos() {
   const [errors, setErrors] = useState({});
   const [dificultad, setDificultad] = useState(1);
   const enumDias = ["L", "M", "X", "J", "V", "S", "D"];
+  let { setDatosLogged, setDatos } = useContext(contextPlantilla);
+
+  useEffect(() => {
+    if (nombre.length <= 2) {
+      setErrors({
+        ...errors,
+        nombre: "Debe de tener 3 carácteres como mínimo",
+      });
+    } else {
+      delete errors.nombre;
+    }
+  }, [nombre]);
+
+  useEffect(() => {
+    if (diasSemana.length == 0) {
+      setErrors({
+        ...errors,
+        diasSemana: "Debe de seleccionar 1 dia como minimo",
+      });
+    } else {
+      delete errors.diasSemana;
+    }
+  }, [diasSemana]);
 
   const handleChangeImage = (e) => {
     const selectedFile = e.target.files[0];
@@ -41,6 +65,21 @@ export function useNuevaPlantillaDatos() {
     setDificultad(value);
   };
 
+  const handleSubmit = (ev) => {
+    console.log("asdas");
+    var size = Object.keys(errors).length;
+    if (size > 0) {
+      setErrors({
+        ...errors,
+        envio: "Debes de rellenar todos los datos antes.",
+      });
+    } else {
+      console.log("asadasdfadgfasdsdas");
+      setDatosLogged(true);
+      setDatos({ nombre, image, diasSemana, privado, dificultad });
+    }
+  };
+
   return {
     privado,
     setPrivado,
@@ -54,6 +93,7 @@ export function useNuevaPlantillaDatos() {
     handleChangeNombre,
     handleDiasSemana,
     handleChangeImage,
+    handleSubmit,
     onOptionChangeDificultad,
     errors,
   };
