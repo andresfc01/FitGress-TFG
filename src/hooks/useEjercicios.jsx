@@ -79,3 +79,42 @@ export function useEjercicios({ busqueda, sort }) {
     loading,
   };
 }
+
+export function useFiltro({ busqueda, sort }) {
+  const [filtroGrupo, setFiltroGrupo] = useState(false);
+  const {
+    setSearch,
+    setGrupoMuscular,
+    grupoMuscular,
+    ejercicios,
+    setEjercicios,
+  } = useEjercicios({
+    busqueda,
+    sort,
+  });
+
+  const handleOnChange = (ev) => {
+    setSearch(ev.target.value);
+    console.log(ejercicios);
+  };
+
+  const handleClickGrupo = (ev) => {
+    if (grupoMuscular !== ev.target.id) {
+      setGrupoMuscular(ev.target.id);
+    } else {
+      setGrupoMuscular("");
+    }
+  };
+
+  const handleClickGrupos = (ev) => {
+    setFiltroGrupo(!filtroGrupo);
+  };
+
+  return {
+    filtroGrupo,
+    handleClickGrupo,
+    handleClickGrupos,
+    handleOnChange,
+    ejercicios,
+  };
+}
