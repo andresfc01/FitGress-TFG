@@ -2,7 +2,12 @@ import { useEjercicios, useFiltro } from "../../hooks/useEjercicios";
 import style from "./styles.module.css";
 import Ejercicio from "../ejercicio/ejercicio";
 
-export default function Ejercicios() {
+export default function Ejercicios({
+  modal,
+  seleccionable,
+  handleEjercicioClick,
+}) {
+  console.log(seleccionable);
   const { gruposMusculares, grupoMuscular, loading } = useEjercicios({
     search: "",
     sort: true,
@@ -64,7 +69,11 @@ export default function Ejercicios() {
             ) : (
               <>
                 {ejercicios.map((ejercicio) => (
-                  <Ejercicio key={ejercicio._id} ejercicio={ejercicio} />
+                  <Ejercicio
+                    key={ejercicio._id}
+                    ejercicio={ejercicio}
+                    handleEjercicioClick={handleEjercicioClick}
+                  />
                 ))}
               </>
             )}

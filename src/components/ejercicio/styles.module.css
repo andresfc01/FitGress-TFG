@@ -18,7 +18,18 @@
   margin-top: 1rem;
 }
 
-.ejercicio h2{
-    margin: 0;
-    padding: 0;
+.ejercicio h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.btnSeleccion {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.seleccionado {
+  background: #000;
 }
