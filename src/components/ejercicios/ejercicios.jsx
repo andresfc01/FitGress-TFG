@@ -7,7 +7,7 @@ export default function Ejercicios({
   seleccionable,
   handleEjercicioClick,
 }) {
-  console.log(seleccionable);
+  (seleccionable);
   const { gruposMusculares, grupoMuscular, loading } = useEjercicios({
     search: "",
     sort: true,

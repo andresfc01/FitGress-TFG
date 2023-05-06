@@ -95,7 +95,6 @@ export function useFiltro({ busqueda, sort }) {
 
   const handleOnChange = (ev) => {
     setSearch(ev.target.value);
-    console.log(ejercicios);
   };
 
   const handleClickGrupo = (ev) => {

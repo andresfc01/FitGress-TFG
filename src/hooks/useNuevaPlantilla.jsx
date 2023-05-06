@@ -66,7 +66,6 @@ export function useNuevaPlantillaDatos() {
   };
 
   const handleSubmit = (ev) => {
-    console.log("asdas");
     var size = Object.keys(errors).length;
     if (size > 0) {
       setErrors({
@@ -74,7 +73,6 @@ export function useNuevaPlantillaDatos() {
         envio: "Debes de rellenar todos los datos antes.",
       });
     } else {
-      console.log("asadasdfadgfasdsdas");
       setDatosLogged(true);
       setDatos({ nombre, image, diasSemana, privado, dificultad });
     }
@@ -111,7 +109,7 @@ export function useNuevaPlantillaEjercicios() {
   const onDrop = (e) => {
     e.preventDefault();
     const targetId = e.target.getAttribute("id");
-    
+
     const targetIndex = ejercicios.findIndex(
       (ejercicio) => ejercicio.id === parseInt(targetId)
     );
@@ -212,5 +210,6 @@ export function useNuevaPlantillaEjercicios() {
     onDragOver,
     onDrop,
     onDragStart,
+    selectedEjercicio,
   };
 }

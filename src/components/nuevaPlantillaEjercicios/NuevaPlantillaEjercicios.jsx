@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./styles.module.css";
 import { useNuevaPlantillaEjercicios } from "../../hooks/useNuevaPlantilla";
 import Ejercicios from "../ejercicios/ejercicios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSort } from "@fortawesome/free-solid-svg-icons";
 
 export default function NuevaPlantillaEjercicios() {
   const {
@@ -13,12 +15,11 @@ export default function NuevaPlantillaEjercicios() {
     handleChangeDuracion,
     handleChangeRepsObj,
     handleChangePesoObj,
-    setSelectedEjercicio,
+    selectedEjercicio,
     onDrop,
     onDragOver,
     onDragStart,
   } = useNuevaPlantillaEjercicios();
-  console.log(ejercicios);
   return (
     <>
       <h2>Ejercicios Pantilla</h2>
@@ -33,19 +34,25 @@ export default function NuevaPlantillaEjercicios() {
       )}
 
       <div>
-        {/* for de los ejercicios que haya */}
         {ejercicios.length == 0 ? (
           <p>De momento no hay ejercicios</p>
         ) : (
-          <div onDragOver={onDragOver} onDrop={onDrop}>
+          <div className={style.ejercicios}>
             {ejercicios.map((obj) => (
               <div
-                className={style.ejercicio}
+                className={
+                  selectedEjercicio == obj
+                    ? `${style.ejercicio} ${style.ejercicioOnDrag}`
+                    : `${style.ejercicio}`
+                }
+                onDragOver={onDragOver}
+                onDrop={onDrop}
                 key={obj.id}
                 id={obj.id}
                 draggable
                 onDragStart={onDragStart(obj)}
               >
+                <FontAwesomeIcon icon={faSort} />
                 <video
                   src={"http://localhost:3000/" + obj.ejercicio.image.imagePath}
                   autoPlay

@@ -1,8 +1,21 @@
+.ejercicios {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  align-items: center;
+}
+
 .ejercicio {
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 0;
   align-items: center;
+  transition: 0.2s;
+  padding: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--background-alt);
+  border-radius: 7px;
 }
 
 .ejercicio > video {
@@ -36,4 +49,11 @@
 
 .ejercicio > span {
   color: red;
+}
+
+.ejercicioOnDrag {
+  opacity: 0.3; /* Opacidad reducida */
+  border: 2px dashed var(--selection); /* Borde punteado */
+  padding: 1rem;
+  border-radius: 7px;
 }

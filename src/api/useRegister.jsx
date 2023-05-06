@@ -6,7 +6,6 @@ export const useRegister = () => {
   const [userRegister, setUserRegister] = useState({});
 
   const postFormData = async (formData) => {
-    console.log("DATOS : ", formData.get("image"));
     const response = await fetch(URL_REGISTER, {
       method: "POST",
       body: formData,
