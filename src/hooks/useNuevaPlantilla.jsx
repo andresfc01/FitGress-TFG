@@ -1,5 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { contextPlantilla } from "../routes/nuevaPlantilla/nuevaPlantilla";
+import { savePlantilla } from "../services/plantillas";
 
 export function useNuevaPlantillaDatos() {
   const [privado, setPrivado] = useState(false);
@@ -101,9 +102,27 @@ export function useNuevaPlantillaEjercicios() {
   const [ejercicios, setEjercicios] = useState([]);
   const [addEjercicio, setAddEjercicio] = useState(false);
   const [selectedEjercicio, setSelectedEjercicio] = useState(null);
+  const plantilla = useRef({});
 
   const handleAddEjercicio = () => {
     setAddEjercicio(true);
+  };
+
+  const handleSave = (datos, token) => async () => {
+    const id = plantilla.current._id;
+    plantilla.current = {
+      ...datos,
+      series: ejercicios,
+      _id: id,
+    };
+    console.log(plantilla.current._id);
+
+    const newPlantilla = await savePlantilla(plantilla.current, token);
+    if (newPlantilla) {
+      plantilla.current = newPlantilla;
+    } else {
+      console.log("sadasd");
+    }
   };
 
   const onDrop = (e) => {
@@ -145,11 +164,15 @@ export function useNuevaPlantillaEjercicios() {
       setEjercicios(ejercicios.filter((obj) => obj.id != id));
     };
   }
+
   function handleChangeDuracion(id) {
     return (ev) => {
       const newEjercicios = ejercicios.map((obj) => {
-        if (obj.id == id) {
-          return { ...obj, descanso: parseInt(ev.target.value) };
+        if (obj.id === id) {
+          const descanso = isNaN(ev.target.value)
+            ? ""
+            : parseInt(ev.target.value);
+          return { ...obj, descanso };
         } else {
           return obj;
         }
@@ -162,8 +185,11 @@ export function useNuevaPlantillaEjercicios() {
   function handleChangeRepsObj(id) {
     return (ev) => {
       const newEjercicios = ejercicios.map((obj) => {
-        if (obj.id == id) {
-          return { ...obj, repsObj: parseInt(ev.target.value) };
+        if (obj.id === id) {
+          const repsObj = isNaN(ev.target.value)
+            ? ""
+            : parseInt(ev.target.value);
+          return { ...obj, repsObj };
         } else {
           return obj;
         }
@@ -176,8 +202,11 @@ export function useNuevaPlantillaEjercicios() {
   function handleChangePesoObj(id) {
     return (ev) => {
       const newEjercicios = ejercicios.map((obj) => {
-        if (obj.id == id) {
-          return { ...obj, pesoObj: parseInt(ev.target.value) };
+        if (obj.id === id) {
+          const pesoObj = isNaN(ev.target.value)
+            ? ""
+            : parseInt(ev.target.value);
+          return { ...obj, pesoObj };
         } else {
           return obj;
         }
@@ -198,6 +227,23 @@ export function useNuevaPlantillaEjercicios() {
     };
   }
 
+  const handleDuplicateEjercicio = (id) => () => {
+    const ejercicioToDuplicate = ejercicios.find((obj) => obj.id === id);
+    if (ejercicioToDuplicate) {
+      const index = ejercicios.findIndex((obj) => obj.id === id);
+      const duplicatedEjercicio = {
+        ...ejercicioToDuplicate,
+        id: ejercicios.length + 1,
+      };
+      //para que se inserte despues del original, no al final
+      setEjercicios((prevEjercicios) => [
+        ...prevEjercicios.slice(0, index + 1),
+        duplicatedEjercicio,
+        ...prevEjercicios.slice(index + 1),
+      ]);
+    }
+  };
+
   return {
     ejercicios,
     handleAddEjercicio,
@@ -211,5 +257,7 @@ export function useNuevaPlantillaEjercicios() {
     onDrop,
     onDragStart,
     selectedEjercicio,
+    handleDuplicateEjercicio,
+    handleSave,
   };
 }

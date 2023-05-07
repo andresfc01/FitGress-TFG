@@ -4,6 +4,8 @@
   gap: 0.5rem;
   flex-direction: column;
   align-items: center;
+
+  z-index: 1;
 }
 
 .ejercicio {
@@ -56,4 +58,47 @@
   border: 2px dashed var(--selection); /* Borde punteado */
   padding: 1rem;
   border-radius: 7px;
+}
+
+.duplicateEjercicio {
+  margin-top: -1.6%;
+  background: var(--text-bright);
+  color: var(--selection);
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  text-align: center;
+  line-height: 1.25 rem;
+  font-weight: bolder;
+  border: none;
+
+  z-index: 2;
+}
+
+.lineaEjercicio {
+  width: 100%;
+  height: 0.15rem;
+  margin-top: -1.6%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--selection),
+    transparent
+  );
+  border: none;
+  z-index: 0;
+}
+
+.guardar {
+}
+
+.guardado {
+  background-color: var(--color-terciary);
+}
+
+.divEjercicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
