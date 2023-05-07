@@ -1,32 +1,51 @@
 import styles from "./styles.module.css";
-import PropTypes from "prop-types";
 
-const plantillaShape = {
-  id: PropTypes.string.isRequired,
-  nombre: PropTypes.string.isRequired,
-  diasSemana: PropTypes.arrayOf(PropTypes.number),
-  privacidad: PropTypes.bool.isRequired,
-  img: PropTypes.string.isRequired,
-  dificultad: PropTypes.number,
-  series: PropTypes.arrayOf({
-    ejercicio: PropTypes.string.isRequired,
-    repObj: PropTypes.number,
-    pesoObj: PropTypes.number,
-    descanso: PropTypes.number,
-  }),
-};
+export default function Plantilla({
+  plantilla,
+  showUser = false,
+  showDetails = false,
+} = props) {
+  const enumDias = ["L", "M", "X", "J", "V", "S", "D"];
 
-Plantilla.propTypes = PropTypes.shape(plantillaShape);
+  const calculaTiempo = () => {
+    let cont = 0;
+    const tiempoPorEjercicio = 30;
+    plantilla.series.forEach((serie) => {
+      cont += serie.descanso + tiempoPorEjercicio;
+    });
 
-export default function Plantilla({ id, diaSemana, img, dificultad } = props) {
+    return cont / 60;
+  };
+
+  console.log(plantilla);
   return (
     <>
       <div className={styles.plantilla}>
-        <p>{id}</p>
-        <p>{diaSemana}</p>
-        <p>{img}</p>
-        <p>{dificultad}</p>
+        <img src={plantilla.image} alt="" />
+        <div>
+          <h2>{plantilla.nombre}</h2>
+          <label htmlFor="">Dia/s de la Semana</label>
+          <ul className={styles.diasSemana}>
+            {enumDias.map((dia) => (
+              <li
+                key={dia}
+                className={
+                  plantilla.diasSemana.indexOf(dia) > -1 ? styles.diaSelect : ""
+                }
+                value={dia}
+                id={dia}
+              >
+                {dia}
+              </li>
+            ))}
+          </ul>
+          <small>
+            Timepo estimado :{" "}
+            <strong>{Math.trunc(calculaTiempo())} min.</strong>
+          </small>
+        </div>
       </div>
+      <hr className={styles.lineaEjercicio} />
     </>
   );
 }

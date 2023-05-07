@@ -1,3 +1,6 @@
+import { searchEjercicios } from "./ejercicios";
+import { searchUser, searchUsers } from "./user";
+
 export const savePlantilla = async (datos, token) => {
   console.log("datos", datos);
   const existe = datos._id ? true : false;
@@ -52,4 +55,16 @@ const toJSON = (objeto) => {
     ...objeto,
     series: seriesModificadas,
   };
+};
+
+export const getPlantillasUser = async (user) => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/plantillaEntrenamiento/user/" + user
+    );
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error searching plantilla");
+  }
 };

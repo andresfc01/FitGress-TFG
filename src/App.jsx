@@ -1,9 +1,9 @@
-import React, { createContext, useEffect } from "react";
+import React, { createContext, useEffect, useRef } from "react";
 import { Router, Route, BrowserRouter, Link, Routes } from "react-router-dom";
 import Header from "./components/header/header";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
-import Plantillas from "./routes/plantillas/plantillas";
+import Plantillas from "./routes/plantillasUser/plantillasUser";
 import Ejercicios from "./routes/ejercicios/ejercicios";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -15,6 +15,7 @@ export const AppContext = createContext();
 function App() {
   const client = new QueryClient();
   const [user, setUser] = useState(null);
+  const ref = useRef();
 
   useEffect(() => {
     // Obtener el usuario del localStorage
