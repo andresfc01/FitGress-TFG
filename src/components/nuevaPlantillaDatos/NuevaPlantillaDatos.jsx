@@ -11,6 +11,7 @@ export default function NuevaPlantillaDatos() {
     enumDias,
     nombre,
     image,
+    urlImage,
     diasSemana,
     handleChangePrivado,
     handleChangeNombre,
@@ -20,7 +21,6 @@ export default function NuevaPlantillaDatos() {
     handleSubmit,
     errors,
   } = useNuevaPlantillaDatos();
-
 
   return (
     <>
@@ -35,7 +35,7 @@ export default function NuevaPlantillaDatos() {
 
       <label htmlFor="">Imagen</label>
       <input type="file" name="" id="" onChange={handleChangeImage} />
-      {image && <img src={image} />}
+      {urlImage && <img src={urlImage} />}
 
       <label htmlFor="">Dia/s de la Semana</label>
       <ul className={style.diasSemana}>

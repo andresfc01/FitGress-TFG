@@ -6,6 +6,7 @@ export function useNuevaPlantillaDatos() {
   const [privado, setPrivado] = useState(false);
   const [nombre, setNombre] = useState("");
   const [image, setImage] = useState("");
+  const [urlImage, setUrlImage] = useState("");
   const [diasSemana, setDiasSemana] = useState(["L"]);
   const [errors, setErrors] = useState({});
   const [dificultad, setDificultad] = useState(1);
@@ -38,7 +39,8 @@ export function useNuevaPlantillaDatos() {
     const selectedFile = e.target.files[0];
     // Puedes validar el tipo y tamaño del archivo aquí
     //setImage(selectedFile);
-    setImage(URL.createObjectURL(e.target.files[0]));
+    setImage(selectedFile);
+    setUrlImage(URL.createObjectURL(selectedFile));
   };
 
   const handleChangePrivado = (val) => {
@@ -95,6 +97,7 @@ export function useNuevaPlantillaDatos() {
     handleSubmit,
     onOptionChangeDificultad,
     errors,
+    urlImage,
   };
 }
 

@@ -21,7 +21,7 @@ export default function Plantilla({
   return (
     <>
       <div className={styles.plantilla}>
-        <img src={plantilla.image} alt="" />
+        <img src={"http://localhost:3000/" + plantilla.image.imagePath} alt="" />
         <div>
           <h2>{plantilla.nombre}</h2>
           <label htmlFor="">Dia/s de la Semana</label>
@@ -40,7 +40,7 @@ export default function Plantilla({
             ))}
           </ul>
           <small>
-            Timepo estimado :{" "}
+            Tiempo estimado :{" "}
             <strong>{Math.trunc(calculaTiempo())} min.</strong>
           </small>
         </div>

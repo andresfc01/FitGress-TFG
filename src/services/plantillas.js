@@ -2,10 +2,10 @@ import { searchEjercicios } from "./ejercicios";
 import { searchUser, searchUsers } from "./user";
 
 export const savePlantilla = async (datos, token) => {
-  console.log("datos", datos);
   const existe = datos._id ? true : false;
-  console.log("existe", existe);
   const plantilla = toJSON(datos);
+  console.log(datos);
+  //HACER FORM DATA DE TODO PARA ENVIAR
 
   if (existe) {
     try {
@@ -13,9 +13,8 @@ export const savePlantilla = async (datos, token) => {
         "http://localhost:3000/api/plantillaEntrenamiento/" + datos._id,
         {
           method: "PUT",
-          body: JSON.stringify(plantilla),
+          body: toFormdata(plantilla),
           headers: {
-            "Content-Type": "application/json",
             "x-access-token": token,
           },
         }
@@ -30,9 +29,8 @@ export const savePlantilla = async (datos, token) => {
         "http://localhost:3000/api/plantillaEntrenamiento",
         {
           method: "POST",
-          body: JSON.stringify(plantilla),
+          body: toFormdata(plantilla),
           headers: {
-            "Content-Type": "application/json",
             "x-access-token": token,
           },
         }
@@ -67,4 +65,16 @@ export const getPlantillasUser = async (user) => {
     console.log(e);
     throw new Error("Error searching plantilla");
   }
+};
+
+const toFormdata = (plantilla) => {
+  const formData = new FormData();
+  formData.append("nombre", plantilla.nombre);
+  formData.append("diasSemana", JSON.stringify(plantilla.diasSemana));
+  formData.append("dificultad", plantilla.dificultad);
+  formData.append("privado", plantilla.privado);
+  formData.append("series", JSON.stringify(plantilla.series));
+  formData.append("user", plantilla.user);
+  formData.append("image", plantilla.image);
+  return formData;
 };

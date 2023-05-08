@@ -9,6 +9,11 @@
   background-color: var(--background-alt);
   border-radius: 7px;
 }
+.plantilla > img {
+  object-fit: cover;
+  width: 7rem;
+  height: 7rem;
+}
 .plantilla > div {
   display: flex;
   flex-direction: column;
