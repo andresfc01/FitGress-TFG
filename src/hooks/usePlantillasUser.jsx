@@ -4,6 +4,7 @@ import { getPlantillasUser } from "../services/plantillas";
 export function usePlantillasUser({ userId }) {
   const plantillasRef = useRef([]);
 
+ 
   useEffect(() => {
     const fetchPlantillas = async () => {
       const plantillas = await getPlantillasUser(userId);
@@ -16,5 +17,5 @@ export function usePlantillasUser({ userId }) {
     }
   }, []);
 
-  return { plantillas: plantillasRef.current };
+  return { plantillas: plantillasRef.current, handleClickPlantilla };
 }

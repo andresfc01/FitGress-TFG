@@ -1,14 +1,24 @@
-import styles from './styles.module.css';
+import { Link, useParams } from "react-router-dom";
+import styles from "./styles.module.css";
+import { usePlantilla } from "../../hooks/usePlantilla";
+import Plantilla from "../../components/plantilla/plantilla";
 
-export default function App({id, diaSemana, img, dificultad}=props) {
-    return (
-        <>
-            <div className={styles.plantilla}>
-                <p>{id}</p>
-                <p>{diaSemana}</p>
-                <p>{img}</p>
-                <p>{dificultad}</p>
-            </div>
-        </>
-    )
+export default function App() {
+  const { id } = useParams();
+  const { plantilla } = usePlantilla({ id });
+
+  return (
+    <>
+      {plantilla ? (
+      
+          <Plantilla
+            setShowUser={false}
+            showDetails={true}
+            plantilla={plantilla}
+          />
+      ) : (
+        <p>No se encuentra la plantilla</p>
+      )}
+    </>
+  );
 }

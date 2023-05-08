@@ -1,9 +1,15 @@
 .plantillas {
-  width: 90%;
+  width: 100%;
   display: flex;
-  gap: 0.5rem;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-
+  justify-content: center;
   z-index: 1;
+}
+
+.plantillas a {
+  display: flex;
+  flex-direction: column;
+  width: 31rem;
+  align-items: center;
 }

@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Plantilla from "/src/components/plantilla/plantilla";
 import { usePlantillasUser } from "../../hooks/usePlantillasUser";
 import { useContext, useEffect, useState } from "react";
@@ -10,6 +10,7 @@ export default function App() {
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [plantillas, setPlantillas] = useState([]);
+
 
   useEffect(() => {
     const fetchPlantillas = async () => {
@@ -29,10 +30,20 @@ export default function App() {
 
   return (
     <>
-      <div>
+      <div className={styles.plantillas}>
         {plantillas.map((plantilla, cont) => {
           return (
-            <Plantilla key={cont} setShowUser={false} plantilla={plantilla} />
+            <Link
+              to={`/plantilla/${plantilla?._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Plantilla
+                key={cont}
+                setShowUser={false}
+                plantilla={plantilla}
+                enableClick={true}
+              />
+            </Link>
           );
         })}
       </div>

@@ -66,6 +66,18 @@ export const getPlantillasUser = async (user) => {
     throw new Error("Error searching plantilla");
   }
 };
+export const getPlantilla = async (id) => {
+  console.log(id);
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/plantillaEntrenamiento/" + id
+    );
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error searching plantilla");
+  }
+};
 
 const toFormdata = (plantilla) => {
   const formData = new FormData();
