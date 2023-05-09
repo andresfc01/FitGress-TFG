@@ -118,7 +118,6 @@ export function useNuevaPlantillaEjercicios() {
       series: ejercicios,
       _id: id,
     };
-    console.log(plantilla.current._id);
 
     const newPlantilla = await savePlantilla(plantilla.current, token);
     if (newPlantilla) {

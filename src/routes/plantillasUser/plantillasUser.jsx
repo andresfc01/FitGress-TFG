@@ -11,7 +11,6 @@ export default function App() {
   const [id, setId] = useState(undefined);
   const [plantillas, setPlantillas] = useState([]);
 
-
   useEffect(() => {
     const fetchPlantillas = async () => {
       try {
@@ -35,10 +34,10 @@ export default function App() {
           return (
             <Link
               to={`/plantilla/${plantilla?._id}`}
+              key={cont}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <Plantilla
-                key={cont}
                 setShowUser={false}
                 plantilla={plantilla}
                 enableClick={true}
