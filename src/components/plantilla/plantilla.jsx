@@ -46,9 +46,12 @@ export default function Plantilla({
   const calculaTiempo = () => {
     let cont = 0;
     const tiempoPorEjercicio = 30;
-    newPlantilla.series.forEach((serie) => {
-      cont += serie.descanso + tiempoPorEjercicio;
-    });
+
+    if (newPlantilla.series) {
+      newPlantilla.series.forEach((serie) => {
+        cont += serie.descanso + tiempoPorEjercicio;
+      });
+    }
 
     return cont / 60;
   };
@@ -148,8 +151,10 @@ export default function Plantilla({
                   <li
                     key={dia}
                     className={
-                      newPlantilla.diasSemana.indexOf(dia) > -1
-                        ? styles.diaSelect
+                      newPlantilla.diasSemana
+                        ? newPlantilla?.diasSemana.indexOf(dia) > -1
+                          ? styles.diaSelect
+                          : ""
                         : ""
                     }
                     onClick={editable ? handleDiasSemana : undefined}
@@ -186,91 +191,102 @@ export default function Plantilla({
               />
             )}
 
-            {showDetails && (
-              <div className={styles.series}>
-                {newPlantilla.series.map((obj, count) => (
-                  <div key={count} className={styles.divSerie}>
-                    <div
-                      className={
-                        selectedSerie == obj
-                          ? `${styles.serie} ${styles.serieOnDrag}`
-                          : `${styles.serie}`
-                      }
-                      onDragOver={editable ? onDragOver : undefined}
-                      onDrop={editable ? onDrop : undefined}
-                      id={count}
-                      draggable={editable ? true : false}
-                      onDragStart={editable ? onDragStart(obj) : undefined}
-                    >
-                      {editable && <FontAwesomeIcon icon={faSort} />}
-                      <video
-                        src={
-                          "http://localhost:3000/" +
-                          obj.ejercicio?.image?.imagePath
+            {showDetails && newPlantilla.series && (
+              <>
+                {" "}
+                <div className={styles.series}>
+                  {newPlantilla.series.map((obj, count) => (
+                    <div key={count} className={styles.divSerie}>
+                      <div
+                        className={
+                          selectedSerie == obj
+                            ? `${styles.serie} ${styles.serieOnDrag}`
+                            : `${styles.serie}`
                         }
-                        autoPlay
-                        muted
-                        type="video/mp4"
-                        loop
-                      />
-                      <div>
-                        <h3>{obj.ejercicio.nombre}</h3>
+                        onDragOver={editable ? onDragOver : undefined}
+                        onDrop={editable ? onDrop : undefined}
+                        id={count}
+                        draggable={editable ? true : false}
+                        onDragStart={editable ? onDragStart(obj) : undefined}
+                      >
+                        {editable && <FontAwesomeIcon icon={faSort} />}
+                        <video
+                          src={
+                            "http://localhost:3000/" +
+                            obj.ejercicio?.image?.imagePath
+                          }
+                          autoPlay
+                          muted
+                          type="video/mp4"
+                          loop
+                        />
                         <div>
-                          <label htmlFor="">Repeticiones</label>
-                          {editable ? (
-                            <input
-                              type="number"
-                              value={obj.repsObj}
-                              onChange={handleChangeRepsObj(count)}
-                            />
-                          ) : (
-                            <p>{obj.repsObj}</p>
-                          )}
-                          <label htmlFor="">Peso</label>
-                          {editable ? (
-                            <input
-                              type="number"
-                              value={obj.pesoObj}
-                              onChange={handleChangePesoObj(count)}
-                            />
-                          ) : (
-                            <p>{obj.pesoObj}</p>
-                          )}
-                          <label htmlFor="">Descanso</label>
-                          {editable ? (
-                            <input
-                              type="number"
-                              value={obj.descanso}
-                              onChange={handleChangeDescanso(count)}
-                            />
-                          ) : (
-                            <p>{obj.descanso}</p>
-                          )}
+                          <h3>{obj.ejercicio.nombre}</h3>
+                          <div>
+                            <label htmlFor="">Repeticiones</label>
+                            {editable ? (
+                              <input
+                                type="number"
+                                value={obj.repsObj}
+                                onChange={handleChangeRepsObj(count)}
+                              />
+                            ) : (
+                              <p>{obj.repsObj}</p>
+                            )}
+                            <label htmlFor="">Peso</label>
+                            {editable ? (
+                              <input
+                                type="number"
+                                value={obj.pesoObj}
+                                onChange={handleChangePesoObj(count)}
+                              />
+                            ) : (
+                              <p>{obj.pesoObj}</p>
+                            )}
+                            <label htmlFor="">Descanso</label>
+                            {editable ? (
+                              <input
+                                type="number"
+                                value={obj.descanso}
+                                onChange={handleChangeDescanso(count)}
+                              />
+                            ) : (
+                              <p>{obj.descanso}</p>
+                            )}
+                          </div>
                         </div>
-                      </div>
 
+                        {editable && (
+                          <span
+                            className={styles.deleteSerie}
+                            onClick={deleteEjercicio(count)}
+                          >
+                            X
+                          </span>
+                        )}
+                      </div>
                       {editable && (
-                        <span
-                          className={styles.deleteSerie}
-                          onClick={deleteEjercicio(count)}
-                        >
-                          X
-                        </span>
+                        <>
+                          <FontAwesomeIcon
+                            icon={faPlusCircle}
+                            onClick={handleDuplicateEjercicio(count)}
+                            className={styles.duplicateSerie}
+                          />
+                          <hr className={styles.lineaEjercicio} />
+                        </>
                       )}
                     </div>
-                    {editable && (
-                      <>
-                        <FontAwesomeIcon
-                          icon={faPlusCircle}
-                          onClick={handleDuplicateEjercicio(count)}
-                          className={styles.duplicateSerie}
-                        />
-                        <hr className={styles.lineaEjercicio} />
-                      </>
-                    )}
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+                {!editable && (
+                  <Link
+                    to={"/realizarEntreno/" + plantilla._id}
+                    className={styles.btnEntrenar}
+                  >
+                    <button>Comenzar entrenamiento</button>
+                  </Link>
+                )}
+              </>
             )}
           </div>
         </>

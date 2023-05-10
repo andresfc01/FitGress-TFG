@@ -122,9 +122,7 @@ export function useNuevaPlantillaEjercicios() {
     const newPlantilla = await savePlantilla(plantilla.current, token);
     if (newPlantilla) {
       plantilla.current = newPlantilla;
-    } else {
-      console.log("sadasd");
-    }
+    } 
   };
 
   const onDrop = (e) => {

@@ -11,7 +11,6 @@ export function usePlantillasUser({ userId }) {
       plantillasRef.current = plantillas;
     };
 
-    console.log(userId);
     if (userId) {
       fetchPlantillas();
     }

@@ -34,7 +34,6 @@ export const savePlantilla = async (datos, token) => {
       });
       return await response.json();
     } catch (e) {
-      console.log(e);
       throw new Error("Error saving plantilla");
     }
   }
@@ -45,11 +44,7 @@ const toJSON = (objeto) => {
     ...serie,
     ejercicio: serie.ejercicio._id,
   }));
-  console.log("objeto", {
-    ...objeto,
-    series: seriesModificadas,
-    user: objeto.user._id,
-  });
+  
   return {
     ...objeto,
     series: seriesModificadas,
@@ -64,19 +59,16 @@ export const getPlantillasUser = async (user) => {
     );
     return await response.json();
   } catch (e) {
-    console.log(e);
     throw new Error("Error searching plantilla");
   }
 };
 export const getPlantilla = async (id) => {
-  console.log(id);
   try {
     const response = await fetch(
       "http://localhost:3000/api/plantillaEntrenamiento/" + id
     );
     return await response.json();
   } catch (e) {
-    console.log(e);
     throw new Error("Error searching plantilla");
   }
 };
@@ -90,6 +82,5 @@ const toFormdata = (plantilla) => {
   formData.append("series", JSON.stringify(plantilla.series));
   formData.append("user", plantilla.user._id);
   formData.append("image", plantilla.image.imagePath);
-  console.log(formData.get("user"));
   return formData;
 };

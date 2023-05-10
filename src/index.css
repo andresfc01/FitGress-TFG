@@ -548,7 +548,7 @@ button {
 @media (prefers-color-scheme: dark) {
   button {
     background-color: #0c151c;
-    background-color: var(--button-base);
+    background-color: var(--selection);
   }
 }
 
