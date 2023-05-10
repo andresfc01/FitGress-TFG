@@ -33,6 +33,12 @@
   align-items: center;
 }
 
+.divSerie button {
+  margin-top: 1rem;
+  font-size: 75%;
+  font-style: italic;
+}
+
 .serie > video {
   width: 10rem;
   border-radius: 7px;
@@ -117,4 +123,52 @@
   );
   border: none;
   z-index: 0;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+.divSensaciones {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--color-secondary);
+  border-radius: 7px;
+}
+
+.divSensaciones button {
+  margin-top: 1rem;
+}
+.divSensaciones label {
+  margin-top: 1rem;
+}
+
+.puntuacionSensaciones input {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.puntuacionSensaciones label {
+  margin: 0;
+  padding: 0.5rem 0;
+  font-size: 200%;
+  width: 3rem;
+  text-align: center;
+  background: var(--background-alt);
+  border-radius: 7px;
+  border: 1px solid var(--selection);
+
+  transition: 0.3s;
+}
+.puntuacionSensaciones label.sensacionSelected {
+  background: var(--selection);
+  border-color: #000;
 }

@@ -19,14 +19,15 @@
 
 .circle {
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 13rem;
+  height: 13rem;
   border: 2px solid var(--selection);
   margin: 50px auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
   animation: borderAnimation 1s infinite;
 }
 
@@ -49,14 +50,26 @@
   border-radius: 50%;
   z-index: -1;
   position: absolute;
-  width: 160px;
-  height: 160px;
-  left: calc(50% - 80px);
-  top: calc(50% - 80px);
+  width: 16rem;
+  height: 16rem;
+  left: calc(50% - 8rem);
+  top: calc(50% - 8rem);
   background-color: var(--background);
 }
 
+.circle h1 {
+  font-size: 300%;
+  color: var(--selection);
+  margin: 0;
+}
+
 .buttons {
-  margin-top: 10px;
-  display: inline-flex;
+  font-size: 115%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  color: var(--text-muted);
+  font-style: italic;
 }

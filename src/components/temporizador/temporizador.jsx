@@ -53,13 +53,15 @@ export default function Temporizador({ tiempo, onDesaparecido } = props) {
     <>
       <div className={styles.bg}>
         <div className={styles.circle}>
-          <div className={styles.stopwatch}>
-            {sec}
-          </div>
+          <h1 className={styles.num}>{sec}</h1>
           <div className={styles.buttons}>
-            <span onClick={handleDecrementarTiempo}>-</span>
+            <span onClick={handleDecrementarTiempo}>
+              <strong>-</strong>
+            </span>
             <span onClick={handleSaltar}>Saltar</span>
-            <span onClick={handleIncrementarTiempo}>+</span>
+            <span onClick={handleIncrementarTiempo}>
+              <strong>+</strong>
+            </span>
           </div>
         </div>
       </div>

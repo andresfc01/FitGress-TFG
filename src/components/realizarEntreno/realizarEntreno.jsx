@@ -20,7 +20,13 @@ export default function realizarEntreno({ idPlantilla } = props) {
     mostrarTemporizador,
     handleMostrarTemporizador,
     handleTemporizadorDesaparecido,
-  } = useRealizarEntreno({ idPlantilla });
+    handleTerminarEntreno,
+    onOptionChangeSensacion,
+    sensacion,
+    terminado,
+    comentario,
+    handleChangeComentario,
+  } = useRealizarEntreno({ idPlantilla, user });
 
   const calculaTiempo = () => {
     let cont = 0;
@@ -65,7 +71,7 @@ export default function realizarEntreno({ idPlantilla } = props) {
               <>
                 <div className={styles.series}>
                   {plantillaEntreno.series.map((obj, count) => (
-                    <div key={count}>
+                    <div className={styles.divSerie} key={count}>
                       <div
                         className={
                           selectedSerie == count
@@ -116,7 +122,7 @@ export default function realizarEntreno({ idPlantilla } = props) {
                           {mostrarTemporizador && (
                             <Temporizador
                               onDesaparecido={handleTemporizadorDesaparecido}
-                              tiempo={20}
+                              tiempo={obj.descanso}
                             />
                           )}
                         </>
@@ -127,6 +133,73 @@ export default function realizarEntreno({ idPlantilla } = props) {
               </>
             )}
           </div>
+
+          <button onClick={handleTerminarEntreno}>
+            Terminar Entrenamiento
+          </button>
+
+          {terminado && (
+            <div className={styles.bg}>
+              <div className={styles.divSensaciones}>
+                <p>Sensaciones</p>
+                <div className={styles.puntuacionSensaciones}>
+                  <input
+                    type="radio"
+                    name="sensacion"
+                    value="0"
+                    id="mal"
+                    checked={sensacion === 0}
+                    onChange={onOptionChangeSensacion}
+                  />
+                  <label
+                    htmlFor="mal"
+                    className={sensacion === 0 ? styles.sensacionSelected : ""}
+                  >
+                    😢
+                  </label>
+
+                  <input
+                    type="radio"
+                    name="sensacion"
+                    value="1"
+                    id="normal"
+                    checked={sensacion === 1}
+                    onChange={onOptionChangeSensacion}
+                  />
+                  <label
+                    htmlFor="normal"
+                    className={sensacion === 1 ? styles.sensacionSelected : ""}
+                  >
+                    🙂
+                  </label>
+
+                  <input
+                    type="radio"
+                    name="sensacion"
+                    value="2"
+                    id="bien"
+                    checked={sensacion === 2}
+                    onChange={onOptionChangeSensacion}
+                  />
+                  <label
+                    htmlFor="bien"
+                    className={sensacion === 2 ? styles.sensacionSelected : ""}
+                  >
+                    😁
+                  </label>
+                </div>
+                <label htmlFor="">Comentario (opcional)</label>
+                <textarea
+                  value={comentario}
+                  onChange={handleChangeComentario}
+                />
+
+                <button onClick={handleSaveEntreno}>
+                  Guardar Entrenamiento
+                </button>
+              </div>
+            </div>
+          )}
         </>
       )}
     </>

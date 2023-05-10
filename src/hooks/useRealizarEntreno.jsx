@@ -1,19 +1,27 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { redirect, useNavigate } from "react-router-dom";
 import {
   getPlantilla,
   getPlantillasUser,
   savePlantilla,
 } from "../services/plantillas";
 import Plantilla from "../components/plantilla/plantilla";
+import { saveEntreno } from "../services/entrenos";
 
-export function useRealizarEntreno({ idPlantilla }) {
+export function useRealizarEntreno({ idPlantilla, user }) {
+  const navigate = useNavigate();
+
   const [plantilla, setPlantilla] = useState(undefined);
   const [selectedSerie, setSelectedSerie] = useState(0);
   const [serieTerminada, setSerieTerminada] = useState(false);
   const [timer, setTimer] = useState(0);
   const [tiempo, setTiempo] = useState("00:00:00");
   const [mostrarTemporizador, setMostrarTemporizador] = useState(false);
+  const [terminado, setTerminado] = useState(false);
+  const [sensacion, setSensacion] = useState(1);
+  const [comentario, setComentario] = useState("");
+  const [seriesRealizadas, setSeriesRealizadas] = useState([]);
 
   useEffect(() => {
     const fetchPlantilla = async (idPlantilla) => {
@@ -33,13 +41,18 @@ export function useRealizarEntreno({ idPlantilla }) {
   }, [timer]);
 
   const handleMostrarTemporizador = () => {
-    console.log(mostrarTemporizador);
     setMostrarTemporizador(true);
   };
 
   const handleTemporizadorDesaparecido = () => {
     setSelectedSerie(selectedSerie + 1);
     setMostrarTemporizador(false);
+
+    const nuevasSeriesRealizadas = [];
+    for (let i = 0; i < selectedSerie + 1; i++) {
+      nuevasSeriesRealizadas.push(plantilla.series[i]);
+    }
+    setSeriesRealizadas(nuevasSeriesRealizadas);
   };
 
   function convertirSegundosATiempo(totalSegundos) {
@@ -94,12 +107,38 @@ export function useRealizarEntreno({ idPlantilla }) {
 
   //TODO
   const handleSaveEntreno = async () => {
-    //si es editable y hay cambios
-    /* if (editable) {
-      const updatedPlantilla = await savePlantilla(plantilla, user.token);
-      setPlantilla(updatedPlantilla);
+    const entrenamiento = {
+      plantilla: plantilla._id,
+      user: user?._id,
+      sensaciones: sensacion,
+      comentario: comentario,
+      duracion: timer,
+      series: seriesRealizadas,
+    };
+
+    entrenamiento.series.forEach((serie, cont) => {
+      serie.peso = serie.pesoObj;
+      serie.reps = serie.repsObj;
+    });
+
+    const newEntreno = await saveEntreno(entrenamiento, user.token);
+    if (newEntreno) {
+      console.log(user);
+      navigate("/perfil/" + user._id + "/entrenamientos");
     }
-    setEditable(!editable); */
+  };
+
+  const handleTerminarEntreno = async () => {
+    setTerminado(true);
+  };
+
+  const onOptionChangeSensacion = (ev) => {
+    const value = parseInt(ev.target.value);
+    setSensacion(value);
+  };
+
+  const handleChangeComentario = (ev) => {
+    setComentario(ev.target.value);
   };
 
   return {
@@ -112,5 +151,11 @@ export function useRealizarEntreno({ idPlantilla }) {
     mostrarTemporizador,
     handleMostrarTemporizador,
     handleTemporizadorDesaparecido,
+    handleTerminarEntreno,
+    onOptionChangeSensacion,
+    sensacion,
+    terminado,
+    comentario,
+    handleChangeComentario,
   };
 }
