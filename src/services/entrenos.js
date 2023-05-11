@@ -57,7 +57,7 @@ const toJSON = (objeto) => {
 export const getEntrenosUser = async (user) => {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/entrenoEntrenamiento/user/" + user
+      "http://localhost:3000/api/entrenamiento/user/" + user
     );
     return await response.json();
   } catch (e) {
@@ -67,7 +67,7 @@ export const getEntrenosUser = async (user) => {
 export const getEntreno = async (id) => {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/entrenoEntrenamiento/" + id
+      "http://localhost:3000/api/entrenamiento/" + id
     );
     return await response.json();
   } catch (e) {

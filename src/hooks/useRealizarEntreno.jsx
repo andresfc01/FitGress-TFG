@@ -124,7 +124,7 @@ export function useRealizarEntreno({ idPlantilla, user }) {
     const newEntreno = await saveEntreno(entrenamiento, user.token);
     if (newEntreno) {
       console.log(user);
-      navigate("/perfil/" + user._id + "/entrenamientos");
+      navigate("/perfil/entrenamientos");
     }
   };
 

@@ -1,0 +1,207 @@
+.entreno {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: 0.2s;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: var(--background-alt);
+  border-radius: 7px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.sensaciones {
+  font-size: 200%;
+}
+
+.series {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 5rem;
+}
+.series .serie {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+  border-top: 1px solid;
+  border-radius: 7px;
+  border-bottom: 1px solid;
+  justify-content: space-between;
+}
+.headerSeries {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.divSerie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.serie > video {
+  width: 10rem;
+  border-radius: 7px;
+  margin-right: 1rem;
+}
+.serie > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.serie > div > h3 {
+  margin: 0;
+}
+.serie > div > div {
+  display: flex;
+  flex-direction: row;
+}
+.serie > div > div > input {
+  max-width: 3rem;
+  background-color: inherit;
+  border-bottom: 2px solid white;
+  padding: 0;
+  border-radius: 0;
+  margin-left: 0.3rem;
+  margin-right: 1rem;
+  text-align: center;
+}
+.entreno > img {
+  object-fit: cover;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 7px;
+}
+.entreno > .info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.entreno > .info > p {
+  margin: 0;
+}
+.entreno > div > h2 {
+  margin: 0;
+}
+
+.entreno > div > small {
+  margin: 0;
+  font-style: italic;
+  color: var(--text-muted);
+  text-align: center;
+  width: 100%;
+}
+
+.diasSemana {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  list-style-type: none;
+  width: 80%;
+
+  gap: 0.5rem;
+  margin: 0;
+}
+.diasSemana li {
+  width: 2rem;
+  height: 2rem;
+
+  background-color: var(--background-alt);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  border: 1px solid var(--selection);
+
+  transition: 0.3s;
+}
+
+.diasSemana li.diaSelect {
+  background-color: var(--selection);
+}
+
+.dificultad {
+  display: flex;
+  gap: 0;
+}
+
+.dificultad input {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.dificultad label {
+  margin: 0;
+  padding: 0.7rem 0;
+  width: 7rem;
+  text-align: center;
+  background: var(--background-alt);
+  border-radius: 7px;
+  border: 1px solid var(--selection);
+
+  transition: 0.3s;
+}
+.dificultad label.dificultadSelected {
+  background: var(--selection);
+  border-color: #000;
+}
+
+.titleSeries {
+  margin: 1rem 0;
+  text-align: center;
+}
+.lineaSeries {
+  width: 100%;
+  height: 0.15rem;
+  margin: 1rem 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--selection),
+    transparent
+  );
+  border: none;
+  z-index: 0;
+}
+.lineaEjercicio {
+  width: 90%;
+  height: 0.15rem;
+  margin-top: -1.9%;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--selection),
+    transparent
+  );
+  border: none;
+  z-index: 0;
+}
+
+.btnEntrenar {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: auto;
+  width: 90%;
+  padding: 10px;
+  z-index: 100;
+}

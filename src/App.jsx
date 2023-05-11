@@ -11,6 +11,7 @@ import { useState } from "react";
 import NuevaPlantilla from "./routes/nuevaPlantilla/nuevaPlantilla";
 import Plantilla from "./routes/plantilla/plantilla";
 import RealizarEntreno from "./routes/realizarEntreno/realizarEntreno";
+import EntrenamientosUser from "./routes/entrenamientosUser/entrenamientosUser";
 
 export const AppContext = createContext();
 
@@ -59,6 +60,10 @@ function App() {
               />
               <Route path="/ejercicios" element={<Ejercicios />} />
               <Route path="/nuevaPlantilla" element={<NuevaPlantilla />} />
+              <Route
+                path="/perfil/entrenamientos"
+                element={<EntrenamientosUser />}
+              />
               <Route path="/register" element={<Register />} />
               <Route path="/*" element={<h1>PAG NO</h1>} />
             </Routes>
