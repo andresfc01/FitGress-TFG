@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import NuevaPlantilla from "./routes/nuevaPlantilla/nuevaPlantilla";
 import Plantilla from "./routes/plantilla/plantilla";
+import Entrenamiento from "./routes/entrenamiento/entrenamiento";
 import RealizarEntreno from "./routes/realizarEntreno/realizarEntreno";
 import EntrenamientosUser from "./routes/entrenamientosUser/entrenamientosUser";
 
@@ -58,6 +59,7 @@ function App() {
                 path="/realizarEntreno/:id"
                 element={<RealizarEntreno />}
               />
+              <Route path="/entreno/:id" element={<Entrenamiento />} />
               <Route path="/ejercicios" element={<Ejercicios />} />
               <Route path="/nuevaPlantilla" element={<NuevaPlantilla />} />
               <Route

@@ -4,7 +4,7 @@
   align-items: center;
   transition: 0.2s;
   padding: 0.5rem;
-  width: 100%;
+  width: 90%;
   background-color: var(--background-alt);
   border-radius: 7px;
   flex-wrap: wrap;
