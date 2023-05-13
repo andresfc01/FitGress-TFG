@@ -6,7 +6,6 @@ export const saveEntreno = async (datos, token) => {
 
   const existe = datos._id ? true : false;
   const entreno = datos;
-  console.log(entreno);
   //HACER FORM DATA DE TODO PARA ENVIAR
 
   if (existe) {

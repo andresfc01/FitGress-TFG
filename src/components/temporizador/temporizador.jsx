@@ -19,7 +19,6 @@ export default function Temporizador({ tiempo, onDesaparecido } = props) {
 
   useEffect(() => {
     if (sec === 0) {
-      console.log("first");
       sound.play();
       clearInterval(timer.current);
       setTimeout(() => {

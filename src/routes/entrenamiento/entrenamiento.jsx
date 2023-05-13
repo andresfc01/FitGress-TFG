@@ -8,7 +8,6 @@ import Entreno from "../../components/entrenamiento/entrenamiento";
 export default function App() {
   const { id } = useParams();
   const [entreno, setEntreno] = useState(undefined);
-  console.log(entreno);
 
   useEffect(() => {
     const fetchEntreno = async () => {

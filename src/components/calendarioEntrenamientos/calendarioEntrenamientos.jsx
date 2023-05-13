@@ -4,6 +4,10 @@ import "react-calendar/dist/Calendar.css";
 import styles from "./styles.module.css"; // Importa los estilos CSS modulares
 
 const CalendarioEntrenamientos = ({ entrenamientos }) => {
+  if (!entrenamientos) {
+    // Si entrenamientos es nulo o indefinido, no realizar ninguna acción
+    return null;
+  }
   const entrenamientosRealizados = entrenamientos.map(
     (entrenamiento) => entrenamiento.fecha.split("T")[0]
   );

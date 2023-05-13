@@ -3,31 +3,26 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { Link } from "react-router-dom";
 import EntrenamientosUser from "../entrenamientosUser/entrenamientosUser";
+import PesosUser from "../pesosUser/pesosUser";
 import "react-calendar/dist/Calendar.css";
 import CalendarioEntrenamientos from "../../components/calendarioEntrenamientos/calendarioEntrenamientos";
 import { getEntrenosUser } from "../../services/entrenos";
+import { usePerfil } from "../../hooks/usePerfil";
 
 export default function App() {
   const { user } = useContext(AppContext);
-  console.log(user);
   const rutaImg = "http://localhost:3000/" + user?.image?.imagePath;
-
-  const [entrenos, setEntrenos] = useState([]);
-
-  useEffect(() => {
-    const fetchEntrenos = async () => {
-      try {
-        const result = await getEntrenosUser(user._id);
-        setEntrenos(result);
-      } catch (error) {
-        // Manejar errores de la petición
-        console.error("Error al obtener las entrenos:", error);
-      }
-    };
-    if (user?._id) {
-      fetchEntrenos();
-    }
-  }, [user]);
+  const {
+    showEntrenamientos,
+    showLogros,
+    showMedidas,
+    showPeso,
+    handleClickEntrenamiento,
+    handleClickLogros,
+    handleClickMedida,
+    handleClickPeso,
+    entrenos,
+  } = usePerfil({ userObj: user });
 
   const [entrenamientosRealizados, setEntrenamientosRealizados] = useState([]);
 
@@ -46,18 +41,38 @@ export default function App() {
         <div className={styles.contenido}>
           <div className={styles.botones}>
             <p>Ver estadísticas</p>
-            <button>Peso</button>
-            <button>Medidas</button>
-            <button>Entrenamientos</button>
-            <button>Logros</button>
+            <button onClick={handleClickPeso}>Peso</button>
+            <button onClick={handleClickMedida}>Medidas</button>
+            <button onClick={handleClickEntrenamiento}>Entrenamientos</button>
+            <button onClick={handleClickLogros}>Logros</button>
           </div>
-          <div className={styles.calendario}>
-            <CalendarioEntrenamientos entrenamientos={entrenos ?? undefined} />
-          </div>
-          <div className={styles.otroContenido}>
-            <h2>Historial entrenamientos</h2>
-            <EntrenamientosUser />
-          </div>
+          {showEntrenamientos && (
+            <>
+              <div className={styles.calendario}>
+                <CalendarioEntrenamientos
+                  entrenamientos={entrenos ?? undefined}
+                />
+              </div>
+              <div className={styles.otroContenido}>
+                <h2>Historial entrenamientos</h2>
+                <EntrenamientosUser />
+              </div>
+            </>
+          )}
+
+          {showLogros && (
+            <>
+              <h1>Logros</h1>
+            </>
+          )}
+
+          {showMedidas && (
+            <>
+              <h1>Medidas</h1>
+            </>
+          )}
+
+          {showPeso && <PesosUser />}
         </div>
       </div>
     )
