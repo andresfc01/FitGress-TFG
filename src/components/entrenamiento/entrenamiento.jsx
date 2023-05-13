@@ -22,7 +22,10 @@ export default function Entreno({ entreno, showDetails = false } = props) {
 
   return (
     entreno && (
-      <div className={styles.entreno} style={showDetails && {"padding-top":"2rem"}}>
+      <div
+        className={styles.entreno}
+        /* style={showDetails && { "padding-top": "2rem" }} */
+      >
         <img
           src={"http://localhost:3000/" + entreno?.plantilla?.image?.imagePath}
           alt=""

@@ -1,0 +1,91 @@
+.perfil {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+h2 {
+  margin: 0;
+}
+.infoPersonal {
+  flex-basis: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 1rem;
+  gap: 2rem;
+  text-align: center;
+
+  background-color: var(--background-alt);
+  border-radius: 14px;
+}
+.infoPersonal img {
+  object-fit: cover;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+}
+.infoPersonal p {
+  font-size: 150%;
+}
+
+.botones {
+  flex-basis: 40%;
+  order: 1; /* Cambia el orden visual de los botones */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.botones button {
+  flex-basis: 40%;
+}
+.botones p {
+  flex-basis: 100%;
+}
+.otroContenido {
+  margin: auto;
+  order: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.contenido {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.calendario {
+  flex-basis: 40%;
+  order: 2; /* Cambia el orden visual del calendario */
+}
+
+@media (max-width: 20rem) {
+  .perfil {
+    flex-wrap: nowrap;
+  }
+
+  .infoPersonal,
+  .botones {
+    flex-basis: 100%;
+  }
+
+  .contenido {
+    flex-basis: 100%;
+  }
+}

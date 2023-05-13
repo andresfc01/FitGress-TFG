@@ -212,14 +212,12 @@ export function usePlantilla({ id, user }) {
 
   return {
     plantilla,
-    enumDias,
     handleChangeDescanso,
     handleChangePesoObj,
     handleChangeRepsObj,
     handleSavePlantilla,
     enumDias,
     editable,
-    plantilla,
     onDragOver,
     onDrop,
     onDragStart,

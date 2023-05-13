@@ -13,6 +13,7 @@ import Plantilla from "./routes/plantilla/plantilla";
 import Entrenamiento from "./routes/entrenamiento/entrenamiento";
 import RealizarEntreno from "./routes/realizarEntreno/realizarEntreno";
 import EntrenamientosUser from "./routes/entrenamientosUser/entrenamientosUser";
+import Perfil from "./routes/perfil/perfil";
 
 export const AppContext = createContext();
 
@@ -66,6 +67,7 @@ function App() {
                 path="/perfil/entrenamientos"
                 element={<EntrenamientosUser />}
               />
+              <Route path="/perfil/" element={<Perfil />} />
               <Route path="/register" element={<Register />} />
               <Route path="/*" element={<h1>PAG NO</h1>} />
             </Routes>

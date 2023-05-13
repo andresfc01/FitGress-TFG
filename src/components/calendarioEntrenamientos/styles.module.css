@@ -1,0 +1,13 @@
+.calendario {
+  margin: auto;
+  background-color: var(--background-alt);
+  border-radius: 7px;
+  border: none;
+  text-align: center;
+}
+.calendario .tile-selected {
+  background-color: var(
+    --selection
+  ); /* Cambia el color de fondo según tus preferencias */
+  color: white; /* Cambia el color del texto según tus preferencias */
+}

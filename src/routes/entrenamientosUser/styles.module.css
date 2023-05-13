@@ -1,5 +1,5 @@
 .entrenos {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -13,4 +13,7 @@
   flex-direction: column;
   width: 22rem;
   align-items: center;
+}
+p {
+  text-align: center;
 }

@@ -29,23 +29,27 @@ export default function App() {
 
   return (
     <>
-      <div className={styles.entrenos}>
-        {entrenos.map((entreno, cont) => {
-          return (
-            <Link
-              to={`/entreno/${entreno?._id}`}
-              key={cont}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <Entreno
-                setShowUser={false}
-                entreno={entreno}
-                enableClick={true}
-              />
-            </Link>
-          );
-        })}
-      </div>
+      {entrenos.length > 0 ? (
+        <div className={styles.entrenos}>
+          {entrenos.map((entreno, cont) => {
+            return (
+              <Link
+                to={`/entreno/${entreno?._id}`}
+                key={cont}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <Entreno
+                  setShowUser={false}
+                  entreno={entreno}
+                  enableClick={true}
+                />
+              </Link>
+            );
+          })}
+        </div>
+      ) : (
+        <p>No hay entrenamientos registrados.</p>
+      )}
     </>
   );
 }

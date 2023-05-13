@@ -34,6 +34,9 @@ export default function App() {
           {user && (
             <>
               <li>
+                <Link to={"perfil"}>Perfil</Link>
+              </li>
+              <li>
                 <BotonLogout></BotonLogout>
               </li>
             </>
