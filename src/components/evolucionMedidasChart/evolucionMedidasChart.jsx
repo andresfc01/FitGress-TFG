@@ -10,9 +10,9 @@ import {
   Legend,
 } from "recharts";
 
-export default function LineChartTabs({ pesos }) {
+export default function LineChartTabs({ medidas }) {
   const [emptyData, setEmptyData] = useState(false);
-  const [filteredPesos, setFilteredPesos] = useState([...pesos]);
+  const [filteredMedidas, setFilteredMedidas] = useState([...medidas]);
 
   // Función para formatear la fecha
   const formatDate = (dateString) => {
@@ -20,15 +20,15 @@ export default function LineChartTabs({ pesos }) {
     return new Date(dateString).toLocaleDateString("es-ES", options);
   };
 
-  const formatPeso = (peso) => `${peso}Kg`;
+  const formatMedida = (medida) => `${medida}cm`;
 
   // Obtener los valores mínimos y máximos del eje Y
-  const valoresPeso = filteredPesos.map((item) => item.peso);
-  const minY = Math.min(...valoresPeso);
-  const maxY = Math.max(...valoresPeso);
+  const valoresMedida = filteredMedidas.map((item) => item.medida);
+  const minY = Math.min(...valoresMedida);
+  const maxY = Math.max(...valoresMedida);
 
   const handleFilter = (period) => {
-    let filteredData = [...pesos].reverse(); // Copia los datos originales
+    let filteredData = [...medidas].reverse(); // Copia los datos originales
 
     switch (period) {
       case "1M": {
@@ -80,7 +80,7 @@ export default function LineChartTabs({ pesos }) {
     setEmptyData(filteredData.length === 0 || filteredData.length === 1);
 
     // Actualizar los datos filtrados
-    setFilteredPesos(filteredData);
+    setFilteredMedidas(filteredData);
   };
 
   return (
@@ -95,7 +95,7 @@ export default function LineChartTabs({ pesos }) {
       {emptyData ? (
         <p>No hay datos disponibles para el período seleccionado.</p>
       ) : (
-        <LineChart width={400} height={300} data={filteredPesos}>
+        <LineChart width={400} height={300} data={filteredMedidas}>
           <XAxis
             dataKey="fecha"
             tickFormatter={formatDate}
@@ -103,14 +103,14 @@ export default function LineChartTabs({ pesos }) {
           />
           <YAxis
             domain={[minY, maxY]}
-            tickFormatter={formatPeso}
+            tickFormatter={formatMedida}
             tick={{ fill: "var(--text-main)" }}
           />
           <Tooltip />
           <Legend verticalAlign="top" align="right" />
           <Line
             type="linear"
-            dataKey="peso"
+            dataKey="medida"
             stroke="var(--selection)"
             strokeWidth={2}
             dot={false}

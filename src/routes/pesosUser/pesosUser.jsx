@@ -48,7 +48,6 @@ export default function App() {
   };
 
   const handleDeletePeso = (pesoId) => {
-    console.log(pesoId);
     const updatedPesos = pesos.filter((peso) => peso._id !== pesoId);
     setPesos(updatedPesos);
     deletePeso(pesoId, user.token);

@@ -4,6 +4,7 @@ import { AppContext } from "../../App";
 import { Link } from "react-router-dom";
 import EntrenamientosUser from "../entrenamientosUser/entrenamientosUser";
 import PesosUser from "../pesosUser/pesosUser";
+import MedidasUser from "../medidasUser/medidasUser";
 import "react-calendar/dist/Calendar.css";
 import CalendarioEntrenamientos from "../../components/calendarioEntrenamientos/calendarioEntrenamientos";
 import { getEntrenosUser } from "../../services/entrenos";
@@ -23,8 +24,6 @@ export default function App() {
     handleClickPeso,
     entrenos,
   } = usePerfil({ userObj: user });
-
-  const [entrenamientosRealizados, setEntrenamientosRealizados] = useState([]);
 
   return (
     user && (
@@ -66,11 +65,7 @@ export default function App() {
             </>
           )}
 
-          {showMedidas && (
-            <>
-              <h1>Medidas</h1>
-            </>
-          )}
+          {showMedidas && <MedidasUser />}
 
           {showPeso && <PesosUser />}
         </div>

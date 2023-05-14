@@ -1,0 +1,20 @@
+.medidas {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  order: 2;
+}
+.divUltimasMedidas {
+  order: 1;
+}
+.ultimasMedidas {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+}

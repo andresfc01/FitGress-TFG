@@ -1,0 +1,21 @@
+.medida {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: 0.2s;
+  width: 90%;
+  background-color: var(--background-alt);
+  border-radius: 7px;
+  justify-content: space-evenly;
+}
+
+.medidaCorrecto {
+  color: green;
+}
+.medidaIncorrecto {
+  color: red;
+}
+
+.editar {
+  font-size: 100%;
+}
