@@ -37,6 +37,21 @@ export const savePeso = async (datos, token) => {
   }
 };
 
+export const deletePeso = async (id, token) => {
+  try {
+    const response = await fetch(url + id, {
+      method: "DELETE",
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error deleting peso");
+  }
+};
+
 export const getPesosUser = async (user, token) => {
   try {
     const response = await fetch(url + "user/" + user, {

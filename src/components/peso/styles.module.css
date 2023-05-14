@@ -3,18 +3,19 @@
   flex-direction: row;
   align-items: center;
   transition: 0.2s;
-  padding: 0.5rem;
   width: 90%;
   background-color: var(--background-alt);
   border-radius: 7px;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
+  justify-content: space-evenly;
 }
 
-.pesoCorrecto{
+.pesoCorrecto {
   color: green;
 }
-.pesoIncorrecto{
+.pesoIncorrecto {
   color: red;
+}
+
+.editar {
+  font-size: 100%;
 }

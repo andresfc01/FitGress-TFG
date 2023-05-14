@@ -1,6 +1,16 @@
+import { useState } from "react";
 import styles from "./styles.module.css";
 
-export default function Peso({ peso, pesoAnt, objetivo } = props) {
+export default function Peso({
+  peso,
+  pesoAnt,
+  objetivo,
+  onEdit,
+  onDelete,
+} = props) {
+  const [editing, setEditing] = useState(false);
+  const [newPeso, setNewPeso] = useState(peso.peso);
+
   function convertirFecha(fechaString) {
     var fecha = new Date(fechaString); // Crea un objeto Date a partir de la cadena de fecha
 
@@ -29,18 +39,55 @@ export default function Peso({ peso, pesoAnt, objetivo } = props) {
     clasePeso = diferencia > 0 ? 1 : 0;
   }
 
+  const handleEditClick = () => {
+    setEditing(true);
+  };
+
+  const handleDeleteClick = () => {
+    onDelete(peso._id);
+    setEditing(false);
+  };
+
+  const handleConfirmClick = () => {
+    onEdit(peso._id, newPeso);
+    setEditing(false);
+  };
+
   return (
     peso && (
       <div className={styles.peso}>
-        <p>{peso.peso}</p>
-        <small>{convertirFecha(peso.fecha)}</small>
-        <p
-          className={
-            clasePeso === 1 ? styles.pesoCorrecto : styles.pesoIncorrecto
-          }
-        >
-          {diferencia > 0 ? `+${diferencia}kg.` : `${diferencia}kg.`}
-        </p>
+        {editing ? (
+          <>
+          <label htmlFor="">Peso : </label>
+            <input
+              type="text"
+              value={newPeso}
+              onChange={(e) => setNewPeso(e.target.value)}
+            />
+            
+            <p onClick={handleConfirmClick}>✅</p>
+            <p onClick={handleDeleteClick}>❌</p>
+          </>
+        ) : (
+          <>
+            <p>
+              Peso : <strong>{peso.peso}Kg.</strong>
+            </p>
+            <small>
+              <i>{convertirFecha(peso.fecha)}</i>
+            </small>
+            <p
+              className={
+                clasePeso === 1 ? styles.pesoCorrecto : styles.pesoIncorrecto
+              }
+            >
+              {diferencia > 0 ? `+${diferencia}kg.` : `${diferencia}kg.`}
+            </p>
+            <p className={styles.editar} onClick={handleEditClick}>
+              ✏️
+            </p>
+          </>
+        )}
       </div>
     )
   );

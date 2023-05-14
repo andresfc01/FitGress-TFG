@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import {
   LineChart,
@@ -11,11 +11,9 @@ import {
 } from "recharts";
 
 export default function LineChartTabs({ pesos }) {
-  if (!pesos || pesos.length === 0) {
-    return null;
-  }
-  console.log(pesos.reverse());
-  pesos = [...pesos].reverse();
+  const [emptyData, setEmptyData] = useState(false);
+  const [filteredPesos, setFilteredPesos] = useState([...pesos].reverse());
+
   // Función para formatear la fecha
   const formatDate = (dateString) => {
     const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
@@ -25,38 +23,101 @@ export default function LineChartTabs({ pesos }) {
   const formatPeso = (peso) => `${peso}Kg`;
 
   // Obtener los valores mínimos y máximos del eje Y
-  const valoresPeso = pesos.map((item) => item.peso);
+  const valoresPeso = filteredPesos.map((item) => item.peso);
   const minY = Math.min(...valoresPeso);
   const maxY = Math.max(...valoresPeso);
 
+  const handleFilter = (period) => {
+    let filteredData = [...pesos]; // Copia los datos originales
+
+    switch (period) {
+      case "1M": {
+        // Filtrar por 1 mes
+        const periodStartDate = new Date();
+        periodStartDate.setMonth(periodStartDate.getMonth() - 1);
+        filteredData = filteredData.filter(
+          (item) => new Date(item.fecha) >= periodStartDate
+        );
+        break;
+      }
+      case "3M": {
+        // Filtrar por 3 meses
+        const periodStartDate = new Date();
+        periodStartDate.setMonth(periodStartDate.getMonth() - 3);
+        filteredData = filteredData.filter(
+          (item) => new Date(item.fecha) >= periodStartDate
+        );
+        console.log(filteredData);
+        break;
+      }
+      case "6M": {
+        // Filtrar por 6 meses
+        const periodStartDate = new Date();
+        periodStartDate.setMonth(periodStartDate.getMonth() - 6);
+        filteredData = filteredData.filter(
+          (item) => new Date(item.fecha) >= periodStartDate
+        );
+        break;
+      }
+      case "1Y": {
+        // Filtrar por 1 año
+        const periodStartDate = new Date();
+        periodStartDate.setFullYear(periodStartDate.getFullYear() - 1);
+        filteredData = filteredData.filter(
+          (item) => new Date(item.fecha) >= periodStartDate
+        );
+        break;
+      }
+      case "total": {
+        // Sin filtrar, mostrar todos los datos
+        filteredData = [...pesos];
+        break;
+      }
+      default:
+        break;
+    }
+
+    // Verificar si los datos filtrados están vacíos
+    setEmptyData(filteredData.length === 0);
+
+    // Actualizar los datos filtrados
+    setFilteredPesos(filteredData);
+  };
+
   return (
     <div className={styles.grafico}>
-      <LineChart
-        width={800}
-        height={400}
-        data={pesos}
-        /*  margin={{ top: 20, right: 30, left: 20, bottom: 20 }} */
-      >
-        <XAxis
-          dataKey="fecha"
-          tickFormatter={formatDate} // Formatear la fecha en el eje X
-          tick={{ fill: "var(--text-main)" }}
-        />
-        <YAxis
-          domain={[minY, maxY]}
-          tickFormatter={formatPeso}
-          tick={{ fill: "var(--text-main)" }}
-        />
-        <Tooltip />
-        <Legend verticalAlign="top" align="right" />
-        <Line
-          type="linear" /* "monotone" */
-          dataKey="peso"
-          stroke="var(--selection)"
-          strokeWidth={2}
-          dot={false}
-        />
-      </LineChart>
+      <div className={styles.filtros}>
+        <button onClick={() => handleFilter("1M")}>1 Mes</button>
+        <button onClick={() => handleFilter("3M")}>3 Meses</button>
+        <button onClick={() => handleFilter("6M")}>6 Meses</button>
+        <button onClick={() => handleFilter("1Y")}>1 Año</button>
+        <button onClick={() => handleFilter("total")}>Total</button>
+      </div>
+      {emptyData ? (
+        <p>No hay datos disponibles para el período seleccionado.</p>
+      ) : (
+        <LineChart width={400} height={300} data={filteredPesos}>
+          <XAxis
+            dataKey="fecha"
+            tickFormatter={formatDate}
+            tick={{ fill: "var(--text-main)" }}
+          />
+          <YAxis
+            domain={[minY, maxY]}
+            tickFormatter={formatPeso}
+            tick={{ fill: "var(--text-main)" }}
+          />
+          <Tooltip />
+          <Legend verticalAlign="top" align="right" />
+          <Line
+            type="linear"
+            dataKey="peso"
+            stroke="var(--selection)"
+            strokeWidth={2}
+            dot={false}
+          />
+        </LineChart>
+      )}
     </div>
   );
 }
