@@ -16,7 +16,6 @@ export default function App() {
         setEntreno(result);
       } catch (error) {
         // Manejar errores de la petición
-        console.error("Error al obtener el entrenamiento : ", error);
       }
     };
     if (id) {

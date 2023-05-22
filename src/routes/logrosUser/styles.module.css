@@ -1,0 +1,27 @@
+.divLogros {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  gap: 0.5rem;
+  order: 2;
+}
+
+.divLogros h2 {
+  margin: 0;
+  padding: 0;
+  padding-top: 1.5rem;
+}
+.divLogros h4 {
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+  color: var(--form-placeholder);
+}
+
+.logros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

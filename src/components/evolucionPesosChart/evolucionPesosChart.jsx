@@ -12,7 +12,7 @@ import {
 
 export default function LineChartTabs({ pesos }) {
   const [emptyData, setEmptyData] = useState(false);
-  const [filteredPesos, setFilteredPesos] = useState([...pesos]);
+  const [filteredPesos, setFilteredPesos] = useState(pesos);
 
   // Función para formatear la fecha
   const formatDate = (dateString) => {
@@ -47,7 +47,6 @@ export default function LineChartTabs({ pesos }) {
         filteredData = filteredData.filter(
           (item) => new Date(item.fecha) >= periodStartDate
         );
-        console.log(filteredData);
         break;
       }
       case "6M": {

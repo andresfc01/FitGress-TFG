@@ -47,7 +47,6 @@ export default function LineChartTabs({ medidas }) {
         filteredData = filteredData.filter(
           (item) => new Date(item.fecha) >= periodStartDate
         );
-        console.log(filteredData);
         break;
       }
       case "6M": {

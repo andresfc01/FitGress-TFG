@@ -21,7 +21,6 @@ export function usePerfil({ userObj }) {
       setEntrenos(result);
     } catch (error) {
       // Manejar errores de la petición
-      console.error("Error al obtener las entrenos:", error);
     }
   };
 

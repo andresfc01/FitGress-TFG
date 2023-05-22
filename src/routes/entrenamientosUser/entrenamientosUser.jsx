@@ -18,7 +18,6 @@ export default function App() {
         setEntrenos(result);
       } catch (error) {
         // Manejar errores de la petición
-        console.error("Error al obtener las entrenos:", error);
       }
     };
     setId(user?._id);

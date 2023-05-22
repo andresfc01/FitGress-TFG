@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import EntrenamientosUser from "../entrenamientosUser/entrenamientosUser";
 import PesosUser from "../pesosUser/pesosUser";
 import MedidasUser from "../medidasUser/medidasUser";
+import LogrosUser from "../logrosUser/logrosUser";
 import "react-calendar/dist/Calendar.css";
 import CalendarioEntrenamientos from "../../components/calendarioEntrenamientos/calendarioEntrenamientos";
 import { getEntrenosUser } from "../../services/entrenos";
@@ -59,11 +60,7 @@ export default function App() {
             </>
           )}
 
-          {showLogros && (
-            <>
-              <h1>Logros</h1>
-            </>
-          )}
+          {showLogros && <LogrosUser />}
 
           {showMedidas && <MedidasUser />}
 
