@@ -53,6 +53,14 @@ const toJSON = (objeto) => {
   };
 };
 
+export const getEntrenos = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/entrenamiento");
+    return await response.json();
+  } catch (e) {
+    throw new Error("Error searching entreno");
+  }
+};
 export const getEntrenosUser = async (user) => {
   try {
     const response = await fetch(

@@ -8,6 +8,9 @@ export default function Logro({
   pesoObjetivo,
 } = props) {
   function compruebaLogro(logro) {
+    if (datos.length === 0) {
+      return false;
+    }
     //calculo el logro por categoria
     if (logro.categoria === "peso") {
       //cant
@@ -39,7 +42,6 @@ export default function Logro({
       }
     } else if (logro.categoria === "medida") {
       //cant
-      console.log(datos);
       if (logro.subCategoria === "cant") {
         const partesCuerpo = [
           "brazo",

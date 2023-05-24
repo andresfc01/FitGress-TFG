@@ -43,6 +43,11 @@ export default function Plantilla({
     handleChangePrivado,
   } = usePlantilla({ id: plantilla._id, user });
 
+  var sameUser = false;
+  if (user) {
+    sameUser = user._id === plantilla.user._id;
+  }
+
   const calculaTiempo = () => {
     let cont = 0;
     const tiempoPorEjercicio = 30;
@@ -52,7 +57,6 @@ export default function Plantilla({
         cont += serie.descanso + tiempoPorEjercicio;
       });
     }
-
     return cont / 60;
   };
 
@@ -60,10 +64,16 @@ export default function Plantilla({
     <>
       {newPlantilla && (
         <>
-          {showDetails && (
-            <button onClick={handleSavePlantilla}>
-              {editable ? "Guardar" : "Editar"}
-            </button>
+          {sameUser ? (
+            <>
+              {showDetails && (
+                <button onClick={handleSavePlantilla}>
+                  {editable ? "Guardar" : "Editar"}
+                </button>
+              )}
+            </>
+          ) : (
+            <button>Copiar plantilla</button>
           )}
 
           <div className={styles.plantilla}>
@@ -278,7 +288,7 @@ export default function Plantilla({
                     </div>
                   ))}
                 </div>
-                {!editable && (
+                {sameUser && !editable && (
                   <Link
                     to={"/realizarEntreno/" + plantilla._id}
                     className={styles.btnEntrenar}

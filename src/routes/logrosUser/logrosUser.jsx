@@ -86,7 +86,6 @@ export default function App() {
       setLogrosMedida(logrosM);
     }
   }, [logros]);
-  console.log(user);
   return (
     <div className={styles.divLogros}>
       {logrosPeso && pesos && (

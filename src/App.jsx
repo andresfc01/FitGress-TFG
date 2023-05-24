@@ -3,7 +3,8 @@ import { Router, Route, BrowserRouter, Link, Routes } from "react-router-dom";
 import Header from "./components/header/header";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
-import Plantillas from "./routes/plantillasUser/plantillasUser";
+import PlantillasUser from "./routes/plantillasUser/plantillasUser";
+import Plantillas from "./routes/plantillas/plantillas";
 import Ejercicios from "./routes/ejercicios/ejercicios";
 import "./App.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -54,7 +55,8 @@ function App() {
                 }
               />
               <Route path="/login" element={<Login />} />
-              <Route path="/plantillas" element={<Plantillas />} />
+              <Route path="/explorar" element={<Plantillas />} />
+              <Route path="/plantillas" element={<PlantillasUser />} />
               <Route path="/plantilla/:id" element={<Plantilla />} />
               <Route
                 path="/realizarEntreno/:id"

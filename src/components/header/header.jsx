@@ -9,11 +9,13 @@ export default function App() {
   const { user } = useContext(AppContext);
   return (
     <>
-      {user?.ima}
       <nav>
         <ul>
           <li>
             <Link to={""}>Home</Link>
+          </li>
+          <li>
+            <Link to={"explorar"}>Explorar</Link>
           </li>
           <li>
             <Link to={"plantillas"}>Plantillas</Link>

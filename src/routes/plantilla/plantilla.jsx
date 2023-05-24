@@ -10,12 +10,11 @@ export default function App() {
   return (
     <>
       {plantilla ? (
-      
-          <Plantilla
-            setShowUser={false}
-            showDetails={true}
-            plantilla={plantilla}
-          />
+        <Plantilla
+          setShowUser={true}
+          showDetails={true}
+          plantilla={plantilla}
+        />
       ) : (
         <p>No se encuentra la plantilla</p>
       )}

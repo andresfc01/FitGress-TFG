@@ -44,7 +44,7 @@ const toJSON = (objeto) => {
     ...serie,
     ejercicio: serie.ejercicio._id,
   }));
-  
+
   return {
     ...objeto,
     series: seriesModificadas,
@@ -56,6 +56,16 @@ export const getPlantillasUser = async (user) => {
   try {
     const response = await fetch(
       "http://localhost:3000/api/plantillaEntrenamiento/user/" + user
+    );
+    return await response.json();
+  } catch (e) {
+    throw new Error("Error searching plantilla");
+  }
+};
+export const getPlantillas = async () => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/plantillaEntrenamiento"
     );
     return await response.json();
   } catch (e) {
