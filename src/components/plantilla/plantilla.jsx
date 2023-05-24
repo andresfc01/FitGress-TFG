@@ -47,7 +47,6 @@ export default function Plantilla({
   if (user) {
     sameUser = user._id === plantilla.user._id;
   }
-
   const calculaTiempo = () => {
     let cont = 0;
     const tiempoPorEjercicio = 30;
@@ -73,7 +72,7 @@ export default function Plantilla({
               )}
             </>
           ) : (
-            <button>Copiar plantilla</button>
+            <>{showDetails && <button>Copiar plantilla</button>}</>
           )}
 
           <div className={styles.plantilla}>
