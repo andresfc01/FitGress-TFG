@@ -41,11 +41,12 @@ export default function Plantilla({
     dificultad,
     privado,
     handleChangePrivado,
+    handleCopiarPlantilla,
   } = usePlantilla({ id: plantilla._id, user });
 
   var sameUser = false;
   if (user) {
-    sameUser = user._id === plantilla.user._id;
+    sameUser = user._id === plantilla.user?._id || plantilla.user === user._id;
   }
   const calculaTiempo = () => {
     let cont = 0;
@@ -72,7 +73,13 @@ export default function Plantilla({
               )}
             </>
           ) : (
-            <>{showDetails && <button>Copiar plantilla</button>}</>
+            <>
+              {showDetails && (
+                <button onClick={handleCopiarPlantilla}>
+                  Copiar plantilla
+                </button>
+              )}
+            </>
           )}
 
           <div className={styles.plantilla}>

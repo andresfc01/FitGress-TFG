@@ -6,6 +6,7 @@ import {
   savePlantilla,
 } from "../services/plantillas";
 import Plantilla from "../components/plantilla/plantilla";
+import { useNavigate } from "react-router-dom";
 
 export function usePlantilla({ id, user }) {
   const [plantilla, setPlantilla] = useState(undefined);
@@ -18,6 +19,8 @@ export function usePlantilla({ id, user }) {
   const [dificultad, setDificultad] = useState(plantilla?.dificultad);
   const [privado, setPrivado] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchPlantilla = async (id) => {
       setPlantilla(await getPlantilla(id));
@@ -26,6 +29,8 @@ export function usePlantilla({ id, user }) {
   }, []);
 
   useEffect(() => {
+    console.log(plantilla);
+    console.log(user);
     setDiasSemana(plantilla?.diasSemana);
     setNombre(plantilla?.nombre);
     setPrivado(plantilla?.privado);
@@ -133,6 +138,21 @@ export function usePlantilla({ id, user }) {
     setSelectedSerie(null);
   };
 
+  const handleCopiarPlantilla = async () => {
+    var plantillaCopia = {
+      ...plantilla,
+      user: user._id,
+      plantillaRef: plantilla._id,
+    };
+    delete plantillaCopia._id;
+
+    const newPlantilla = await savePlantilla(plantillaCopia, user.token);
+    if (newPlantilla) {
+      navigate("/plantilla/" + newPlantilla._id);
+      setPlantilla(newPlantilla);
+    }
+  };
+
   const onDragOver = (e) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
@@ -233,5 +253,6 @@ export function usePlantilla({ id, user }) {
     dificultad,
     privado,
     handleChangePrivado,
+    handleCopiarPlantilla,
   };
 }

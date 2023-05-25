@@ -45,11 +45,17 @@ const toJSON = (objeto) => {
     ejercicio: serie.ejercicio._id,
   }));
 
-  return {
+  let obj = {
     ...objeto,
     series: seriesModificadas,
-    user: objeto.user._id,
   };
+  if (objeto.user?._id) {
+    obj.user = objeto.user._id;
+  } else {
+    obj.user = objeto.user;
+  }
+
+  return obj;
 };
 
 export const getPlantillasUser = async (user) => {
@@ -90,7 +96,18 @@ const toFormdata = (plantilla) => {
   formData.append("dificultad", plantilla.dificultad);
   formData.append("privado", plantilla.privado);
   formData.append("series", JSON.stringify(plantilla.series));
-  formData.append("user", plantilla.user._id);
-  formData.append("image", plantilla.image.imagePath);
+  if (plantilla.plantillaRef) {
+    formData.append("plantillaRef", plantilla.plantillaRef);
+  }
+  if (plantilla.user?._id) {
+    formData.append("user", plantilla.user?._id);
+  } else {
+    formData.append("user", plantilla.user);
+  }
+  if (plantilla.image instanceof File) {
+    formData.append("image", plantilla.image);
+  } else {
+    formData.append("image", JSON.stringify(plantilla.image));
+  }
   return formData;
 };

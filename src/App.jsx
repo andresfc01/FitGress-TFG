@@ -4,6 +4,7 @@ import Header from "./components/header/header";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import PlantillasUser from "./routes/plantillasUser/plantillasUser";
+import EditPerfil from "./routes/editPerfil/editPerfil";
 import Plantillas from "./routes/plantillas/plantillas";
 import Ejercicios from "./routes/ejercicios/ejercicios";
 import "./App.css";
@@ -15,6 +16,7 @@ import Entrenamiento from "./routes/entrenamiento/entrenamiento";
 import RealizarEntreno from "./routes/realizarEntreno/realizarEntreno";
 import EntrenamientosUser from "./routes/entrenamientosUser/entrenamientosUser";
 import Perfil from "./routes/perfil/perfil";
+import Home from "./routes/home/home";
 
 export const AppContext = createContext();
 
@@ -46,17 +48,11 @@ function App() {
           <Header />
           <div id="App">
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <button>
-                    <Link to="/nuevaPlantilla">Nueva Plantilla</Link>
-                  </button>
-                }
-              />
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/explorar" element={<Plantillas />} />
               <Route path="/plantillas" element={<PlantillasUser />} />
+              <Route path="/editPerfil" element={<EditPerfil />} />
               <Route path="/plantilla/:id" element={<Plantilla />} />
               <Route
                 path="/realizarEntreno/:id"

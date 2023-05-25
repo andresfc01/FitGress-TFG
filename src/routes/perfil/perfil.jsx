@@ -35,7 +35,9 @@ export default function App() {
             <h2>{user.username}</h2>
             <small>{user.email}</small>
           </div>
-          <p>⚙️</p>
+          <Link to={"/editPerfil"}>
+            <p>⚙️</p>
+          </Link>
         </div>
 
         <div className={styles.contenido}>
