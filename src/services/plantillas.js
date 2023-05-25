@@ -78,6 +78,16 @@ export const getPlantillas = async () => {
     throw new Error("Error searching plantilla");
   }
 };
+export const getPlantillasMasUsadas = async () => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/plantillaEntrenamiento/masUsadas"
+    );
+    return await response.json();
+  } catch (e) {
+    throw new Error("Error searching plantilla");
+  }
+};
 export const getPlantilla = async (id) => {
   try {
     const response = await fetch(

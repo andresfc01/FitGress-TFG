@@ -31,7 +31,6 @@ const Form = () => {
       .string()
       .required("Debe de seleccionar un objetivo físico")
       .label("Objetivo físico"),
-    pesoObjetivo: yup.number().label("Peso Objetivo"),
     image: yup.mixed(),
     /* .test(
         "fileType",
