@@ -88,7 +88,6 @@ const Form = () => {
     formData.append("password", user?.password);
 
     formData.append("objetivoFisico", objetivoFisico);
-    console.log(pesoObjetivo);
     formData.append("pesoObjetivo", pesoObjetivo);
     if (selectedFile !== null) {
       formData.append("image", selectedFile);
@@ -160,7 +159,6 @@ const Form = () => {
       </p> */}
 
       <label htmlFor="objetivoFisico">Objetivo físico:</label>
-      {console.log(objetivoFisico)}
 
       <select
         id="objetivoFisico"

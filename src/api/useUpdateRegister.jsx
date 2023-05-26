@@ -6,7 +6,6 @@ export const useUpdateUser = () => {
   const [userUpdate, setUserUpdate] = useState({});
 
   const postFormData = async (formData) => {
-    console.log(formData.get("pesoObjetivo"));
     const response = await fetch(URL_UPDATE, {
       method: "PUT",
       body: formData,

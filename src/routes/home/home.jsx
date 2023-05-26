@@ -20,6 +20,7 @@ export default function App() {
       <button>
         <Link to="/nuevaPlantilla">Nueva Plantilla</Link>
       </button>
+      <h2>Plantillas de entrenamiento mas usadas</h2>
       {plantillas &&
         plantillas.map((plantilla) => (
           <div key={plantilla.id}>

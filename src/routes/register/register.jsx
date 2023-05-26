@@ -5,7 +5,9 @@ import "../../css/error.css";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { useRegister } from "../../api/useRegister";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Plantilla from "../../components/plantilla/plantilla";
+import { getPlantillasMasUsadas } from "../../services/plantillas";
 
 const Form = () => {
   const schema = yup.object().shape({
@@ -16,7 +18,7 @@ const Form = () => {
     email: yup
       .string()
       .required("Debe de rellenar este campo")
-      .email("Debe ser un correo electronico")
+      .email("Debe ser un correo electrónico")
       .label("Email"),
     password: yup
       .string()
@@ -32,14 +34,26 @@ const Form = () => {
       .required("Debe de seleccionar un objetivo físico")
       .label("Objetivo físico"),
     image: yup.mixed(),
-    /* .test(
-        "fileType",
-        "Debe de ser un archivo de imagen",
-        (value) => value && value[0] && value[0].type.startsWith("image/")
-      ) */ objetivoPeso: yup
+    objetivoPeso: yup
       .number()
       .required("Debe de indicar su peso objetivo")
       .label("Peso objetivo"),
+    sexo: yup
+      .string()
+      .required("Debe seleccionar un sexo")
+      .oneOf(["M", "F"], "El sexo debe ser 'M' o 'F'"),
+    altura: yup
+      .number()
+      .required("Debe indicar su altura")
+      .min(120, "La altura mínima debe ser de 120 cm")
+      .max(250, "La altura máxima debe ser de 250 cm"),
+    nivelExperiencia: yup
+      .string()
+      .required("Debe seleccionar un nivel de experiencia")
+      .oneOf(
+        ["0", "1", "2"],
+        "El nivel de experiencia debe ser 'Principiante', 'Intermedio' o 'Experto'"
+      ),
   });
 
   const {
@@ -51,14 +65,20 @@ const Form = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(AppContext);
   const { userRegister, registerUser } = useRegister();
+  const [fase, setFase] = useState(0);
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState("");
   const [objetivoFisico, setObjetivoFisico] = useState("Mantenimiento");
   const [objetivoPeso, setObjetivoPeso] = useState(70);
-  const [image, setImage] = useState("");
+  const [sexo, setSexo] = useState("M");
+  const [altura, setAltura] = useState(170);
+  const [nivelExperiencia, setNivelExperiencia] = useState(0);
+  const [plantillasRecomendadas, setPlantillasRecomendadas] =
+    useState(undefined);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -71,11 +91,27 @@ const Form = () => {
     if (userRegister?.status != 200) {
       setError(userRegister?.message);
     }
+    //cuando se ha registrado el usuario
     if (userRegister?.user) {
       setUser(userRegister.user);
-      navigate("/");
+      setFase(2);
+      /* navigate("/"); */
     }
   }, [userRegister]);
+
+  useEffect(() => {
+    if (fase === 2) {
+      const fetchPlantillas = async () => {
+        const plantillas = await getPlantillasMasUsadas();
+        const plantillasFiltradas = plantillas.filter(
+          (plantilla) =>
+            plantilla.dificultad == userRegister.user?.nivelExperiencia
+        );
+        setPlantillasRecomendadas(plantillasFiltradas);
+      };
+      fetchPlantillas();
+    }
+  }, [fase]);
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -84,118 +120,214 @@ const Form = () => {
     formData.append("password", password);
     formData.append("objetivoFisico", objetivoFisico);
     formData.append("objetivoPeso", objetivoPeso);
-    formData.append("image", selectedFile);
+    formData.append("sexo", sexo);
+    formData.append("altura", altura);
+    formData.append("nivelExperiencia", nivelExperiencia);
+    if (selectedFile) {
+      formData.append("image", selectedFile);
+    }
     registerUser(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <p className="msgError" style={{ display: error ? "block" : "none" }}>
-        {userRegister?.message}
-      </p>
-      <label htmlFor="username">Nombre de usuario:</label>
-      <input
-        type="text"
-        id="username"
-        {...register("username")}
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <p
-        className="msgError"
-        style={{ display: errors.username ? "block" : "none" }}
-      >
-        {errors.username?.message}
-      </p>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <p className="msgError" style={{ display: error ? "block" : "none" }}>
+          {userRegister?.message}
+        </p>
+        {fase === 0 && (
+          <>
+            <label htmlFor="username">Nombre de usuario:</label>
+            <input
+              type="text"
+              id="username"
+              {...register("username")}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <p
+              className="msgError"
+              style={{ display: errors.username ? "block" : "none" }}
+            >
+              {errors.username?.message}
+            </p>
 
-      <label htmlFor="email">Correo electrónico:</label>
-      <input
-        type="text"
-        id="email"
-        {...register("email")}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <p
-        className="msgError"
-        style={{ display: errors.email ? "block" : "none" }}
-      >
-        {errors.email?.message}
-      </p>
+            <label htmlFor="email">Correo electrónico:</label>
+            <input
+              type="text"
+              id="email"
+              {...register("email")}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <p
+              className="msgError"
+              style={{ display: errors.email ? "block" : "none" }}
+            >
+              {errors.email?.message}
+            </p>
 
-      <label htmlFor="password">Contraseña:</label>
-      <input
-        type="password"
-        id="password"
-        {...register("password")}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <p
-        className="msgError"
-        style={{ display: errors.password ? "block" : "none" }}
-      >
-        {errors.password?.message}
-      </p>
+            <label htmlFor="password">Contraseña:</label>
+            <input
+              type="password"
+              id="password"
+              {...register("password")}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <p
+              className="msgError"
+              style={{ display: errors.password ? "block" : "none" }}
+            >
+              {errors.password?.message}
+            </p>
 
-      <label htmlFor="confirmPassword">Confirmar contraseña:</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        {...register("confirmPassword")}
-      />
-      <p
-        className="msgError"
-        style={{ display: errors.confirmPassword ? "block" : "none" }}
-      >
-        {errors.confirmPassword?.message}
-      </p>
+            <label htmlFor="confirmPassword">Confirmar contraseña:</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              {...register("confirmPassword")}
+            />
+            <p
+              className="msgError"
+              style={{ display: errors.confirmPassword ? "block" : "none" }}
+            >
+              {errors.confirmPassword?.message}
+            </p>
 
-      <label htmlFor="objetivoFisico">Objetivo físico:</label>
-      <select
-        id="objetivoFisico"
-        {...register("objetivoFisico")}
-        value={objetivoFisico}
-        onChange={(e) => setObjetivoFisico(e.target.value)}
-      >
-        <option value="Mantenimiento">Mantenimiento</option>
-        <option value="Perdida grasa">Pérdida de peso</option>
-        <option value="Ganancia de peso">Ganancia de masa muscular</option>
-      </select>
-      <p
-        className="msgError"
-        style={{ display: errors.objetivoFisico ? "block" : "none" }}
-      >
-        {errors.objetivoFisico?.message}
-      </p>
+            {/* <input type="file" id="image"  {...register("image")}  /> */}
+            <input type="file" onChange={handleFileChange} id="image" />
+            <p
+              className="msgError"
+              style={{ display: errors.image ? "block" : "none" }}
+            >
+              {errors.image?.message}
+            </p>
+            {selectedFile && <img src={image} />}
 
-      <label htmlFor="objetivoPeso">Meta de peso:</label>
-      <input
-        type="number"
-        id="objetivoPeso"
-        {...register("objetivoPeso")}
-        value={objetivoPeso}
-        onChange={(e) => setObjetivoPeso(e.target.value)}
-      />
-      <p
-        className="msgError"
-        style={{ display: errors.objetivoPeso ? "block" : "none" }}
-      >
-        {errors.objetivoPeso?.message}
-      </p>
+            <button
+              onClick={() => {
+                if (
+                  username !== "" &&
+                  email !== "" &&
+                  password !== "" &&
+                  confirmPassword !== ""
+                ) {
+                  setFase(1);
+                }
+              }}
+            >
+              Siguiente
+            </button>
+          </>
+        )}
 
-      {/* <input type="file" id="image"  {...register("image")}  /> */}
-      <input type="file" onChange={handleFileChange} id="image" />
-      <p
-        className="msgError"
-        style={{ display: errors.image ? "block" : "none" }}
-      >
-        {errors.image?.message}
-      </p>
-      {selectedFile && <img src={image} />}
+        {fase === 1 && (
+          <>
+            <label htmlFor="objetivoFisico">Objetivo físico:</label>
+            <select
+              id="objetivoFisico"
+              {...register("objetivoFisico")}
+              value={objetivoFisico}
+              onChange={(e) => setObjetivoFisico(e.target.value)}
+            >
+              <option value="Mantenimiento">Mantenimiento</option>
+              <option value="Perdida grasa">Pérdida de peso</option>
+              <option value="Ganancia de peso">
+                Ganancia de masa muscular
+              </option>
+            </select>
+            <p
+              className="msgError"
+              style={{ display: errors.objetivoFisico ? "block" : "none" }}
+            >
+              {errors.objetivoFisico?.message}
+            </p>
 
-      <button type="submit">Registrarme</button>
-    </form>
+            <label htmlFor="objetivoPeso">Meta de peso:</label>
+            <input
+              type="number"
+              id="objetivoPeso"
+              {...register("objetivoPeso")}
+              value={objetivoPeso}
+              onChange={(e) => setObjetivoPeso(e.target.value)}
+            />
+            <p
+              className="msgError"
+              style={{ display: errors.objetivoPeso ? "block" : "none" }}
+            >
+              {errors.objetivoPeso?.message}
+            </p>
+
+            <label htmlFor="sexo">Sexo:</label>
+            <select
+              id="sexo"
+              {...register("sexo")}
+              value={sexo}
+              onChange={(e) => setSexo(e.target.value)}
+            >
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+            </select>
+            <p
+              className="msgError"
+              style={{ display: errors.sexo ? "block" : "none" }}
+            >
+              {errors.sexo?.message}
+            </p>
+
+            <label htmlFor="altura">Altura:</label>
+            <input
+              type="number"
+              id="altura"
+              {...register("altura")}
+              value={altura}
+              onChange={(e) => setAltura(e.target.value)}
+            />
+            <p
+              className="msgError"
+              style={{ display: errors.altura ? "block" : "none" }}
+            >
+              {errors.altura?.message}
+            </p>
+
+            <label htmlFor="nivelExperiencia">Nivel de experiencia:</label>
+            <select
+              id="nivelExperiencia"
+              {...register("nivelExperiencia")}
+              value={nivelExperiencia}
+              onChange={(e) => setNivelExperiencia(e.target.value)}
+            >
+              <option value="0">Principiante</option>
+              <option value="1">Intermedio</option>
+              <option value="2">Experiencia</option>
+            </select>
+            <p
+              className="msgError"
+              style={{ display: errors.nivelExperiencia ? "block" : "none" }}
+            >
+              {errors.nivelExperiencia?.message}
+            </p>
+
+            <button onClick={() => setFase(0)}>Anterior</button>
+            <button type="submit">Registrarme</button>
+          </>
+        )}
+      </form>
+
+      {fase === 2 && (
+        <>
+          <h2>¡Entrenamientos recomendados para ti!</h2>
+          <Link to={"/nuevaPlantilla"}>
+            <button>Crear Plantilla</button>{" "}
+          </Link>
+          {plantillasRecomendadas &&
+            plantillasRecomendadas.map((plantilla) => (
+              <Plantilla key={plantilla.id} plantilla={plantilla} />
+            ))}
+        </>
+      )}
+    </>
   );
 };
 

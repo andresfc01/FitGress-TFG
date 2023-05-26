@@ -29,8 +29,6 @@ export function usePlantilla({ id, user }) {
   }, []);
 
   useEffect(() => {
-    console.log(plantilla);
-    console.log(user);
     setDiasSemana(plantilla?.diasSemana);
     setNombre(plantilla?.nombre);
     setPrivado(plantilla?.privado);
