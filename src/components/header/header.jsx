@@ -15,6 +15,9 @@ export default function App() {
             <Link to={""}>Home</Link>
           </li>
           <li>
+            <Link to={"/admin"}>Admin</Link>
+          </li>
+          <li>
             <Link to={"explorar"}>Explorar</Link>
           </li>
           <li>

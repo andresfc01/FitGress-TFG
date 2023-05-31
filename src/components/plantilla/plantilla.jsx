@@ -7,9 +7,15 @@ import { useContext } from "react";
 import { AppContext } from "../../App";
 import { usePlantilla } from "../../hooks/usePlantilla";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle, faSort } from "@fortawesome/free-solid-svg-icons";
+import {
+  faComment,
+  faCommentDots,
+  faPlusCircle,
+  faSort,
+} from "@fortawesome/free-solid-svg-icons";
 import Ejercicios from "../ejercicios/ejercicios";
 import ReactSwitch from "react-switch";
+import Comentario from "../comentario/comentario";
 
 export default function Plantilla({
   plantilla,
@@ -42,6 +48,14 @@ export default function Plantilla({
     privado,
     handleChangePrivado,
     handleCopiarPlantilla,
+    handleClickComentarios,
+    comentarios,
+    seeComentarios,
+    handleClickAddComentario,
+    addComentario,
+    handleSaveComentario,
+    handleChangeComentario,
+    comentario,
   } = usePlantilla({ id: plantilla._id, user });
 
   var sameUser = false;
@@ -185,7 +199,47 @@ export default function Plantilla({
                 Tiempo estimado :{" "}
                 <strong>{Math.trunc(calculaTiempo())} min.</strong>
               </small>
+              {showDetails && (
+                <a onClick={handleClickComentarios}>
+                  Ver comentarios <FontAwesomeIcon icon={faCommentDots} />
+                </a>
+              )}
             </div>
+
+            {seeComentarios && showDetails && (
+              <>
+                <hr className={styles.lineaSeries} />
+                <div className={styles.headerSeries}>
+                  <h2 className={styles.titleSeries}>Comentarios</h2>
+                  <button onClick={handleClickAddComentario}>+ Comentar</button>
+                </div>
+
+                {addComentario && (
+                  <div className={styles.addComentario}>
+                    <label htmlFor="">Comentario : </label>
+                    <input
+                      type="text"
+                      value={comentario}
+                      onChange={handleChangeComentario}
+                    />
+                    <button onClick={handleClickAddComentario                              }>Cancelar</button>
+                    <button onClick={handleSaveComentario}>Publicar</button>
+                  </div>
+                )}
+
+                <div className={styles.divComentarios}>
+                  {comentarios &&
+                    comentarios.map((comentario) => (
+                      <div key={comentario._id}>
+                        <Comentario comentario={comentario} />
+                      </div>
+                    ))}
+                  {comentarios && comentarios.length === 0 && (
+                    <p>No hay comentarios en esta plantilla</p>
+                  )}
+                </div>
+              </>
+            )}
 
             {showDetails && (
               <>

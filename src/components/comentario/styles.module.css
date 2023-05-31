@@ -1,0 +1,29 @@
+.comentario {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-body);
+  padding: 0.5rem 2rem;
+  border-radius: 7px;
+}
+.comentario > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 0.5rem;
+}
+
+.comentario > div > p {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.comentario img {
+  width: 4rem;
+  border-radius: 50%;
+  border: 2px solid var(--selection);
+}

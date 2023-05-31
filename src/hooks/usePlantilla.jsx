@@ -7,6 +7,10 @@ import {
 } from "../services/plantillas";
 import Plantilla from "../components/plantilla/plantilla";
 import { useNavigate } from "react-router-dom";
+import {
+  getComentariosPlantilla,
+  saveComentario,
+} from "../services/comentarios";
 
 export function usePlantilla({ id, user }) {
   const [plantilla, setPlantilla] = useState(undefined);
@@ -18,8 +22,26 @@ export function usePlantilla({ id, user }) {
   const [diasSemana, setDiasSemana] = useState(plantilla?.diasSemana);
   const [dificultad, setDificultad] = useState(plantilla?.dificultad);
   const [privado, setPrivado] = useState(false);
+  const [comentarios, setComentarios] = useState(undefined);
+  const [seeComentarios, setSeeComentarios] = useState(true);
+  const [addComentario, setAddComentario] = useState(false);
+  const [comentario, setComentario] = useState("");
 
   const navigate = useNavigate();
+
+  const handleClickComentarios = (ev) => {
+    ev.preventDefault();
+    setSeeComentarios(!seeComentarios);
+  };
+
+  useEffect(() => {
+    const fecthComentarios = async (id) => {
+      setComentarios(await getComentariosPlantilla(id));
+    };
+    if (!comentarios && seeComentarios) {
+      fecthComentarios(plantilla?._id);
+    }
+  }, [seeComentarios]);
 
   useEffect(() => {
     const fetchPlantilla = async (id) => {
@@ -228,6 +250,29 @@ export function usePlantilla({ id, user }) {
     setPlantilla({ ...plantilla, dificultad: value });
   };
 
+  const handleClickAddComentario = () => {
+    setAddComentario(!addComentario);
+  };
+
+  const handleSaveComentario = () => {
+    const newComentario = saveComentario(
+      {
+        texto: comentario,
+        user: user?._id,
+        plantilla: plantilla?._id,
+      },
+      user.token
+    );
+
+    if (newComentario) {
+      setComentarios([...comentarios, newComentario]);
+    }
+  };
+
+  const handleChangeComentario = (ev) => {
+    setComentario(ev.target.value);
+  };
+
   return {
     plantilla,
     handleChangeDescanso,
@@ -252,5 +297,13 @@ export function usePlantilla({ id, user }) {
     privado,
     handleChangePrivado,
     handleCopiarPlantilla,
+    handleClickComentarios,
+    comentarios,
+    seeComentarios,
+    handleClickAddComentario,
+    addComentario,
+    handleSaveComentario,
+    comentario,
+    handleChangeComentario,
   };
 }
