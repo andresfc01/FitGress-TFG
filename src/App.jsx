@@ -20,6 +20,7 @@ import Home from "./routes/home/home";
 import Admin from "./routes/admin/admin";
 import CrudUser from "./routes/admin/crudUser";
 import CrudLogro from "./routes/admin/crudLogro";
+import CrudMedida from "./routes/admin/crudMedida";
 
 export const AppContext = createContext();
 
@@ -55,6 +56,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/user" element={<CrudUser />} />
               <Route path="/admin/logro" element={<CrudLogro />} />
+              <Route path="/admin/medida" element={<CrudMedida />} />
               <Route path="/login" element={<Login />} />
               <Route path="/explorar" element={<Plantillas />} />
               <Route path="/plantillas" element={<PlantillasUser />} />

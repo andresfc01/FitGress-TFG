@@ -38,6 +38,10 @@
   width: 90%;
 }
 
+.tablaAdmin img {
+  max-width: 5rem;
+}
+
 .filtroCRUD {
   display: flex;
   align-items: center;

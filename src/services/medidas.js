@@ -2,6 +2,9 @@ const url = "http://localhost:3000/api/medida/";
 export const saveMedida = async (datos, token) => {
   const existe = datos._id ? true : false;
   const medida = datos;
+  if (medida?.user?._id) {
+    medida.user = medida.user._id;
+  }
   //HACER FORM DATA DE TODO PARA ENVIAR
 
   if (existe) {
@@ -23,11 +26,11 @@ export const saveMedida = async (datos, token) => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        body: JSON.stringify(medida),
         headers: {
           "Content-Type": "application/json",
           "x-access-token": token,
         },
+        body: JSON.stringify(medida),
       });
       return await response.json();
     } catch (e) {
@@ -55,6 +58,20 @@ export const deleteMedida = async (id, token) => {
 export const getMedidasUser = async (user, token) => {
   try {
     const response = await fetch(url + "user/" + user, {
+      method: "GET",
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error searching medida");
+  }
+};
+export const getMedidas = async (token) => {
+  try {
+    const response = await fetch(url + "/populated", {
       method: "GET",
       headers: {
         "x-access-token": token,

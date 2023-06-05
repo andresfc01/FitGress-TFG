@@ -95,7 +95,6 @@ const LogroTable = ({ logros: logroAll, token }) => {
   const handleSaveClick = async () => {
     setEditing(false);
     setCreating(false);
-    
   };
 
   const handleDeleteConfirmationConfirm = async () => {
@@ -360,7 +359,7 @@ const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
           <MenuItem value="porcent">Porcent</MenuItem>
         </Select>
       </FormControl>
-      <NumberField
+      <TextField
         name="requisito"
         label="requisito"
         value={editedLogro.requisito}
