@@ -4,3 +4,31 @@
   align-items: center;
   justify-content: center;
 }
+
+.crudAdmin {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.tablaAdmin {
+  background-color: white;
+  border-radius: 7px;
+  width: 90%;
+}
+
+.filtroCRUD {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  align-content: center;
+}
+
+.paginacion {
+  color: white !important;
+}

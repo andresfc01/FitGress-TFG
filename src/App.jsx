@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useRef } from "react";
 import { Router, Route, BrowserRouter, Link, Routes } from "react-router-dom";
 import Header from "./components/header/header";
-import Admin from "./routes/admin/admin";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import PlantillasUser from "./routes/plantillasUser/plantillasUser";
@@ -18,6 +17,8 @@ import RealizarEntreno from "./routes/realizarEntreno/realizarEntreno";
 import EntrenamientosUser from "./routes/entrenamientosUser/entrenamientosUser";
 import Perfil from "./routes/perfil/perfil";
 import Home from "./routes/home/home";
+import Admin from "./routes/admin/admin";
+import CrudUser from "./routes/admin/crudUser";
 
 export const AppContext = createContext();
 
@@ -51,6 +52,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/user" element={<CrudUser />} />
               <Route path="/login" element={<Login />} />
               <Route path="/explorar" element={<Plantillas />} />
               <Route path="/plantillas" element={<PlantillasUser />} />
