@@ -9,10 +9,9 @@ export const saveLogro = async (datos, token) => {
       const response = await fetch(url + logro._id, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
           "x-access-token": token,
         },
-        body: JSON.stringify(logro),
+        body: toFormdata(logro),
       });
       return await response.json();
     } catch (e) {
@@ -23,9 +22,8 @@ export const saveLogro = async (datos, token) => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        body: JSON.stringify(logro),
+        body: toFormdata(logro),
         headers: {
-          "Content-Type": "application/json",
           "x-access-token": token,
         },
       });
@@ -37,6 +35,20 @@ export const saveLogro = async (datos, token) => {
   }
 };
 
+const toFormdata = (logro) => {
+  const formData = new FormData();
+  formData.append("nombre", logro.nombre);
+  formData.append("categoria", logro.categoria);
+  formData.append("subCategoria", logro.subCategoria);
+  formData.append("requisito", logro.requisito);
+  if (logro.image instanceof File) {
+    formData.append("image", logro.image);
+  } else {
+    formData.append("image", JSON.stringify(logro.image));
+  }
+  return formData;
+};
+
 export const deleteLogro = async (id, token) => {
   try {
     const response = await fetch(url + id, {
@@ -45,7 +57,7 @@ export const deleteLogro = async (id, token) => {
         "x-access-token": token,
       },
     });
-    return await response.json();
+    return response.status;
   } catch (e) {
     console.log(e);
     throw new Error("Error deleting logro");

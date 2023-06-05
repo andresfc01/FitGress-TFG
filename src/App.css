@@ -20,7 +20,6 @@
   background-color: white;
   padding: 20px;
   border-radius: 7px;
-
 }
 
 .crudAdmin {
@@ -58,6 +57,10 @@
   justify-content: center;
   align-content: center;
   gap: 1rem;
+}
+
+.editItem img {
+  width: 5rem;
 }
 
 .botonesEdit {
