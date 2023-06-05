@@ -41,7 +41,7 @@ export const saveUser = async (datos, token) => {
           "Content-Type": "application/json",
           "x-access-token": token,
         },
-        body: JSON.stringify(plantilla),
+        body: JSON.stringify(user),
       });
       return await response.json();
     } catch (e) {

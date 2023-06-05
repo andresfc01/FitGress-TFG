@@ -145,6 +145,7 @@ const UserTable = ({ users: usuarios, token }) => {
         <Modal open={editing}>
           <div className="modal-overlay">
             <div className="modal-container">
+              <p>Edición User {editedUser.username}</p>
               <EditUserForm
                 user={editedUser}
                 onSave={handleSaveClick}
