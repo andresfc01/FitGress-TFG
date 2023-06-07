@@ -11,7 +11,6 @@ const url = "http://localhost:3000/api/grupoMuscular/";
 export const saveGrupoMuscular = async (datos, token) => {
   const existe = datos._id ? true : false;
   const grupoMuscular = datos;
-  debugger;
   if (grupoMuscular?.user?._id) {
     grupoMuscular.user = grupoMuscular.user._id;
   }
