@@ -78,6 +78,16 @@ export const getPlantillas = async () => {
     throw new Error("Error searching plantilla");
   }
 };
+export const getPlantillasUserPopulated = async () => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/plantillaEntrenamiento/populated"
+    );
+    return await response.json();
+  } catch (e) {
+    throw new Error("Error searching plantilla");
+  }
+};
 export const getPlantillasMasUsadas = async () => {
   try {
     const response = await fetch(
@@ -120,4 +130,22 @@ const toFormdata = (plantilla) => {
     formData.append("image", JSON.stringify(plantilla.image));
   }
   return formData;
+};
+
+export const deletePlantilla = async (id, token) => {
+  const url = "http://localhost:3000/api/plantilla/";
+
+  try {
+    const response = await fetch(url + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    });
+    return response.status;
+  } catch (e) {
+    console.error(e);
+    throw new Error("Error deleteing plantilla");
+  }
 };
