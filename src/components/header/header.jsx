@@ -62,7 +62,12 @@ export default function App() {
             }
             onClick={() => setMenuPerfil(!menuPerfil)}
           >
-            <img src={`http://localhost:3000/${user.image.imagePath}`} />
+            {user.image.imagePath ? (
+              <img src={`http://localhost:3000/${user.image.imagePath}`} />
+            ) : (
+              <img src={`/src/assets/images/perfilUser.jpg`} />
+            )}
+
             <FontAwesomeIcon icon={faArrowDown} />
             {menuPerfil && (
               <div className={styles.menuPerfil}>
