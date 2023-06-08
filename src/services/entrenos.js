@@ -71,6 +71,16 @@ export const getEntrenosUser = async (user) => {
     throw new Error("Error searching entreno");
   }
 };
+export const getEntrenamientosUserPopulated = async () => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/entrenamiento/populated"
+    );
+    return await response.json();
+  } catch (e) {
+    throw new Error("Error searching plantilla");
+  }
+};
 export const getEntreno = async (id) => {
   try {
     const response = await fetch(
@@ -91,4 +101,22 @@ const toFormdata = (entreno) => {
   formData.append("series", JSON.stringify(entreno.series));
   formData.append("comentario", entreno.comentario);
   return formData;
+};
+
+export const deleteEntrenamiento = async (id, token) => {
+  const url = "http://localhost:3000/api/entrenamiento/";
+
+  try {
+    const response = await fetch(url + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      },
+    });
+    return response.status;
+  } catch (e) {
+    console.error(e);
+    throw new Error("Error deleteing entrenamiento");
+  }
 };

@@ -24,6 +24,7 @@ import CrudMedida from "./routes/admin/crudMedida";
 import CrudGrupoMuscular from "./routes/admin/crudGrupoMuscular";
 import CrudEjercicio from "./routes/admin/crudEjercicio";
 import CrudPlantilla from "./routes/admin/crudPlantilla";
+import CrudEntrenamiento from "./routes/admin/crudEntrenamiento";
 
 export const AppContext = createContext();
 
@@ -66,6 +67,10 @@ function App() {
               />
               <Route path="/admin/ejercicio" element={<CrudEjercicio />} />
               <Route path="/admin/plantilla" element={<CrudPlantilla />} />
+              <Route
+                path="/admin/entrenamiento"
+                element={<CrudEntrenamiento />}
+              />
               <Route path="/login" element={<Login />} />
               <Route path="/explorar" element={<Plantillas />} />
               <Route path="/plantillas" element={<PlantillasUser />} />

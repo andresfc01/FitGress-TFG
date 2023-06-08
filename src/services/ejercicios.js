@@ -88,3 +88,14 @@ export const deleteEjercicio = async (id, token) => {
     throw new Error("Error deleting ejercicio");
   }
 };
+
+export const getEjerciciosUserPopulated = async () => {
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/entrenamiento/populated"
+    );
+    return await response.json();
+  } catch (e) {
+    throw new Error("Error searching plantilla");
+  }
+};
