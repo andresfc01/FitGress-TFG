@@ -28,7 +28,7 @@ import {
 import { deleteUser, saveUser } from "../../services/user";
 
 const UserTable = ({ users: usuarios, token }) => {
-  const [users, setUsers] = useState([...usuarios]);
+  const [users, setUsers] = useState([]);
   const [searchUsername, setSearchUsername] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);

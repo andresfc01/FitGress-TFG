@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function BotonLogout() {
   const { setUser } = useContext(AppContext);
@@ -13,5 +15,9 @@ export default function BotonLogout() {
     // redireccionar a la página de inicio u otra página según corresponda
   }
 
-  return <button onClick={handleLogout}>Cerrar sesión</button>;
+  return (
+    <a onClick={handleLogout}>
+      <FontAwesomeIcon icon={faRightFromBracket} /> Cerrar sesión
+    </a>
+  );
 }
