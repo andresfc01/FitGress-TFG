@@ -45,7 +45,7 @@ export const deletePeso = async (id, token) => {
         "x-access-token": token,
       },
     });
-    return await response.json();
+    return response.status;
   } catch (e) {
     console.log(e);
     throw new Error("Error deleting peso");
@@ -55,6 +55,21 @@ export const deletePeso = async (id, token) => {
 export const getPesosUser = async (user, token) => {
   try {
     const response = await fetch(url + "user/" + user, {
+      method: "GET",
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return await response.json();
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error searching peso");
+  }
+};
+
+export const getPesos = async (token) => {
+  try {
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "x-access-token": token,
