@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function App() {
   const { user } = useContext(AppContext);
   const [menuPerfil, setMenuPerfil] = useState(false);
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   return (
     <>
       <nav>

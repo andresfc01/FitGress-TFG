@@ -8,6 +8,9 @@ import { useRegister } from "../../api/useRegister";
 import { Link, useNavigate } from "react-router-dom";
 import Plantilla from "../../components/plantilla/plantilla";
 import { getPlantillasMasUsadas } from "../../services/plantillas";
+import styles from "./styles.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Form = () => {
   const schema = yup.object().shape({
@@ -65,7 +68,7 @@ const Form = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(AppContext);
   const { userRegister, registerUser } = useRegister();
-  const [fase, setFase] = useState(0);
+  const [fase, setFase] = useState(1);
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [username, setUsername] = useState("");
@@ -131,200 +134,243 @@ const Form = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <p className="msgError" style={{ display: error ? "block" : "none" }}>
-          {userRegister?.message}
-        </p>
-        {fase === 0 && (
-          <>
-            <label htmlFor="username">Nombre de usuario:</label>
-            <input
-              type="text"
-              id="username"
-              {...register("username")}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+      {fase < 2 && (
+        <>
+          <h1>Registro</h1>
+          <form onSubmit={handleSubmit(onSubmit)} className="formulario">
             <p
               className="msgError"
-              style={{ display: errors.username ? "block" : "none" }}
+              style={{ display: error ? "block" : "none" }}
             >
-              {errors.username?.message}
+              {userRegister?.message}
             </p>
+            {fase === 0 && (
+              <>
+                <div>
+                  <label htmlFor="username">Nombre de usuario:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    {...register("username")}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <p
+                    className="msgError"
+                    style={{ display: errors.username ? "block" : "none" }}
+                  >
+                    {errors.username?.message}
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="email">Correo electrónico:</label>
+                  <input
+                    type="text"
+                    id="email"
+                    {...register("email")}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <p
+                    className="msgError"
+                    style={{ display: errors.email ? "block" : "none" }}
+                  >
+                    {errors.email?.message}
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="password">Contraseña:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    {...register("password")}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <p
+                    className="msgError"
+                    style={{ display: errors.password ? "block" : "none" }}
+                  >
+                    {errors.password?.message}
+                  </p>
+                </div>
 
-            <label htmlFor="email">Correo electrónico:</label>
-            <input
-              type="text"
-              id="email"
-              {...register("email")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <p
-              className="msgError"
-              style={{ display: errors.email ? "block" : "none" }}
-            >
-              {errors.email?.message}
-            </p>
+                <div>
+                  <label htmlFor="confirmPassword">Confirmar contraseña:</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    {...register("confirmPassword")}
+                  />
+                  <p
+                    className="msgError"
+                    style={{
+                      display: errors.confirmPassword ? "block" : "none",
+                    }}
+                  >
+                    {errors.confirmPassword?.message}
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="">Foto de perfil</label>
+                  {/* <input type="file" id="image"  {...register("image")}  /> */}
+                  <input type="file" onChange={handleFileChange} id="image" />
+                  <p
+                    className="msgError"
+                    style={{ display: errors.image ? "block" : "none" }}
+                  >
+                    {errors.image?.message}
+                  </p>
+                  {selectedFile && <img src={image} />}
+                </div>
 
-            <label htmlFor="password">Contraseña:</label>
-            <input
-              type="password"
-              id="password"
-              {...register("password")}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <p
-              className="msgError"
-              style={{ display: errors.password ? "block" : "none" }}
-            >
-              {errors.password?.message}
-            </p>
+                <button
+                  onClick={() => {
+                    if (
+                      username !== "" &&
+                      email !== "" &&
+                      password !== "" &&
+                      confirmPassword !== ""
+                    ) {
+                      setFase(1);
+                    }
+                  }}
+                >
+                  Siguiente <FontAwesomeIcon icon={faArrowRight} />
+                </button>
 
-            <label htmlFor="confirmPassword">Confirmar contraseña:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              {...register("confirmPassword")}
-            />
-            <p
-              className="msgError"
-              style={{ display: errors.confirmPassword ? "block" : "none" }}
-            >
-              {errors.confirmPassword?.message}
-            </p>
+                <Link to={"/login"}>Ya tengo cuenta</Link>
+              </>
+            )}
 
-            {/* <input type="file" id="image"  {...register("image")}  /> */}
-            <input type="file" onChange={handleFileChange} id="image" />
-            <p
-              className="msgError"
-              style={{ display: errors.image ? "block" : "none" }}
-            >
-              {errors.image?.message}
-            </p>
-            {selectedFile && <img src={image} />}
-
-            <button
-              onClick={() => {
-                if (
-                  username !== "" &&
-                  email !== "" &&
-                  password !== "" &&
-                  confirmPassword !== ""
-                ) {
-                  setFase(1);
-                }
-              }}
-            >
-              Siguiente
-            </button>
-          </>
-        )}
-
-        {fase === 1 && (
-          <>
-            <label htmlFor="objetivoFisico">Objetivo físico:</label>
-            <select
-              id="objetivoFisico"
-              {...register("objetivoFisico")}
-              value={objetivoFisico}
-              onChange={(e) => setObjetivoFisico(e.target.value)}
-            >
-              <option value="Mantenimiento">Mantenimiento</option>
-              <option value="Perdida grasa">Pérdida de peso</option>
-              <option value="Ganancia de peso">
-                Ganancia de masa muscular
-              </option>
-            </select>
-            <p
-              className="msgError"
-              style={{ display: errors.objetivoFisico ? "block" : "none" }}
-            >
-              {errors.objetivoFisico?.message}
-            </p>
-
-            <label htmlFor="objetivoPeso">Meta de peso:</label>
-            <input
-              type="number"
-              id="objetivoPeso"
-              {...register("objetivoPeso")}
-              value={objetivoPeso}
-              onChange={(e) => setObjetivoPeso(e.target.value)}
-            />
-            <p
-              className="msgError"
-              style={{ display: errors.objetivoPeso ? "block" : "none" }}
-            >
-              {errors.objetivoPeso?.message}
-            </p>
-
-            <label htmlFor="sexo">Sexo:</label>
-            <select
-              id="sexo"
-              {...register("sexo")}
-              value={sexo}
-              onChange={(e) => setSexo(e.target.value)}
-            >
-              <option value="M">Masculino</option>
-              <option value="F">Femenino</option>
-            </select>
-            <p
-              className="msgError"
-              style={{ display: errors.sexo ? "block" : "none" }}
-            >
-              {errors.sexo?.message}
-            </p>
-
-            <label htmlFor="altura">Altura:</label>
-            <input
-              type="number"
-              id="altura"
-              {...register("altura")}
-              value={altura}
-              onChange={(e) => setAltura(e.target.value)}
-            />
-            <p
-              className="msgError"
-              style={{ display: errors.altura ? "block" : "none" }}
-            >
-              {errors.altura?.message}
-            </p>
-
-            <label htmlFor="nivelExperiencia">Nivel de experiencia:</label>
-            <select
-              id="nivelExperiencia"
-              {...register("nivelExperiencia")}
-              value={nivelExperiencia}
-              onChange={(e) => setNivelExperiencia(e.target.value)}
-            >
-              <option value="0">Principiante</option>
-              <option value="1">Intermedio</option>
-              <option value="2">Experiencia</option>
-            </select>
-            <p
-              className="msgError"
-              style={{ display: errors.nivelExperiencia ? "block" : "none" }}
-            >
-              {errors.nivelExperiencia?.message}
-            </p>
-
-            <button onClick={() => setFase(0)}>Anterior</button>
-            <button type="submit">Registrarme</button>
-          </>
-        )}
-      </form>
+            {fase === 1 && (
+              <>
+                <div>
+                  <label htmlFor="objetivoFisico">Objetivo físico:</label>
+                  <select
+                    id="objetivoFisico"
+                    {...register("objetivoFisico")}
+                    value={objetivoFisico}
+                    onChange={(e) => setObjetivoFisico(e.target.value)}
+                  >
+                    <option value="Mantenimiento">Mantenimiento</option>
+                    <option value="Perdida grasa">Pérdida de peso</option>
+                    <option value="Ganancia de peso">
+                      Ganancia de masa muscular
+                    </option>
+                  </select>
+                  <p
+                    className="msgError"
+                    style={{
+                      display: errors.objetivoFisico ? "block" : "none",
+                    }}
+                  >
+                    {errors.objetivoFisico?.message}
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="objetivoPeso">Meta de peso:</label>
+                  <input
+                    type="number"
+                    id="objetivoPeso"
+                    {...register("objetivoPeso")}
+                    value={objetivoPeso}
+                    onChange={(e) => setObjetivoPeso(e.target.value)}
+                  />
+                  <p
+                    className="msgError"
+                    style={{ display: errors.objetivoPeso ? "block" : "none" }}
+                  >
+                    {errors.objetivoPeso?.message}
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="sexo">Sexo:</label>
+                  <select
+                    id="sexo"
+                    {...register("sexo")}
+                    value={sexo}
+                    onChange={(e) => setSexo(e.target.value)}
+                  >
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                  </select>
+                  <p
+                    className="msgError"
+                    style={{ display: errors.sexo ? "block" : "none" }}
+                  >
+                    {errors.sexo?.message}
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="altura">Altura:</label>
+                  <input
+                    type="number"
+                    id="altura"
+                    {...register("altura")}
+                    value={altura}
+                    onChange={(e) => setAltura(e.target.value)}
+                  />
+                  <p
+                    className="msgError"
+                    style={{ display: errors.altura ? "block" : "none" }}
+                  >
+                    {errors.altura?.message}
+                  </p>
+                </div>
+                <div>
+                  <label htmlFor="nivelExperiencia">
+                    Nivel de experiencia:
+                  </label>
+                  <select
+                    id="nivelExperiencia"
+                    {...register("nivelExperiencia")}
+                    value={nivelExperiencia}
+                    onChange={(e) => setNivelExperiencia(e.target.value)}
+                  >
+                    <option value="0">Principiante</option>
+                    <option value="1">Intermedio</option>
+                    <option value="2">Experiencia</option>
+                  </select>
+                  <p
+                    className="msgError"
+                    style={{
+                      display: errors.nivelExperiencia ? "block" : "none",
+                    }}
+                  >
+                    {errors.nivelExperiencia?.message}
+                  </p>
+                </div>
+                <div className={styles.botonesRegistros}>
+                  <span onClick={() => setFase(0)}>
+                    <FontAwesomeIcon icon={faArrowLeft} /> Anterior
+                  </span>
+                  <button type="submit">Registrarme</button>
+                </div>
+              </>
+            )}
+          </form>
+        </>
+      )}
 
       {fase === 2 && (
         <>
-          <h2>¡Entrenamientos recomendados para ti!</h2>
-          <Link to={"/nuevaPlantilla"}>
-            <button>Crear Plantilla</button>{" "}
-          </Link>
-          {plantillasRecomendadas &&
-            plantillasRecomendadas.map((plantilla) => (
-              <Plantilla key={plantilla.id} plantilla={plantilla} />
-            ))}
+          <div className={styles.entrenamientosRecomenadados}>
+            <h2>¡Entrenamientos recomendados para ti!</h2>
+            <Link to={"/nuevaPlantilla"}>
+              <button className="btnPrincipal">Crear Plantilla</button>
+            </Link>
+            <div className={styles.plantillas}>
+              {plantillasRecomendadas &&
+                plantillasRecomendadas.map((plantilla, cont) => {
+                  if (cont < 6) {
+                    return (
+                      <Plantilla key={plantilla.id} plantilla={plantilla} />
+                    );
+                  }
+                })}
+            </div>
+          </div>
         </>
       )}
     </>

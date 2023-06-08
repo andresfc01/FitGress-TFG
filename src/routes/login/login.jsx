@@ -5,7 +5,7 @@ import "../../css/error.css";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { useLogin } from "../../api/useLogin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Form = () => {
   const schema = yup.object().shape({
@@ -47,27 +47,38 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <p className="msgError" style={{ display: error ? "block" : "none" }}>
-        {userLogin?.message}
-      </p>
-      <input type="text" {...register("email")} />
-      <p
-        className="msgError"
-        style={{ display: errors.email ? "block" : "none" }}
-      >
-        {errors.email?.message}
-      </p>
-      <input type="password" {...register("password")} />
-      <p
-        className="msgError"
-        style={{ display: errors.password ? "block" : "none" }}
-      >
-        {errors.password?.message}
-      </p>
+    <>
+      <h1>Inicia Sesión</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="formulario">
+        <p className="msgError" style={{ display: error ? "block" : "none" }}>
+          {userLogin?.message}
+        </p>
+        <div>
+          <label htmlFor="">Correo Electronico</label>
+          <input type="text" {...register("email")} />
+          <p
+            className="msgError"
+            style={{ display: errors.email ? "block" : "none" }}
+          >
+            {errors.email?.message}
+          </p>
+        </div>
+        <div>
+          <label htmlFor="">Contraseña</label>
+          <input type="password" {...register("password")} />
+          <p
+            className="msgError"
+            style={{ display: errors.password ? "block" : "none" }}
+          >
+            {errors.password?.message}
+          </p>
+        </div>
 
-      <input type="submit" value="Iniciar sesion" />
-    </form>
+        <input type="submit" value="Iniciar sesion" className="btnPrincipal" />
+
+        <Link to={"/register"}>Crear cuenta</Link>
+      </form>
+    </>
   );
 };
 

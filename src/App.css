@@ -109,3 +109,41 @@
   color: var(--text-muted);
   font-style: italic;
 }
+
+.btnPrincipal {
+  color: var(--text-main) !important;
+  background-color: var(--selection) !important;
+}
+.btnPrincipal:hover {
+  color: var(--text-main) !important;
+  background-color: var(--background) !important;
+  border: 2px solid var(--links) !important;
+}
+
+.formulario {
+  background-color: var(--background);
+  padding: 2rem 3rem;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+
+  gap: 1rem;
+}
+
+.formulario > div > label {
+  color: var(--color-terciary);
+  font-style: italic;
+}
+.formulario > div > input {
+  width: 92%;
+}
+.formulario > div > select {
+  width: 100%;
+}
+.formulario > a {
+  width: 100%;
+  text-align: center;
+  font-style: italic;
+}
