@@ -78,3 +78,34 @@
   flex-direction: row;
   justify-content: center;
 }
+
+.enlacesAdmin {
+  width: 90%;
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.enlaceAdmin {
+  background-color: var(--background);
+  padding: 1.5rem;
+  border-radius: 10px;
+  font-size: larger;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.enlaceAdmin:hover {
+  text-decoration: none;
+  background-color: var(--color-secondary);
+  color: var(--text-main);
+  font-size: x-large;
+}
+
+.descAdmin {
+  color: var(--text-muted);
+  font-style: italic;
+}
