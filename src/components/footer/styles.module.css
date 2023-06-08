@@ -1,0 +1,33 @@
+.footer {
+  background-color: var(--background-header);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+  gap: 11%;
+
+  padding: 1rem 0;
+}
+.footer img {
+  max-height: 1.25rem;
+}
+.footer div {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.footer div p {
+  padding: 0;
+  margin: 0;
+}
+.footer div small {
+  padding: 0;
+  margin: 0;
+  font-style: italic;
+}

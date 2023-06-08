@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useRef } from "react";
 import { Router, Route, BrowserRouter, Link, Routes } from "react-router-dom";
 import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import PlantillasUser from "./routes/plantillasUser/plantillasUser";
@@ -96,6 +97,7 @@ function App() {
               <Route path="/*" element={<h1>PAG NO</h1>} />
             </Routes>
           </div>
+          <Footer />
         </BrowserRouter>
       </QueryClientProvider>
     </AppContext.Provider>
