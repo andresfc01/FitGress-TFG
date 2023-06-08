@@ -92,3 +92,20 @@ const toFormdata = (comentario) => {
   formData.append("plantilla", comentario.plantilla);
   return formData;
 };
+
+export const deleteComentario = async (id, token) => {
+  const url = "http://localhost:3000/api/comentario/";
+
+  try {
+    const response = await fetch(url + id, {
+      method: "DELETE",
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return response.status;
+  } catch (e) {
+    console.log(e);
+    throw new Error("Error deleting comentario");
+  }
+};
