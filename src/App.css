@@ -114,6 +114,9 @@
   color: var(--text-main) !important;
   background-color: var(--selection) !important;
 }
+.btnPrincipal a{
+  color: var(--text-main) !important;
+}
 .btnPrincipal:hover {
   color: var(--text-main) !important;
   background-color: var(--background) !important;

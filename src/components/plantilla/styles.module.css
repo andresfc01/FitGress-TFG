@@ -3,9 +3,8 @@
   flex-direction: row;
   align-items: center;
   transition: 0.2s;
-  padding: 0.5rem;
+  padding: 1rem;
   justify-content: space-between;
-  width: 90%;
   background-color: var(--background-alt);
   border-radius: 7px;
   flex-wrap: wrap;
