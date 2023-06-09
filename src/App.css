@@ -162,3 +162,6 @@
   text-align: center;
   font-style: italic;
 }
+.formulario > img {
+  width: 5rem;
+}

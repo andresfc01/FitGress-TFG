@@ -2,14 +2,14 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { contextPlantilla } from "../routes/nuevaPlantilla/nuevaPlantilla";
 import { savePlantilla } from "../services/plantillas";
 
-export function useNuevaPlantillaDatos() {
-  const [privado, setPrivado] = useState(false);
-  const [nombre, setNombre] = useState("");
-  const [image, setImage] = useState("");
+export function useNuevaPlantillaDatos(datos) {
+  const [privado, setPrivado] = useState(datos?.privado ?? false);
+  const [nombre, setNombre] = useState(datos?.nombre ?? "");
+  const [image, setImage] = useState(datos?.image ?? "");
   const [urlImage, setUrlImage] = useState("");
-  const [diasSemana, setDiasSemana] = useState(["L"]);
-  const [errors, setErrors] = useState({});
-  const [dificultad, setDificultad] = useState(1);
+  const [diasSemana, setDiasSemana] = useState(datos?.diasSemana ?? ["L"]);
+  const [errors, setErrors] = useState(datos?.errors ?? {});
+  const [dificultad, setDificultad] = useState(datos?.dificultad ?? 1);
   const enumDias = ["L", "M", "X", "J", "V", "S", "D"];
   let { setDatosLogged, setDatos } = useContext(contextPlantilla);
 
@@ -105,10 +105,12 @@ export function useNuevaPlantillaEjercicios() {
   const [ejercicios, setEjercicios] = useState([]);
   const [addEjercicio, setAddEjercicio] = useState(false);
   const [selectedEjercicio, setSelectedEjercicio] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const plantilla = useRef({});
 
   const handleAddEjercicio = () => {
-    setAddEjercicio(true);
+    setAddEjercicio(!addEjercicio);
   };
 
   const handleSave = (datos, token) => async () => {
@@ -122,7 +124,8 @@ export function useNuevaPlantillaEjercicios() {
     const newPlantilla = await savePlantilla(plantilla.current, token);
     if (newPlantilla) {
       plantilla.current = newPlantilla;
-    } 
+      setShowSuccess(true);
+    }
   };
 
   const onDrop = (e) => {
@@ -259,5 +262,7 @@ export function useNuevaPlantillaEjercicios() {
     selectedEjercicio,
     handleDuplicateEjercicio,
     handleSave,
+    showSuccess,
+    setShowSuccess,
   };
 }
