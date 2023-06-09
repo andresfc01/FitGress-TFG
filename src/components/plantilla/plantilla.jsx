@@ -8,9 +8,12 @@ import { AppContext } from "../../App";
 import { usePlantilla } from "../../hooks/usePlantilla";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faArrowCircleUp,
   faComment,
   faCommentDots,
+  faPencil,
   faPlusCircle,
+  faSave,
   faSort,
 } from "@fortawesome/free-solid-svg-icons";
 import Ejercicios from "../ejercicios/ejercicios";
@@ -81,8 +84,15 @@ export default function Plantilla({
           {sameUser ? (
             <>
               {showDetails && (
-                <button onClick={handleSavePlantilla}>
-                  {editable ? "Guardar" : "Editar"}
+                <button
+                  onClick={handleSavePlantilla}
+                  className={styles.btnEditar}
+                >
+                  {editable ? (
+                    <FontAwesomeIcon icon={faSave} />
+                  ) : (
+                    <FontAwesomeIcon icon={faPencil} />
+                  )}
                 </button>
               )}
             </>
@@ -97,18 +107,80 @@ export default function Plantilla({
           )}
 
           <div className={styles.plantilla}>
-            <img
-              src={"http://localhost:3000/" + newPlantilla?.image?.imagePath}
-              alt=""
-            />
-            <div className={styles.info}>
-              {editable ? (
+            {editable ? (
+              <div className={styles.divNombreEdit}>
+                <label htmlFor="">Nombre : </label>
                 <input
                   value={newPlantilla.nombre}
                   onChange={handleChangeNombre}
                 />
-              ) : (
-                <h2>{newPlantilla.nombre}</h2>
+              </div>
+            ) : (
+              <h2>{newPlantilla.nombre}</h2>
+            )}
+            <img
+              src={"http://localhost:3000/" + newPlantilla?.image?.imagePath}
+              alt=""
+              className={showDetails && styles.imgDetails}
+            />
+
+            <div className={styles.info}>
+              {!editable && (
+                <div className={styles.divDificultad}>
+                  <label>Dificultad</label>
+                  <div className={styles.dificultad}>
+                    <input
+                      type="radio"
+                      name="dificultad"
+                      value="0"
+                      id="Principiante"
+                      checked={dificultad == 0}
+                      onChange={onOptionChangeDificultad}
+                    />
+                    <label
+                      htmlFor="Principiante"
+                      className={
+                        dificultad == 0 ? styles.dificultadSelected : ""
+                      }
+                    >
+                      Principiante
+                    </label>
+
+                    <input
+                      type="radio"
+                      name="dificultad"
+                      value="1"
+                      id="Intermedio"
+                      checked={dificultad == 1}
+                      onChange={onOptionChangeDificultad}
+                    />
+                    <label
+                      htmlFor="Intermedio"
+                      className={
+                        dificultad == 1 ? styles.dificultadSelected : ""
+                      }
+                    >
+                      Intermedio
+                    </label>
+
+                    <input
+                      type="radio"
+                      name="dificultad"
+                      value="2"
+                      id="Experto"
+                      checked={dificultad == 2}
+                      onChange={onOptionChangeDificultad}
+                    />
+                    <label
+                      htmlFor="Experto"
+                      className={
+                        dificultad == 2 ? styles.dificultadSelected : ""
+                      }
+                    >
+                      Experto
+                    </label>
+                  </div>
+                </div>
               )}
 
               {editable && (
@@ -119,7 +191,7 @@ export default function Plantilla({
                     onChange={handleChangePrivado}
                     onColor="#1c76c5"
                   />
-                  <h3>Dificultad</h3>
+                  <label>Dificultad</label>
                   <div className={styles.dificultad}>
                     <input
                       type="radio"
@@ -200,7 +272,10 @@ export default function Plantilla({
                 <strong>{Math.trunc(calculaTiempo())} min.</strong>
               </small>
               {showDetails && (
-                <a onClick={handleClickComentarios}>
+                <a
+                  onClick={handleClickComentarios}
+                  className={styles.verComentarios}
+                >
                   Ver comentarios <FontAwesomeIcon icon={faCommentDots} />
                 </a>
               )}
@@ -211,7 +286,11 @@ export default function Plantilla({
                 <hr className={styles.lineaSeries} />
                 <div className={styles.headerSeries}>
                   <h2 className={styles.titleSeries}>Comentarios</h2>
-                  <button onClick={handleClickAddComentario}>+ Comentar</button>
+                  {!addComentario && (
+                    <button onClick={handleClickAddComentario}>
+                      + Comentar
+                    </button>
+                  )}
                 </div>
 
                 {addComentario && (
@@ -222,18 +301,26 @@ export default function Plantilla({
                       value={comentario}
                       onChange={handleChangeComentario}
                     />
-                    <button onClick={handleClickAddComentario                              }>Cancelar</button>
-                    <button onClick={handleSaveComentario}>Publicar</button>
+                    <button onClick={handleSaveComentario}>
+                      {/* <FontAwesomeIcon icon={faSave} />  */}Publicar
+                    </button>
+                    <a onClick={handleClickAddComentario}>Cancelar</a>
                   </div>
                 )}
 
                 <div className={styles.divComentarios}>
                   {comentarios &&
-                    comentarios.map((comentario) => (
-                      <div key={comentario._id}>
+                    comentarios.map((comentario, cont) => (
+                      <div key={cont}>
                         <Comentario comentario={comentario} />
                       </div>
                     ))}
+                  {comentarios && (
+                    <FontAwesomeIcon
+                      icon={faArrowCircleUp}
+                      onClick={handleClickComentarios}
+                    ></FontAwesomeIcon>
+                  )}
                   {comentarios && comentarios.length === 0 && (
                     <p>No hay comentarios en esta plantilla</p>
                   )}

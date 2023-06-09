@@ -45,17 +45,18 @@ export default function realizarEntreno({ idPlantilla } = props) {
     <>
       {plantillaEntreno && (
         <>
+          <h1>Realiza tu entrenamiento</h1>
           <p>Tiempo transcurrido : {tiempo}</p>
 
           <div className={styles.plantilla}>
-            <img
+            {/*  <img
               src={
                 "http://localhost:3000/" + plantillaEntreno?.image?.imagePath
               }
               alt=""
-            />
+            /> */}
+            <h2>{plantillaEntreno.nombre}</h2>
             <div className={styles.info}>
-              <h2>{plantillaEntreno.nombre}</h2>
               <small>
                 Tiempo estimado :{" "}
                 <strong>{Math.trunc(calculaTiempo())} min.</strong>

@@ -9,6 +9,27 @@
   border-radius: 7px;
   flex-wrap: wrap;
   justify-content: center;
+
+  max-width: 68rem;
+  gap: 1rem;
+}
+.plantilla > h2 {
+  width: 100%;
+  text-align: center;
+}
+.divDificultad {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.divDificultad p {
+  padding: 0;
 }
 .divComentarios {
   display: flex;
@@ -92,9 +113,20 @@
 .serie > div > h3 {
   margin: 0;
 }
+.serie > div > div > p {
+  margin: 0;
+  padding: 0;
+  color: var(--selection);
+  border-bottom: 2px solid var(--selection);
+}
 .serie > div > div {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 0.75rem;
 }
 .serie > div > div > input {
   max-width: 3rem;
@@ -108,17 +140,23 @@
 }
 .plantilla > img {
   object-fit: cover;
-  width: 7rem;
-  height: 7rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 10px;
 }
 .plantilla > .info {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+.info h2 {
+  width: 100%;
+  text-align: center;
 }
 .plantilla > div > h2 {
-  margin: 0 0 0.75rem 0;
 }
 .plantilla > div > label {
   text-align: center;
@@ -134,21 +172,17 @@
 }
 
 .diasSemana {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: nowrap;
-
-  list-style-type: none;
-  width: 80%;
-
-  gap: 0.5rem;
+  width: 100%;
   margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
 }
 .diasSemana li {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: small;
 
   background-color: var(--background-alt);
 
@@ -178,11 +212,11 @@
 }
 .dificultad label {
   margin: 0;
-  padding: 0.7rem 0;
-  width: 7rem;
+  padding: 0.5rem 0;
+  width: 5rem;
+  font-size: small;
   text-align: center;
   background: var(--background-alt);
-  border-radius: 7px;
   border: 1px solid var(--selection);
 
   transition: 0.3s;
@@ -193,7 +227,6 @@
 }
 
 .titleSeries {
-  margin: 1rem 0;
   text-align: center;
 }
 .lineaSeries {
@@ -231,4 +264,43 @@
   width: 90%;
   padding: 10px;
   z-index: 100;
+}
+
+.btnEditar {
+  position: absolute;
+  top: 22%;
+  right: 14%;
+}
+
+.imgDetails {
+  width: 12rem !important;
+  height: 12rem !important;
+}
+
+.verComentarios {
+  width: 100%;
+  text-align: center;
+}
+
+.addComentario {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 1rem;
+}
+
+.divNombreEdit > label {
+  width: fit-content !important;
+  margin-right: 1rem;
+}
+.divNombreEdit {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }

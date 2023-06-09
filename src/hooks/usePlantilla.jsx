@@ -23,7 +23,7 @@ export function usePlantilla({ id, user }) {
   const [dificultad, setDificultad] = useState(plantilla?.dificultad);
   const [privado, setPrivado] = useState(false);
   const [comentarios, setComentarios] = useState(undefined);
-  const [seeComentarios, setSeeComentarios] = useState(true);
+  const [seeComentarios, setSeeComentarios] = useState(false);
   const [addComentario, setAddComentario] = useState(false);
   const [comentario, setComentario] = useState("");
 
@@ -254,8 +254,8 @@ export function usePlantilla({ id, user }) {
     setAddComentario(!addComentario);
   };
 
-  const handleSaveComentario = () => {
-    const newComentario = saveComentario(
+  const handleSaveComentario = async () => {
+    const newComentario = await saveComentario(
       {
         texto: comentario,
         user: user?._id,
@@ -265,7 +265,11 @@ export function usePlantilla({ id, user }) {
     );
 
     if (newComentario) {
+      debugger;
+      newComentario.user = user;
+      newComentario.plantilla = plantilla;
       setComentarios([...comentarios, newComentario]);
+      setAddComentario(false);
     }
   };
 

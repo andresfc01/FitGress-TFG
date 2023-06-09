@@ -1,3 +1,8 @@
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
 .series {
   display: flex;
   flex-direction: column;
@@ -56,21 +61,36 @@
 .serie > div > div {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+
+  gap: 1rem;
+}
+.serie > div > div > p {
+  margin: 0;
+  padding: 0;
+  color: var(--selection);
 }
 .serie > div > div > input {
-  max-width: 3rem;
   background-color: inherit;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid var(--selection);
+  color: var(--selection);
   padding: 0;
+  margin: 0;
   border-radius: 0;
-  margin-left: 0.3rem;
-  margin-right: 1rem;
+  width: 4rem;
   text-align: center;
 }
 .plantilla > img {
   object-fit: cover;
   width: 7rem;
   height: 7rem;
+}
+.plantilla > h2 {
+  width: 100%;
+  text-align: center;
 }
 .plantilla > .info {
   display: flex;
