@@ -5,6 +5,7 @@ import { searchGruposMusculares } from "../services/gruposMusculares";
 export function useEjercicios({ busqueda, sort }) {
   const [ejercicios, setEjercicios] = useState([]);
   const [grupoMuscular, setGrupoMuscular] = useState("");
+  const [gruposMusculares, setGruposMusculares] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const allEjercicios = useRef([]);
@@ -25,6 +26,7 @@ export function useEjercicios({ busqueda, sort }) {
   async function fetchGruposMusculares() {
     var newGrupos = await searchGruposMusculares();
     allGrupos.current = newGrupos;
+    setGruposMusculares(newGrupos);
   }
 
   useEffect(() => {
@@ -73,10 +75,11 @@ export function useEjercicios({ busqueda, sort }) {
   return {
     ejercicios,
     setSearch,
-    gruposMusculares: allGrupos,
     grupoMuscular,
     setGrupoMuscular,
     loading,
+    gruposMusculares,
+    setGruposMusculares,
   };
 }
 
@@ -88,6 +91,8 @@ export function useFiltro({ busqueda, sort }) {
     grupoMuscular,
     ejercicios,
     setEjercicios,
+    setGruposMusculares,
+    gruposMusculares,
   } = useEjercicios({
     busqueda,
     sort,

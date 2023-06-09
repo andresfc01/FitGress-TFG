@@ -1,10 +1,12 @@
 .ejercicios {
   margin: 2rem 0;
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  gap: 1rem;
-  justify-items: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  gap: 1.5rem;
 }
 .gruposMusculares {
   width: 85%;
@@ -83,4 +85,31 @@
   100% {
     opacity: 1;
   }
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.filtros label {
+  margin-right: 0.5rem;
+  font-style: italic;
+}
+.filtros > div {
+  display: flex;
+  align-items: center;
+}
+.filtros > .filtroGruposMusculares {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.divMas {
+  width: 100%;
+  text-align: center;
 }

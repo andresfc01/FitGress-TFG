@@ -127,6 +127,7 @@
   padding: 0.5rem 1rem;
   border-radius: 7px;
   border: 2px solid var(--text-main);
+  background-color: transparent;
 }
 .btnSecundario:hover {
   transition: 0.2s;

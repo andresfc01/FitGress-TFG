@@ -1,0 +1,38 @@
+.ejercicios {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  gap: 1rem;
+}
+
+.ejercicios section {
+  width: 100%;
+}
+
+.cabeceraEjercicios {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.cabeceraEjercicios h1,
+.cabeceraEjercicios p {
+  margin: 0;
+  padding: 0;
+}
+
+.llamadaAccion {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
