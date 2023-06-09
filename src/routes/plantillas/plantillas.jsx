@@ -49,37 +49,47 @@ export default function App() {
   }, [dificultadFiltro, cantidadDiasFiltro, plantillas]);
 
   return (
-    <>
-      <h1>Elige tu entrenamiento favorito!</h1>
+    <div className={styles.explorar}>
       <div>
-        <select
-          value={dificultadFiltro || ""}
-          onChange={(e) => setDificultadFiltro(e.target.value || null)}
-        >
-          <option value="">Todas las dificultades</option>
-          <option value="0">Fácil</option>
-          <option value="1">Intermedia</option>
-          <option value="2">Difícil</option>
-        </select>
-        <select
-          value={
-            cantidadDiasFiltro !== null ? cantidadDiasFiltro.toString() : ""
-          }
-          onChange={(e) =>
-            setCantidadDiasFiltro(parseInt(e.target.value) || null)
-          }
-        >
-          <option value="">Cualquier cantidad de días</option>
-          <option value="1">1 día</option>
-          <option value="2">2 días</option>
-          <option value="3">3 días</option>
-          <option value="4">4 días</option>
-          <option value="5">5 días</option>
-          <option value="6">6 días</option>
-          <option value="7">7 días</option>
-        </select>
+        <h1>Elige tu entrenamiento favorito!</h1>
+        <p>¡Filtra y busca los mejores entrenamientos para ti 😁!</p>
       </div>
-      <div className={styles.plantillas}>
+
+      <section className={styles.filtros}>
+        <div>
+          <label htmlFor="">Dificultad</label>
+          <select
+            value={dificultadFiltro || ""}
+            onChange={(e) => setDificultadFiltro(e.target.value || null)}
+          >
+            <option value="">Todas las dificultades</option>
+            <option value="0">Fácil</option>
+            <option value="1">Intermedia</option>
+            <option value="2">Difícil</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="">Cantidad de dias</label>
+          <select
+            value={
+              cantidadDiasFiltro !== null ? cantidadDiasFiltro.toString() : ""
+            }
+            onChange={(e) =>
+              setCantidadDiasFiltro(parseInt(e.target.value) || null)
+            }
+          >
+            <option value="">Cualquier cantidad de días</option>
+            <option value="1">1 día</option>
+            <option value="2">2 días</option>
+            <option value="3">3 días</option>
+            <option value="4">4 días</option>
+            <option value="5">5 días</option>
+            <option value="6">6 días</option>
+            <option value="7">7 días</option>
+          </select>
+        </div>
+      </section>
+      <section className={styles.plantillas}>
         {plantillasFiltradas?.length > 0 ? (
           <>
             {plantillasFiltradas.map((plantilla, cont) => {
@@ -101,7 +111,14 @@ export default function App() {
         ) : (
           <p>No se ha encontrado plantillas.</p>
         )}
-      </div>
-    </>
+      </section>
+
+      <section className={styles.llamadaAccion}>
+        <p>¿No encuentras lo qur buscas?</p>
+        <Link className="btnSecundario" to={"/nuevaPlantilla"}>
+          Crear Plantilla
+        </Link>
+      </section>
+    </div>
   );
 }

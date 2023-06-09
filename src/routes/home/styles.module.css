@@ -96,7 +96,8 @@
   gap: 1rem;
 }
 .plantillas h2 {
-  font-size: 150%;
+  font-size: 175%;
+  text-align: center;
 }
 .plantillas > div {
   width: 100%;

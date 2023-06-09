@@ -1,5 +1,20 @@
+.explorar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.explorar h1,
+.explorar p {
+  margin: 0;
+  padding: 0;
+}
+
 .plantillas {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -13,4 +28,29 @@
   flex-direction: column;
   width: 31rem;
   align-items: center;
+}
+.filtros {
+  width: 65%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.filtros label {
+  margin-right: 0.5rem;
+}
+.filtros > div {
+  display: flex;
+  align-items: center;
+}
+
+.llamadaAccion {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }

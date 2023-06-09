@@ -114,7 +114,7 @@
   color: var(--text-main) !important;
   background-color: var(--selection) !important;
 }
-.btnPrincipal a{
+.btnPrincipal a {
   color: var(--text-main) !important;
 }
 .btnPrincipal:hover {
@@ -122,7 +122,18 @@
   background-color: var(--background) !important;
   border: 2px solid var(--links) !important;
 }
-
+.btnSecundario {
+  color: var(--text-main) !important;
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  border: 2px solid var(--text-main);
+}
+.btnSecundario:hover {
+  transition: 0.2s;
+  color: var(--selection) !important;
+  border-color: var(--selection);
+  text-decoration: none;
+}
 .formulario {
   background-color: var(--background);
   padding: 2rem 3rem;
