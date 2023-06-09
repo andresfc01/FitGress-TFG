@@ -9,6 +9,7 @@
 }
 .explorar h1,
 .explorar p {
+  text-align: center;
   margin: 0;
   padding: 0;
 }
@@ -39,6 +40,7 @@
 }
 .filtros label {
   margin-right: 0.5rem;
+  font-style: italic;
 }
 .filtros > div {
   display: flex;

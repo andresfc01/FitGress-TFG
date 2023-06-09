@@ -435,8 +435,6 @@ input {
   background-color: var(--background-body);
   font-family: inherit;
   font-size: inherit;
-  margin-right: 6px;
-  margin-bottom: 6px;
   padding: 10px;
   border: none;
   border-radius: 6px;
@@ -490,8 +488,6 @@ textarea {
   background-color: var(--background);
   font-family: inherit;
   font-size: inherit;
-  margin-right: 6px;
-  margin-bottom: 6px;
   padding: 10px;
   border: none;
   border-radius: 6px;
@@ -519,8 +515,6 @@ select {
   background-color: var(--background-input);
   font-family: inherit;
   font-size: inherit;
-  margin-right: 6px;
-  margin-bottom: 6px;
   padding: 10px;
   border: none;
   border-radius: 6px;

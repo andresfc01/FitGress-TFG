@@ -1,5 +1,21 @@
+.plantillasUser {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 2rem;
+}
+.plantillasUser h1,
+.plantillasUser p {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 .plantillas {
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -13,4 +29,34 @@
   flex-direction: column;
   width: 31rem;
   align-items: center;
+}
+
+.filtros {
+  width: 65%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+.filtros label {
+  margin-right: 0.5rem;
+  font-style: italic;
+}
+.filtros > div {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 1222px) {
+  .filtros {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .filtros .btnPrincipal {
+    order: 0;
+  }
+  .filtros div {
+    order: 1;
+  }
 }
