@@ -22,9 +22,10 @@ export default function App() {
 
   const [menuPerfil, setMenuPerfil] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  
   return (
     <>
-      <nav>
+      <nav className={esAdmin ? styles.headerAdmin : ""}>
         <Link to={""} className={styles.logo}>
           <img src="/src/assets/images/logoHorizontal-bw.png" />{" "}
         </Link>

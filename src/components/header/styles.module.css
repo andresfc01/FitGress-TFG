@@ -1,3 +1,6 @@
+.headerAdmin {
+  background-color: var(--selection);
+}
 nav {
   width: 100vw;
   margin: 0;
