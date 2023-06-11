@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { URL_UPDATE } from "./urls";
+import { useNavigate } from "react-router-dom";
 
 export const useUpdateUser = () => {
+  const navigate = useNavigate();
+
   const [userUpdate, setUserUpdate] = useState({});
 
   const postFormData = async (formData) => {
@@ -26,7 +29,9 @@ export const useUpdateUser = () => {
 
     delete userObj.confirmPassword;
     setUserUpdate(userObj);
+    navigate("/perfil");
     localStorage.setItem("user", JSON.stringify(userObj));
+
     return response;
   };
 
