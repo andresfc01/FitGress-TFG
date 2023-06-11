@@ -91,10 +91,12 @@
 }
 
 .enlaceAdmin {
+  width: 25rem;
+  text-align: center;
   background-color: var(--background);
   padding: 1.5rem;
   border-radius: 10px;
-  font-size: larger;
+  font-size: xx-large;
   text-decoration: none;
   transition: 0.3s;
 }

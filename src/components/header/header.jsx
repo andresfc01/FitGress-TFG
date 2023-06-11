@@ -8,6 +8,9 @@ import {
   faArrowDown,
   faBars,
   faBurger,
+  faCalendar,
+  faDumbbell,
+  faMagnifyingGlass,
   faPencil,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +25,7 @@ export default function App() {
 
   const [menuPerfil, setMenuPerfil] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  
+
   return (
     <>
       <nav className={esAdmin ? styles.headerAdmin : ""}>
@@ -36,18 +39,26 @@ export default function App() {
         />
         <ul className={showMenu ? styles.showMenu : ""}>
           {esAdmin && (
-            <li>
-              <Link to={"/admin"}>Admin</Link>
+            <li onClick={() => setShowMenu(false)}>
+              <Link to={"/admin"}>
+                <FontAwesomeIcon icon={faUser} /> Admin
+              </Link>
             </li>
           )}
-          <li>
-            <Link to={"explorar"}>Explorar</Link>
+          <li onClick={() => setShowMenu(false)}>
+            <Link to={"explorar"}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} /> Explorar
+            </Link>
           </li>
-          <li>
-            <Link to={"plantillas"}>Plantillas</Link>
+          <li onClick={() => setShowMenu(false)}>
+            <Link to={"plantillas"}>
+              <FontAwesomeIcon icon={faCalendar} /> Plantillas
+            </Link>
           </li>
-          <li>
-            <Link to={"ejercicios"}>Ejercicios</Link>
+          <li onClick={() => setShowMenu(false)}>
+            <Link to={"ejercicios"}>
+              <FontAwesomeIcon icon={faDumbbell} /> Ejercicios
+            </Link>
           </li>
         </ul>
 

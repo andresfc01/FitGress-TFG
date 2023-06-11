@@ -15,7 +15,7 @@ export default function App() {
   esAdmin();
   return (
     <>
-      <h2>Administración</h2>
+      <h1>Administración</h1>
       <small className="descAdmin">
         Selecciona que apartado quieres administrar
       </small>
