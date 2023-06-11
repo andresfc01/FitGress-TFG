@@ -165,3 +165,14 @@
 .formulario img {
   width: 5rem;
 }
+.breadCrumbs {
+  display: flex;
+  gap: 0.5rem;
+  position: absolute;
+  top: 15%;
+  left: 3%;
+}
+.breadCrumbs p {
+  margin: 0;
+  padding: 0;
+}

@@ -28,6 +28,7 @@ import CrudPlantilla from "./routes/admin/crudPlantilla";
 import CrudEntrenamiento from "./routes/admin/crudEntrenamiento";
 import CrudPeso from "./routes/admin/crudPeso";
 import CrudComentario from "./routes/admin/crudComentario";
+import Breadcrumbs from "./components/Breadcrumbs";
 
 export const AppContext = createContext();
 
@@ -56,6 +57,7 @@ function App() {
     <AppContext.Provider value={{ user, setUser }}>
       <QueryClientProvider client={client}>
         <BrowserRouter>
+          <Breadcrumbs />
           <Header />
           <div id="App">
             <Routes>
