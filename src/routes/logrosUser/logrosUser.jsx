@@ -6,8 +6,10 @@ import { getMedidasUser } from "../../services/medidas";
 import { getEntrenosUser } from "../../services/entrenos";
 import Logro from "../../components/logro/logro";
 import { getPesosUser } from "../../services/pesos";
+import { isLogged } from "../../components/isLogged";
 
 export default function App() {
+  isLogged();
   const { user } = useContext(AppContext);
   const [logros, setLogros] = useState(undefined);
   const [pesos, setPesos] = useState(undefined);

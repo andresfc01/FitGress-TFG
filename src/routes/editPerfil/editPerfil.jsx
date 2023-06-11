@@ -6,8 +6,11 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { useUpdateUser } from "../../api/useUpdateRegister";
 import { useNavigate } from "react-router-dom";
+import { isLogged } from "../../components/isLogged";
 
 const Form = () => {
+  isLogged();
+
   const schema = yup.object().shape({
     username: yup
       .string()

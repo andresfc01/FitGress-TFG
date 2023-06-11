@@ -5,10 +5,12 @@ import React from "react";
 import NuevaPlantillaEjercicios from "../../components/nuevaPlantillaEjercicios/NuevaPlantillaEjercicios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { isLogged } from "../../components/isLogged";
 
 export const contextPlantilla = createContext();
 
 export default function NuevaPlantilla() {
+  isLogged();
   const [datosLogged, setDatosLogged] = useState(false);
   const [datos, setDatos] = useState({});
   return (

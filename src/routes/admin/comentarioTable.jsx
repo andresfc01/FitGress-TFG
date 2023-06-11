@@ -334,7 +334,6 @@ const EditComentarioForm = ({
 
   const handleInputChange = (e) => {
     const { name, value, innerHTML } = e.target;
-    debugger;
     if (name === "user") {
       setEditedComentario((prevComentario) => ({
         ...prevComentario,

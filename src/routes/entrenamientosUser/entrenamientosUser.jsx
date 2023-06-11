@@ -5,8 +5,10 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { getEntrenosUser } from "../../services/entrenos";
 import Entreno from "../../components/entrenamiento/entrenamiento";
+import { isLogged } from "../../components/isLogged";
 
 export default function App() {
+  isLogged();
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [entrenos, setEntrenos] = useState([]);

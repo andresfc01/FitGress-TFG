@@ -9,12 +9,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { esAdmin } from "../../components/esAdmin";
 
 export default function App() {
+  esAdmin();
   return (
     <>
       <h2>Administración</h2>
-      <small className="descAdmin">Selecciona que apartado quieres administrar</small>
+      <small className="descAdmin">
+        Selecciona que apartado quieres administrar
+      </small>
       <div className="enlacesAdmin">
         <Link to={"/admin/user"} className="enlaceAdmin">
           <FontAwesomeIcon icon={faUser} /> Users

@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { getPlantillasUserPopulated } from "../../services/plantillas";
 import PlantillaTable from "./plantillaTable";
+import { esAdmin } from "../../components/esAdmin";
 
 export default function App() {
   const { user } = useContext(AppContext);
   const [plantillas, setPlantillas] = useState(undefined);
-
+  esAdmin();
   useEffect(() => {
     const fetchPlantillas = async () => {
       const fechedPlantillas = await getPlantillasUserPopulated();

@@ -10,8 +10,10 @@ import "react-calendar/dist/Calendar.css";
 import CalendarioEntrenamientos from "../../components/calendarioEntrenamientos/calendarioEntrenamientos";
 import { getEntrenosUser } from "../../services/entrenos";
 import { usePerfil } from "../../hooks/usePerfil";
+import { isLogged } from "../../components/isLogged";
 
 export default function App() {
+  isLogged();
   const { user } = useContext(AppContext);
   const rutaImg = "http://localhost:3000/" + user?.image?.imagePath;
   const {

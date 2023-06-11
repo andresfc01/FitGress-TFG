@@ -265,7 +265,6 @@ export function usePlantilla({ id, user }) {
     );
 
     if (newComentario) {
-      debugger;
       newComentario.user = user;
       newComentario.plantilla = plantilla;
       setComentarios([...comentarios, newComentario]);

@@ -15,6 +15,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function App() {
   const { user } = useContext(AppContext);
+  const esAdmin =
+    user?.roles &&
+    user?.roles.length > 0 &&
+    user?.roles.includes("640ed10308e23cd6654b5ebe");
+
   const [menuPerfil, setMenuPerfil] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   return (
@@ -29,9 +34,11 @@ export default function App() {
           icon={faBars}
         />
         <ul className={showMenu ? styles.showMenu : ""}>
-          <li>
-            <Link to={"/admin"}>Admin</Link>
-          </li>
+          {esAdmin && (
+            <li>
+              <Link to={"/admin"}>Admin</Link>
+            </li>
+          )}
           <li>
             <Link to={"explorar"}>Explorar</Link>
           </li>

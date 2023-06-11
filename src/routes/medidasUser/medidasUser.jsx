@@ -10,10 +10,12 @@ import {
 } from "../../services/medidas";
 import Medida from "../../components/medida/medida";
 import EvolucionMedidasChart from "../../components/evolucionMedidasChart/evolucionMedidasChart";
+import { isLogged } from "../../components/isLogged";
 
 const partesCuerpo = ["brazo", "muslo", "gemelo", "pecho", "cintura", "cadera"];
 
 export default function App() {
+  isLogged();
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [objetivo, setObjetivo] = useState(undefined);

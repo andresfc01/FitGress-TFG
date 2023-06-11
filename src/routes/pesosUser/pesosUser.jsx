@@ -8,8 +8,10 @@ import Peso from "../../components/peso/peso";
 import EvolucionPesosChart from "../../components/evolucionPesosChart/evolucionPesosChart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { isLogged } from "../../components/isLogged";
 
 export default function App() {
+  isLogged();
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [objetivo, setObjetivo] = useState(undefined);

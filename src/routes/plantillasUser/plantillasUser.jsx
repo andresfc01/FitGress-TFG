@@ -7,8 +7,10 @@ import { AppContext } from "../../App";
 import { getPlantillasUser } from "../../services/plantillas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { isLogged } from "../../components/isLogged";
 
 export default function App() {
+  isLogged();
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [plantillas, setPlantillas] = useState([]);

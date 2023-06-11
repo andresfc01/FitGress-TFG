@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { getPesos } from "../../services/pesos";
 import PesoTable from "./pesoTable";
+import { esAdmin } from "../../components/esAdmin";
 
 export default function App() {
   const { user } = useContext(AppContext);
   const [pesos, setPesos] = useState(undefined);
-
+  esAdmin();
   useEffect(() => {
     const fetchPesos = async (token) => {
       const fechedPesos = await getPesos(token);
