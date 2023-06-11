@@ -14,7 +14,7 @@ export function useNuevaPlantillaDatos(datos) {
   let { setDatosLogged, setDatos } = useContext(contextPlantilla);
 
   useEffect(() => {
-    if (nombre.length <= 2) {
+    if (nombre !== "" && nombre.length <= 2) {
       setErrors({
         ...errors,
         nombre: "Debe de tener 3 carácteres como mínimo",

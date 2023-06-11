@@ -168,8 +168,8 @@ export function usePlantilla({ id, user }) {
 
     const newPlantilla = await savePlantilla(plantillaCopia, user.token);
     if (newPlantilla) {
-      navigate("/plantilla/" + newPlantilla._id);
-      setPlantilla(newPlantilla);
+      navigate("/plantillas");
+      //setPlantilla(newPlantilla);
     }
   };
 

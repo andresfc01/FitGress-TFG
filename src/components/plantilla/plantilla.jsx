@@ -368,6 +368,7 @@ export default function Plantilla({
                       >
                         {editable && <FontAwesomeIcon icon={faSort} />}
                         <video
+                          label={console.log(obj)}
                           src={
                             "http://localhost:3000/" +
                             obj.ejercicio?.image?.imagePath
@@ -378,7 +379,7 @@ export default function Plantilla({
                           loop
                         />
                         <div>
-                          <h3>{obj.ejercicio.nombre}</h3>
+                          <h3>{obj?.ejercicio?.nombre}</h3>
                           <div>
                             <label htmlFor="">Repeticiones</label>
                             {editable ? (

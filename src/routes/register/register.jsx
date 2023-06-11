@@ -68,7 +68,7 @@ const Form = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(AppContext);
   const { userRegister, registerUser } = useRegister();
-  const [fase, setFase] = useState(1);
+  const [fase, setFase] = useState(0);
   const [error, setError] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [username, setUsername] = useState("");
@@ -117,19 +117,29 @@ const Form = () => {
   }, [fase]);
 
   const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("objetivoFisico", objetivoFisico);
-    formData.append("objetivoPeso", objetivoPeso);
-    formData.append("sexo", sexo);
-    formData.append("altura", altura);
-    formData.append("nivelExperiencia", nivelExperiencia);
-    if (selectedFile) {
-      formData.append("image", selectedFile);
+    if (
+      error ||
+      userRegister?.message ||
+      errors?.username ||
+      errors?.email ||
+      errors?.password
+    ) {
+      setFase(0);
+    } else {
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("objetivoFisico", objetivoFisico);
+      formData.append("objetivoPeso", objetivoPeso);
+      formData.append("sexo", sexo);
+      formData.append("altura", altura);
+      formData.append("nivelExperiencia", nivelExperiencia);
+      if (selectedFile) {
+        formData.append("image", selectedFile);
+      }
+      registerUser(formData);
     }
-    registerUser(formData);
   };
 
   return (
@@ -182,7 +192,6 @@ const Form = () => {
                   <label htmlFor="password">Contraseña:</label>
                   <input
                     type="password"
-                    id="password"
                     {...register("password")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -365,7 +374,17 @@ const Form = () => {
                 plantillasRecomendadas.map((plantilla, cont) => {
                   if (cont < 6) {
                     return (
-                      <Plantilla key={plantilla.id} plantilla={plantilla} />
+                      <Link
+                        to={`/plantilla/${plantilla?._id}`}
+                        key={cont}
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        <Plantilla
+                          key={plantilla.id}
+                          plantilla={plantilla}
+                          enableClick={true}
+                        />
+                      </Link>
                     );
                   }
                 })}

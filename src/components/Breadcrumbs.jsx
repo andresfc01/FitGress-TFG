@@ -28,23 +28,23 @@ const Breadcrumbs = () => {
               contador--;
               rutaAnterior = rutas[contador - 1];
               return (
-                <>
+                <React.Fragment key={cont}>
                   <p>&gt;</p>
-                  <Link to={enruta}>
+                  <Link to={enruta} key={cont}>
                     {capitalizeFirstLetter(nombreRutaAnterior)}
                   </Link>
-                </>
+                </React.Fragment>
               );
             }
           }
         }
       })}
-      {rutas && rutas.length > 1 && (
+      {/* {rutas && rutas.length > 1 && (
         <>
           <p>&gt;</p>
           <span>{capitalizeFirstLetter(rutas[rutas.length - 1])}</span>
         </>
-      )}
+      )} */}
     </div>
   );
 };
