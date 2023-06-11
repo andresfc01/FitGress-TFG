@@ -121,7 +121,7 @@ export default function App() {
   };
 
   return (
-    <>
+    <div className={styles.todo}>
       <div className={styles.divUltimasMedidas}>
         <p>Ultimas medidas</p>
         <div className={styles.ultimasMedidas}>
@@ -133,36 +133,35 @@ export default function App() {
         </div>
       </div>
 
-      <button onClick={handleOpenModal}>Añadir medida</button>
+      <button onClick={handleOpenModal}>+ Añadir medida</button>
       {isModalOpen && (
-        <div>
-          <form onSubmit={handleAddMedida}>
-            <label>
-              Parte del cuerpo:
-              <select
-                value={selectedParte}
-                onChange={(e) => setSelectedParte(e.target.value)}
-              >
-                {partesCuerpo.map((parte) => (
-                  <option key={parte} value={parte}>
-                    {parte}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              Medida:
-              <input
-                type="number"
-                value={newMedida}
-                onChange={(e) => setNewMedida(parseInt(e.target.value))}
-              />
-            </label>
-            <p type="submit" onClick={handleAddMedida}>
-              ✅
-            </p>
-          </form>
-        </div>
+        <form onSubmit={handleAddMedida} className={styles.addMedida}>
+          <label>
+            Parte del cuerpo:
+            <select
+              value={selectedParte}
+              onChange={(e) => setSelectedParte(e.target.value)}
+            >
+              {partesCuerpo.map((parte) => (
+                <option key={parte} value={parte}>
+                  {parte}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Medida:
+            <input
+              type="number"
+              value={newMedida}
+              onChange={(e) => setNewMedida(parseInt(e.target.value))}
+            />
+          </label>
+          <p type="submit" onClick={handleAddMedida}>
+            ✅ Guardar
+          </p>
+          <p onClick={() => setIsModalOpen(false)}>Cancelar</p>
+        </form>
       )}
 
       <label>
@@ -206,6 +205,6 @@ export default function App() {
           )}
         </>
       )}
-    </>
+    </div>
   );
 }

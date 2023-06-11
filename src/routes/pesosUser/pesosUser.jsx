@@ -6,12 +6,15 @@ import { AppContext } from "../../App";
 import { deletePeso, getPesosUser, savePeso } from "../../services/pesos";
 import Peso from "../../components/peso/peso";
 import EvolucionPesosChart from "../../components/evolucionPesosChart/evolucionPesosChart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 export default function App() {
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [objetivo, setObjetivo] = useState(undefined);
   const [pesos, setPesos] = useState([]);
+  const [showAll, setShowAll] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newPeso, setNewPeso] = useState("");
@@ -54,7 +57,7 @@ export default function App() {
   };
 
   const handleOpenModal = () => {
-    setIsModalOpen(true);
+    setIsModalOpen(!isModalOpen);
   };
 
   const handleAddPeso = async (e) => {
@@ -84,45 +87,77 @@ export default function App() {
   };
 
   return (
-    <>
-      <button onClick={handleOpenModal}>Añadir peso</button>
-      {isModalOpen && (
-        <div>
-          <form onSubmit={handleAddPeso}>
-            <label>
-              Peso:
-              <input
-                type="number"
-                value={newPeso}
-                onChange={(e) => setNewPeso(parseInt(e.target.value))}
-              />
-            </label>
-            <button type="submit">Aceptar</button>
-          </form>
-        </div>
-      )}
+    <div className={styles.todo}>
+      <div className={styles.btnAddPeso}>
+        <button onClick={handleOpenModal}>
+          {isModalOpen ? "Añade tu peso" : "+ Añadir peso"}
+        </button>
+      </div>
 
+      {isModalOpen && (
+        <form onSubmit={handleAddPeso} className={styles.addPeso}>
+          <label>Peso:</label>
+          <input
+            type="number"
+            value={newPeso}
+            onChange={(e) => setNewPeso(parseInt(e.target.value))}
+          />
+          <button type="submit">
+            <FontAwesomeIcon icon={faSave} /> Aceptar
+          </button>
+          <p onClick={() => setIsModalOpen(false)}>Cancelar</p>
+        </form>
+      )}
+      <h2>Evolución pesos</h2>
       <EvolucionPesosChart pesos={pesos} />
+
       {pesos.length > 0 ? (
         <div className={styles.pesos}>
+          <h2>Historial Pesos</h2>
+
           {pesos.map((peso, index) => {
-            const pesoSiguiente =
-              index < pesos.length - 1 ? pesos[index + 1] : null;
-            return (
-              <Peso
-                key={index}
-                peso={peso}
-                pesoAnt={pesoSiguiente}
-                objetivo={objetivo}
-                onEdit={handleEditPeso}
-                onDelete={handleDeletePeso}
-              />
-            );
+            if (index < 10) {
+              const pesoSiguiente =
+                index < pesos.length - 1 ? pesos[index + 1] : null;
+              return (
+                <Peso
+                  key={index}
+                  peso={peso}
+                  pesoAnt={pesoSiguiente}
+                  objetivo={objetivo}
+                  onEdit={handleEditPeso}
+                  onDelete={handleDeletePeso}
+                />
+              );
+            } else if (showAll) {
+              const pesoSiguiente =
+                index < pesos.length - 1 ? pesos[index + 1] : null;
+              return (
+                <Peso
+                  key={index}
+                  peso={peso}
+                  pesoAnt={pesoSiguiente}
+                  objetivo={objetivo}
+                  onEdit={handleEditPeso}
+                  onDelete={handleDeletePeso}
+                />
+              );
+            }
           })}
+          {pesos.length > 10 && (
+            <div className={styles.pesos}>
+              <button
+                onClick={() => setShowAll(!showAll)}
+                className="btnPrincipal"
+              >
+                {showAll ? "Mostrar menos" : "Ver mas"}
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <p>No hay pesos registrados.</p>
       )}
-    </>
+    </div>
   );
 }

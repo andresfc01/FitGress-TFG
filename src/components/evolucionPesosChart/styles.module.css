@@ -10,9 +10,28 @@
   order: 1;
 }
 .filtros {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  width: 9rem;
+  gap: 0.5rem;
+}
+.filtros button {
+  background-color: transparent;
+  border: 1px solid var(--selection);
+  color: var(--selection);
+}
+@media (max-width: 600px) {
+  .grafico {
     flex-direction: column;
-    align-content: center;
-    justify-content: center;
-    width: 9rem;
+  }
+  .filtros {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .filtros button {
+    width: 49%;
+  }
 }

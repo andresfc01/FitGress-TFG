@@ -28,7 +28,7 @@ export default function App() {
           className={styles.iconoMenu}
           icon={faBars}
         />
-        <ul className={showMenu && styles.showMenu}>
+        <ul className={showMenu ? styles.showMenu : ""}>
           <li>
             <Link to={"/admin"}>Admin</Link>
           </li>
@@ -55,11 +55,7 @@ export default function App() {
         )}
         {user && (
           <div
-            className={
-              menuPerfil
-                ? styles.divUsuario + " " + styles.divUsuarioActivo
-                : styles.divUsuario
-            }
+            className={styles.divUsuario}
             onClick={() => setMenuPerfil(!menuPerfil)}
           >
             {user?.image?.imagePath ? (

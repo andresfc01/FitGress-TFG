@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import {
   LineChart,
@@ -13,7 +13,11 @@ import {
 export default function LineChartTabs({ medidas }) {
   const [emptyData, setEmptyData] = useState(false);
   const [filteredMedidas, setFilteredMedidas] = useState([...medidas]);
+  const [period, setPeriod] = useState("");
 
+  useEffect(() => {
+    handleFilter();
+  }, [period]);
   // Función para formatear la fecha
   const formatDate = (dateString) => {
     const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
@@ -27,7 +31,7 @@ export default function LineChartTabs({ medidas }) {
   const minY = Math.min(...valoresMedida);
   const maxY = Math.max(...valoresMedida);
 
-  const handleFilter = (period) => {
+  const handleFilter = () => {
     let filteredData = [...medidas].reverse(); // Copia los datos originales
 
     switch (period) {
@@ -84,12 +88,38 @@ export default function LineChartTabs({ medidas }) {
 
   return (
     <div className={styles.grafico}>
+      {period == "" && <p>Selecciona un periodo</p>}
       <div className={styles.filtros}>
-        <button onClick={() => handleFilter("1M")}>1 Mes</button>
-        <button onClick={() => handleFilter("3M")}>3 Meses</button>
-        <button onClick={() => handleFilter("6M")}>6 Meses</button>
-        <button onClick={() => handleFilter("1Y")}>1 Año</button>
-        <button onClick={() => handleFilter("total")}>Total</button>
+        <button
+          onClick={() => setPeriod("1M")}
+          className={period == "1M" ? "btnPrincipal" : ""}
+        >
+          1 Mes
+        </button>
+        <button
+          onClick={() => setPeriod("3M")}
+          className={period == "3M" ? "btnPrincipal" : ""}
+        >
+          3 Meses
+        </button>
+        <button
+          onClick={() => setPeriod("6M")}
+          className={period == "6M" ? "btnPrincipal" : ""}
+        >
+          6 Meses
+        </button>
+        <button
+          onClick={() => setPeriod("1Y")}
+          className={period == "1Y" ? "btnPrincipal" : ""}
+        >
+          1 Año
+        </button>
+        <button
+          onClick={() => setPeriod("total")}
+          className={period == "total" ? "btnPrincipal" : ""}
+        >
+          Total
+        </button>
       </div>
       {emptyData ? (
         <p>No hay datos disponibles para el período seleccionado.</p>

@@ -5,16 +5,29 @@
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  order: 2;
 }
 .divUltimasMedidas {
-  order: 1;
 }
 .ultimasMedidas {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+}
+.todo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+}
+.addMedida {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
 }

@@ -6,8 +6,8 @@ import { getEntrenosUser } from "../services/entrenos";
 export function usePerfil({ userObj }) {
   const [user, setUser] = useState(undefined);
   const [showPeso, setShowPeso] = useState(false);
-  const [showMedidas, setShowMedidas] = useState(false);
-  const [showEntrenamientos, setShowEntrenamientos] = useState(true);
+  const [showMedidas, setShowMedidas] = useState(true);
+  const [showEntrenamientos, setShowEntrenamientos] = useState(false);
   const [showLogros, setShowLogros] = useState(false);
   const [entrenos, setEntrenos] = useState([]);
 

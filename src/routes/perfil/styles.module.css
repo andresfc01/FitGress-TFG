@@ -7,14 +7,16 @@
   justify-content: center;
   align-content: center;
 }
+.perfil h1 {
+  width: 100%;
+  text-align: center;
+}
 h2 {
   margin: 0;
 }
 .infoPersonal {
-  flex-basis: 45%;
   display: flex;
   justify-content: center;
-  align-items: center;
   align-content: center;
   padding: 1rem;
   gap: 2rem;
@@ -22,14 +24,22 @@ h2 {
 
   background-color: var(--background-alt);
   border-radius: 14px;
+  align-items: center;
 }
-.infoPersonal img {
+.datos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 2rem;
+}
+.infoPersonal .datos img {
   object-fit: cover;
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
 }
-.infoPersonal p {
+.infoPersonal .datos p {
   font-size: 150%;
 }
 
@@ -41,12 +51,19 @@ h2 {
   justify-content: center;
   align-items: center;
   align-content: center;
+  gap: 0.5rem;
 }
 .botones button {
-  flex-basis: 40%;
+  width: 11rem;
+  background-color: transparent;
+  border: 1px solid var(--selection);
+  color: var(--selection);
 }
 .botones p {
   flex-basis: 100%;
+  margin: 0;
+  font-size: medium;
+  font-style: italic;
 }
 .otroContenido {
   margin: auto;
@@ -73,6 +90,10 @@ h2 {
 .calendario {
   flex-basis: 40%;
   order: 2; /* Cambia el orden visual del calendario */
+  text-align: center;
+}
+.calendario h2 {
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 20rem) {
@@ -88,4 +109,22 @@ h2 {
   .contenido {
     flex-basis: 100%;
   }
+}
+
+@media (max-width: 677px) {
+  .infoPersonal {
+    flex-direction: column;
+  }
+  .botones button {
+    width: 49%;
+  }
+}
+@media (max-width: 479px) {
+  .botones button {
+    width: 90%;
+  }
+}
+
+.btnMas {
+  width: 100%;
 }

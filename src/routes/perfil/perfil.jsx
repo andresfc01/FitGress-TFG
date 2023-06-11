@@ -29,28 +29,60 @@ export default function App() {
   return (
     user && (
       <div className={styles.perfil}>
-        <div className={styles.infoPersonal}>
-          <img src={rutaImg} alt="" />
-          <div>
-            <h2>{user.username}</h2>
-            <small>{user.email}</small>
+        <h1>Perfil</h1>
+        <section className={styles.infoPersonal}>
+          <div className={styles.datos}>
+            <img
+              src={
+                user?.image?.imagePath
+                  ? rutaImg
+                  : "src/assets/images/perfilUser.jpg"
+              }
+              alt=""
+            />
+            <div>
+              <h2>{user.username}</h2>
+              <small>{user.email}</small>
+            </div>
+            <Link to={"/editPerfil"}>
+              <p>⚙️</p>
+            </Link>
           </div>
-          <Link to={"/editPerfil"}>
-            <p>⚙️</p>
-          </Link>
-        </div>
 
-        <div className={styles.contenido}>
           <div className={styles.botones}>
             <p>Ver estadísticas</p>
-            <button onClick={handleClickPeso}>Peso</button>
-            <button onClick={handleClickMedida}>Medidas</button>
-            <button onClick={handleClickEntrenamiento}>Entrenamientos</button>
-            <button onClick={handleClickLogros}>Logros</button>
+            <button
+              onClick={handleClickEntrenamiento}
+              className={showEntrenamientos ? "btnPrincipal" : ""}
+            >
+              Entrenamientos
+            </button>
+            <button
+              onClick={handleClickPeso}
+              className={showPeso ? "btnPrincipal" : ""}
+            >
+              Peso
+            </button>
+            <button
+              onClick={handleClickMedida}
+              className={showMedidas ? "btnPrincipal" : ""}
+            >
+              Medidas
+            </button>
+            <button
+              onClick={handleClickLogros}
+              className={showLogros ? "btnPrincipal" : ""}
+            >
+              Logros
+            </button>
           </div>
+        </section>
+
+        <section className={styles.contenido}>
           {showEntrenamientos && (
             <>
               <div className={styles.calendario}>
+                <h2>Calendario entrenamientos</h2>
                 <CalendarioEntrenamientos
                   entrenamientos={entrenos ?? undefined}
                 />
@@ -67,7 +99,7 @@ export default function App() {
           {showMedidas && <MedidasUser />}
 
           {showPeso && <PesosUser />}
-        </div>
+        </section>
       </div>
     )
   );
