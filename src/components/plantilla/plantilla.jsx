@@ -121,7 +121,7 @@ export default function Plantilla({
             <img
               src={"http://localhost:3000/" + newPlantilla?.image?.imagePath}
               alt=""
-              className={showDetails && styles.imgDetails}
+              className={showDetails ? styles.imgDetails : ""}
             />
 
             <div className={styles.info}>

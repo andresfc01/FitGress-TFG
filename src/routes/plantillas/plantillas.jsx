@@ -9,6 +9,8 @@ export default function App() {
   const [plantillasFiltradas, setPlantillasFiltradas] = useState([]);
   const [dificultadFiltro, setDificultadFiltro] = useState(null);
   const [cantidadDiasFiltro, setCantidadDiasFiltro] = useState(null);
+  const [nombreFiltro, setNombreFiltro] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     const fetchPlantillas = async () => {
@@ -41,12 +43,17 @@ export default function App() {
           (plantilla) => plantilla.diasSemana.length === cantidadDiasFiltro
         );
       }
+      if (nombreFiltro !== "") {
+        filtradas = plantillas.filter((plantilla) =>
+          plantilla.nombre.toLowerCase().includes(nombreFiltro.toLowerCase())
+        );
+      }
 
       setPlantillasFiltradas(filtradas);
     };
 
     filtrarPlantillas();
-  }, [dificultadFiltro, cantidadDiasFiltro, plantillas]);
+  }, [dificultadFiltro, cantidadDiasFiltro, plantillas, nombreFiltro]);
 
   return (
     <div className={styles.explorar}>
@@ -56,6 +63,14 @@ export default function App() {
       </div>
 
       <section className={styles.filtros}>
+        <div>
+          <label htmlFor="">Nombre</label>
+          <input
+            value={nombreFiltro}
+            onChange={(e) => setNombreFiltro(e.target.value)}
+            placeholder="FullBody, Torso..."
+          />
+        </div>
         <div>
           <label htmlFor="">Dificultad</label>
           <select
@@ -93,20 +108,46 @@ export default function App() {
         {plantillasFiltradas?.length > 0 ? (
           <>
             {plantillasFiltradas.map((plantilla, cont) => {
-              return (
-                <Link
-                  to={`/plantilla/${plantilla?._id}`}
-                  key={cont}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <Plantilla
-                    setShowUser={true}
-                    plantilla={plantilla}
-                    enableClick={true}
-                  />
-                </Link>
-              );
+              if (cont < 8) {
+                return (
+                  <Link
+                    to={`/plantilla/${plantilla?._id}`}
+                    key={cont}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Plantilla
+                      setShowUser={true}
+                      plantilla={plantilla}
+                      enableClick={true}
+                    />
+                  </Link>
+                );
+              } else if (showAll) {
+                return (
+                  <Link
+                    to={`/plantilla/${plantilla?._id}`}
+                    key={cont}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Plantilla
+                      setShowUser={true}
+                      plantilla={plantilla}
+                      enableClick={true}
+                    />
+                  </Link>
+                );
+              }
             })}
+            {plantillasFiltradas.length > 9 && (
+              <div className={styles.plantillas}>
+                <button
+                  onClick={() => setShowAll(!showAll)}
+                  className="btnPrincipal"
+                >
+                  {showAll ? "Mostrar menos" : "Ver mas"}
+                </button>
+              </div>
+            )}
           </>
         ) : (
           <p>No se ha encontrado plantillas.</p>
