@@ -300,7 +300,6 @@ const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
   const [editedLogro, setEditedLogro] = useState({ ...logro });
   useEffect(() => {
     if (logro) {
-      console.log(logro);
       setEditedLogro(logro);
     }
   }, []);

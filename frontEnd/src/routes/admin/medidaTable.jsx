@@ -392,7 +392,6 @@ const EditMedidaForm = ({
         value={editedMedida?.fecha.slice(0, 16) ?? currentDateTime}
         onChange={handleInputChange}
       />
-      {console.log(editedMedida.fecha)}
       <div className="botonesEdit">
         <Button onClick={handleSave}>Guardar</Button>
         <Button onClick={onCancel}>Cancelar</Button>

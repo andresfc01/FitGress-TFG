@@ -96,7 +96,6 @@ const getById = async (req, res, next) => {
         },
       }) // Popula la propiedad 'ejercicio' con el objeto completo del ejercicio
       .exec();
-    console.log(plantillaEntrenamiento);
     res.status(200).json(plantillaEntrenamiento);
   } catch (error) {
     res.status(401).json(error);

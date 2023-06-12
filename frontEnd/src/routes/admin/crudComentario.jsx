@@ -11,7 +11,6 @@ export default function App() {
   useEffect(() => {
     const fetchComentarios = async (token) => {
       const fechedComentarios = await getComentarios(token);
-      console.log(fechedComentarios);
       if (fechedComentarios) {
         setComentarios(fechedComentarios);
       }

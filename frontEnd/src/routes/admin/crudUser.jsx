@@ -12,7 +12,6 @@ export default function App() {
     const fetchUsers = async (token) => {
       const usuarios = await searchUsers(token);
       if (usuarios) {
-        console.log(usuarios);
         setUsers(usuarios);
       }
     };

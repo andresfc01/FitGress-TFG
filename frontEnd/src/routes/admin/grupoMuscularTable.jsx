@@ -303,7 +303,6 @@ const EditGrupoMuscularForm = ({
   });
   useEffect(() => {
     if (grupoMuscular) {
-      console.log(grupoMuscular);
       setEditedGrupoMuscular(grupoMuscular);
     }
   }, []);

@@ -292,7 +292,6 @@ const EditUserForm = ({ user, onSave, onCancel, onUpdateUser, token }) => {
   const [editedUser, setEditedUser] = useState({ ...user });
   useEffect(() => {
     if (user) {
-      console.log(user);
       setEditedUser(user);
     }
   }, []);

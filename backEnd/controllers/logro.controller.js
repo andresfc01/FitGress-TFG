@@ -39,7 +39,6 @@ const getById = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     let newLogro = req.body;
-    console.log(req.body);
     if (req.file) {
       //creo el obj imagen y lo asigno al grupoMuscular
       const newImage = {
@@ -75,8 +74,6 @@ const update = async (req, res, next) => {
       };
       logroUpdated.image = newImage;
     }
-    console.log(req.file);
-    console.log(logroUpdated.image);
 
     let logro = await Logro.findByIdAndUpdate(req.params.id, logroUpdated, {
       new: true,

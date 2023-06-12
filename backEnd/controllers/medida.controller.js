@@ -70,7 +70,6 @@ const getById = async (req, res, next) => {
  */
 const create = async (req, res, next) => {
   try {
-    console.log(req.body);
     let medida = await Medida.create(req.body);
     res.status(201).json(medida);
   } catch (error) {

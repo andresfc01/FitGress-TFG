@@ -119,7 +119,6 @@ const signIn = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const user = req.body;
-    console.log(user);
     const _id = user._id;
 
     if (req.file) {
@@ -139,7 +138,6 @@ const update = async (req, res, next) => {
     const token = jwt.sign({ id: updatedUser._id }, config.SECRET, {
       /* expiresIn: 86400, */
     });
-    console.log(updatedUser);
 
     res.json({ ...updatedUser._doc, token });
   } catch (error) {

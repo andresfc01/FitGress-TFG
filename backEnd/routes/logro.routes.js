@@ -13,10 +13,8 @@ function handleImage(req, res, next) {
     // Puedes realizar las acciones necesarias para este caso
     // Por ejemplo, asignar el objeto JSON a una nueva variable en el cuerpo de la solicitud
     // req.body.imageData = req.body.image;
-    console.log("b");
   } else {
     // Si no es un objeto, asumimos que es un archivo de imagen y continúa con el middleware multer
-    console.log("a");
     return multer.single("image")(req, res, next);
   }
   next();

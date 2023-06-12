@@ -54,7 +54,6 @@ const getById = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     let ej = req.body;
-    console.log(ej);
     if (req.file) {
       //creo el obj imagen y lo asigno al user
       const newImage = {

@@ -93,7 +93,6 @@ const getByUser = async (req, res, next) => {
 const create = async (req, res, next) => {
   try {
     const entrenamiento = req.body;
-    console.log(entrenamiento);
 
     const newEntrenamiento = new Entrenamiento(entrenamiento);
 
