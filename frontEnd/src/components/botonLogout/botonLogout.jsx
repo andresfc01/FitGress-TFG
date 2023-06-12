@@ -10,7 +10,7 @@ export default function BotonLogout() {
 
   function handleLogout() {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     navigate("/");
     // redireccionar a la página de inicio u otra página según corresponda
   }

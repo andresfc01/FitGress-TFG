@@ -29,6 +29,7 @@ router
    * POST /singin , ode 200 - 401 INVALID PASSWORD / 400 EMAIL NO ENCONTRADO
    */
   .post("/signin", AuthCtrl.signIn)
+  .get("/token", AuthCtrl.getInfo)
   .put("/update", [handleImage], AuthCtrl.update);
 
 module.exports = router;

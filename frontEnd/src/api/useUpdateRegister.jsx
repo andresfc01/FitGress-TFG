@@ -30,7 +30,7 @@ export const useUpdateUser = () => {
     delete userObj.confirmPassword;
     setUserUpdate(userObj);
     navigate("/perfil");
-    localStorage.setItem("user", JSON.stringify(userObj));
+    localStorage.setItem("token", userObj.token);
 
     return response;
   };

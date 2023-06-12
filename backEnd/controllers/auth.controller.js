@@ -116,6 +116,22 @@ const signIn = async (req, res, next) => {
   }
 };
 
+const getInfo = async (req, res, next) => {
+  try {
+    const token = req.headers["x-access-token"];
+    if (!token) {
+      res.status(401).json({ error: "Token no proporcionado" });
+      return;
+    }
+    const decoded = jwt.verify(token, config.SECRET);
+    const _id = decoded.id;
+    const user = await User.findById(_id);
+    res.json({ ...user._doc, token });
+  } catch (error) {
+    res.status(401).json(error);
+  }
+};
+
 const update = async (req, res, next) => {
   try {
     const user = req.body;
@@ -146,4 +162,4 @@ const update = async (req, res, next) => {
   }
 };
 
-module.exports = { signIn, signUp, update };
+module.exports = { signIn, signUp, update, getInfo };

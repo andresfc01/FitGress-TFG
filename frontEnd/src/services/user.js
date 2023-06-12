@@ -1,3 +1,15 @@
+export const getInfoToken = async (token) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/auth/token", {
+      headers: {
+        "x-access-token": token,
+      },
+    });
+    return await response.json();
+  } catch (e) {
+    throw new Error("Error searching token");
+  }
+};
 export const searchUser = async (id, token) => {
   try {
     const response = await fetch("http://localhost:3000/api/user/" + id, {

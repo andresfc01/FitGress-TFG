@@ -29,6 +29,7 @@ import CrudEntrenamiento from "./routes/admin/crudEntrenamiento";
 import CrudPeso from "./routes/admin/crudPeso";
 import CrudComentario from "./routes/admin/crudComentario";
 import Breadcrumbs from "./components/Breadcrumbs";
+import { getInfoToken } from "./services/user";
 
 export const AppContext = createContext();
 
@@ -38,19 +39,25 @@ function App() {
   const ref = useRef();
 
   useEffect(() => {
-    // Obtener el usuario del localStorage
-    const userFromStorage = localStorage.getItem("user");
+    const setUserLocalStorage = async () => {
+      // Obtener el usuario del localStorage
+      const tokenFromStorage = localStorage.getItem("token");
+      if (tokenFromStorage) {
+        const userFromStorage = await getInfoToken(tokenFromStorage);
 
-    // Si el usuario existe en el localStorage, establecerlo en el contexto
-    if (userFromStorage) {
-      setUser(JSON.parse(userFromStorage));
-    }
+        // Si el usuario existe en el localStorage, establecerlo en el contexto
+        if (userFromStorage) {
+          setUser(userFromStorage);
+        }
+      }
+    };
+    setUserLocalStorage();
   }, []); // Solo se ejecuta una vez al inicio
 
   //cada vez que cambia algo se guarda en local storage
   useEffect(() => {
     //si user no es null lo guardo
-    user ? localStorage.setItem("user", JSON.stringify(user)) : "";
+    user ? localStorage.setItem("token", user.token) : "";
   }, [user]);
 
   return (
