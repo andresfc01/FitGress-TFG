@@ -35,9 +35,9 @@ export default function Entreno({ entreno, showDetails = false } = props) {
           <p>
             <i>Fecha : {convertirFecha(entreno?.fecha)}</i>
           </p>
-          <h2>{entreno.plantilla.nombre}</h2>
+          <h2>{entreno?.plantilla?.nombre}</h2>
           <small>
-            Duracion : <strong>{entreno.duracion} min.</strong>
+            Duracion : <strong>{entreno?.duracion} min.</strong>
           </small>
         </div>
         <div className={styles.sensaciones}>
