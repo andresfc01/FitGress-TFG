@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { URL_REGISTER } from "./urls";
+import { AppContext } from "../App";
 
 export const useRegister = () => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
   const [userRegister, setUserRegister] = useState({});
 
   const postFormData = async (formData) => {
@@ -20,6 +22,8 @@ export const useRegister = () => {
 
     if (response.status === 200) {
       userObj.user = body;
+      setAlertText("Usuario registrado");
+      setShowAlert(true);
     } else {
       userObj.message = body?.message;
     }

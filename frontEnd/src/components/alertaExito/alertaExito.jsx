@@ -8,16 +8,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function App({ texto, tiempo, set }) {
+export default function App({
+  texto = "Acción realizada con exito",
+  tiempo = 5,
+  tipoSuccess = true,
+}) {
+  const { setShowAlert } = useContext(AppContext);
   const [addFadeOut, setAddFadeOut] = useState(false);
   setTimeout(() => {
-    set(false);
+    setShowAlert(false);
   }, tiempo * 1000);
   setTimeout(() => {
     setAddFadeOut(true);
   }, (tiempo - 0.4) * 1000);
   return (
-    <div className={`${style.alertaExito} ${addFadeOut && style.fadeOut}`}>
+    <div
+      className={`${tipoSuccess ? style.alertaExito : style.alertaError} ${
+        addFadeOut && style.fadeOut
+      }`}
+    >
       <FontAwesomeIcon icon={faCheckCircle} /> {texto}
     </div>
   );

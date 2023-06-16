@@ -12,6 +12,8 @@ import { isLogged } from "../../components/isLogged";
 
 export default function App() {
   isLogged();
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [objetivo, setObjetivo] = useState(undefined);
@@ -49,7 +51,12 @@ export default function App() {
     setPesos(updatedPesos);
 
     const updatedPeso = updatedPesos.find((peso) => peso._id === pesoId);
-    savePeso(updatedPeso, user.token);
+    const savedPeso = savePeso(updatedPeso, user.token);
+
+    if (savedPeso) {
+      setAlertText("Peso guardado");
+      setShowAlert(true);
+    }
   };
 
   const handleDeletePeso = (pesoId) => {
@@ -75,13 +82,17 @@ export default function App() {
 
       // Llamar a la función savePeso y guardar el resultado en una variable
       const result = await savePeso(pesoData, user.token);
+      if (result) {
+        // Agregar el nuevo peso al array de pesos en el estado
+        setPesos((prevPesos) => [result, ...prevPesos]);
 
-      // Agregar el nuevo peso al array de pesos en el estado
-      setPesos((prevPesos) => [result, ...prevPesos]);
+        // Cerrar el modal y reiniciar el estado del nuevo peso
+        setIsModalOpen(false);
+        setNewPeso("");
 
-      // Cerrar el modal y reiniciar el estado del nuevo peso
-      setIsModalOpen(false);
-      setNewPeso("");
+        setAlertText("Peso guardado");
+        setShowAlert(true);
+      }
     } catch (error) {
       console.error("Error al guardar el peso:", error);
       // Manejar el error de guardar el peso en el servidor

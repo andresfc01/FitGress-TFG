@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -27,8 +27,11 @@ import {
 } from "@mui/material";
 import { deleteLogro, saveLogro } from "../../services/logros";
 import { NumberField } from "react-admin";
+import { AppContext } from "../../App";
 
 const LogroTable = ({ logros: logroAll, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [logros, setLogros] = useState([...logroAll]);
   const [searchLogroname, setSearchLogroname] = useState("");
   const [page, setPage] = useState(0);
@@ -104,6 +107,9 @@ const LogroTable = ({ logros: logroAll, token }) => {
       setLogros(logros.filter((logro) => logro?._id !== deleteConfirmation));
 
       setDeleteConfirmation(null);
+
+      setAlertText("Logro borrado");
+      setShowAlert(true);
     }
   };
 
@@ -297,6 +303,8 @@ const LogroTable = ({ logros: logroAll, token }) => {
 };
 
 const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedLogro, setEditedLogro] = useState({ ...logro });
   useEffect(() => {
     if (logro) {
@@ -319,6 +327,9 @@ const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
     if (savedLogro) {
       setEditedLogro(saveLogro); // Actualiza el usuario en la tabla
       onUpdateLogro(editedLogro);
+
+      setAlertText("Logro guardado");
+      setShowAlert(true);
     }
     onSave();
   };
@@ -382,6 +393,8 @@ const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
 };
 
 const CreateLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [newLogro, setNewLogro] = useState({ ...logro });
   useEffect(() => {
     if (logro) {
@@ -410,6 +423,9 @@ const CreateLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
     if (savedLogro) {
       setNewLogro(saveLogro); // Actualiza el usuario en la tabla
       onUpdateLogro(newLogro);
+
+      setAlertText("Logro guardado");
+      setShowAlert(true);
     }
     onSave();
   };

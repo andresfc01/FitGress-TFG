@@ -28,8 +28,6 @@ export default function NuevaPlantillaEjercicios() {
     onDragStart,
     handleDuplicateEjercicio,
     handleSave,
-    showSuccess,
-    setShowSuccess,
   } = useNuevaPlantillaEjercicios();
 
   const { datos } = useContext(contextPlantilla);
@@ -37,14 +35,6 @@ export default function NuevaPlantillaEjercicios() {
 
   return (
     <>
-      {showSuccess && (
-        <AlertaExito
-          texto={"Plantilla guardarda"}
-          tiempo={4}
-          set={setShowSuccess}
-        />
-      )}
-
       <div className={style.creaPlantillaEjercicios}>
         <h1>Ejercicios Pantilla</h1>
         <section className={style.addBar}>

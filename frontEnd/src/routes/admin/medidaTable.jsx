@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -31,8 +31,11 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 import { searchUsers } from "../../services/user";
 import { DateField } from "@mui/x-date-pickers";
+import { AppContext } from "../../App";
 
 const MedidaTable = ({ medidas: medidaAll, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [medidas, setMedidas] = useState([...medidaAll]);
   const [searchMedidaName, setSearchMedidaName] = useState("");
   const [page, setPage] = useState(0);
@@ -112,6 +115,9 @@ const MedidaTable = ({ medidas: medidaAll, token }) => {
       );
 
       setDeleteConfirmation(null);
+
+      setAlertText("Medida borrada");
+      setShowAlert(true);
     }
   };
 
@@ -304,6 +310,8 @@ const EditMedidaForm = ({
   onUpdateMedida,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedMedida, setEditedMedida] = useState({ ...medida });
   const [users, setUsers] = useState(undefined);
 
@@ -339,6 +347,9 @@ const EditMedidaForm = ({
     if (savedMedida) {
       setEditedMedida(savedMedida);
       onUpdateMedida(editedMedida);
+
+      setAlertText("Medida guardada");
+      setShowAlert(true);
     }
     onSave();
   };
@@ -407,6 +418,8 @@ const CreateMedidaForm = ({
   onUpdateMedida,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [newMedida, setNewMedida] = useState({ ...medida });
   const [users, setUsers] = useState(undefined);
 
@@ -448,6 +461,9 @@ const CreateMedidaForm = ({
     if (savedMedida) {
       setNewMedida(saveMedida); // Actualiza el usuario en la tabla
       onUpdateMedida(newMedida);
+
+      setAlertText("Medida guardada");
+      setShowAlert(true);
     }
     onSave();
   };

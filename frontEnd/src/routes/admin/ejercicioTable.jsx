@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -28,8 +28,11 @@ import {
 import { deleteEjercicio, saveEjercicio } from "../../services/ejercicios";
 import { NumberField } from "react-admin";
 import { searchGruposMusculares } from "../../services/gruposMusculares";
+import { AppContext } from "../../App";
 
 const EjercicioTable = ({ ejercicios: ejercicioAll, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [ejercicios, setEjercicios] = useState([...ejercicioAll]);
   const [searchEjercicioname, setSearchEjercicioname] = useState("");
   const [page, setPage] = useState(0);
@@ -111,6 +114,9 @@ const EjercicioTable = ({ ejercicios: ejercicioAll, token }) => {
       );
 
       setDeleteConfirmation(null);
+
+      setAlertText("Comentario borrado");
+      setShowAlert(true);
     }
   };
 
@@ -320,6 +326,8 @@ const EditEjercicioForm = ({
   onUpdateEjercicio,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedEjercicio, setEditedEjercicio] = useState({ ...ejercicio });
   const [gruposMusculares, setGruposMusculares] = useState(undefined);
 
@@ -363,6 +371,9 @@ const EditEjercicioForm = ({
     if (savedEjercicio) {
       setEditedEjercicio(saveEjercicio); // Actualiza el usuario en la tabla
       onUpdateEjercicio(editedEjercicio);
+
+      setAlertText("Ejercicio guardado");
+      setShowAlert(true);
     }
     onSave();
   };
@@ -436,6 +447,8 @@ const CreateEjercicioForm = ({
   onUpdateEjercicio,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [newEjercicio, setNewEjercicio] = useState({ ...ejercicio });
   const [gruposMusculares, setGruposMusculares] = useState(undefined);
 
@@ -471,6 +484,9 @@ const CreateEjercicioForm = ({
     if (savedEjercicio) {
       setNewEjercicio(saveEjercicio); // Actualiza el usuario en la tabla
       onUpdateEjercicio(newEjercicio);
+
+      setAlertText("Ejercicio guardado");
+      setShowAlert(true);
     }
     onSave();
   };

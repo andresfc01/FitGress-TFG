@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -30,8 +30,11 @@ import {
   saveGrupoMuscular,
 } from "../../services/gruposMusculares";
 import { NumberField } from "react-admin";
+import { AppContext } from "../../App";
 
 const GrupoMuscularTable = ({ gruposMusculares: grupoMuscularAll, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [gruposMusculares, setGruposMusculares] = useState([
     ...grupoMuscularAll,
   ]);
@@ -118,6 +121,9 @@ const GrupoMuscularTable = ({ gruposMusculares: grupoMuscularAll, token }) => {
       );
 
       setDeleteConfirmation(null);
+
+      setAlertText("Grupo Muscular eliminado");
+      setShowAlert(true);
     }
   };
 
@@ -298,6 +304,8 @@ const EditGrupoMuscularForm = ({
   onUpdateGrupoMuscular,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedGrupoMuscular, setEditedGrupoMuscular] = useState({
     ...grupoMuscular,
   });
@@ -331,6 +339,9 @@ const EditGrupoMuscularForm = ({
     if (savedGrupoMuscular) {
       setEditedGrupoMuscular(saveGrupoMuscular); // Actualiza el usuario en la tabla
       onUpdateGrupoMuscular(editedGrupoMuscular);
+
+      setAlertText("Grupo Muscular guardado");
+      setShowAlert(true);
     }
     onSave();
   };
@@ -367,6 +378,8 @@ const CreateGrupoMuscularForm = ({
   onUpdateGrupoMuscular,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [newGrupoMuscular, setNewGrupoMuscular] = useState({
     ...grupoMuscular,
   });
@@ -400,6 +413,9 @@ const CreateGrupoMuscularForm = ({
     if (savedGrupoMuscular) {
       setNewGrupoMuscular(saveGrupoMuscular); // Actualiza el usuario en la tabla
       onUpdateGrupoMuscular(newGrupoMuscular);
+
+      setAlertText("Grupo Muscular guardado");
+      setShowAlert(true);
     }
     onSave();
   };

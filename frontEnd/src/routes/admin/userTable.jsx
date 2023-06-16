@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -26,8 +26,11 @@ import {
   InputLabel,
 } from "@mui/material";
 import { deleteUser, saveUser } from "../../services/user";
+import { AppContext } from "../../App";
 
 const UserTable = ({ users: usuarios, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [users, setUsers] = useState([]);
   const [searchUsername, setSearchUsername] = useState("");
   const [page, setPage] = useState(0);
@@ -101,6 +104,9 @@ const UserTable = ({ users: usuarios, token }) => {
       setUsers(users.filter((user) => user?._id !== deleteConfirmation));
 
       setDeleteConfirmation(null);
+
+      setAlertText("Usuario eliminado");
+      setShowAlert(true);
     }
   };
 
@@ -289,6 +295,8 @@ const UserTable = ({ users: usuarios, token }) => {
 };
 
 const EditUserForm = ({ user, onSave, onCancel, onUpdateUser, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedUser, setEditedUser] = useState({ ...user });
   useEffect(() => {
     if (user) {
@@ -305,6 +313,9 @@ const EditUserForm = ({ user, onSave, onCancel, onUpdateUser, token }) => {
     const savedUser = await saveUser(editedUser, token);
     if (savedUser) {
       onUpdateUser(editedUser); // Actualiza el usuario en la tabla
+
+      setAlertText("Usuario guardado");
+      setShowAlert(true);
     }
     onSave();
   };

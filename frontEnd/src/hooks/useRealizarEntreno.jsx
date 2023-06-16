@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 import {
@@ -8,9 +8,11 @@ import {
 } from "../services/plantillas";
 import Plantilla from "../components/plantilla/plantilla";
 import { saveEntreno } from "../services/entrenos";
+import { AppContext } from "../App";
 
 export function useRealizarEntreno({ idPlantilla, user }) {
   const navigate = useNavigate();
+  const { setShowAlert, setAlertText } = useContext(AppContext);
 
   const [plantilla, setPlantilla] = useState(undefined);
   const [selectedSerie, setSelectedSerie] = useState(0);
@@ -123,6 +125,9 @@ export function useRealizarEntreno({ idPlantilla, user }) {
 
     const newEntreno = await saveEntreno(entrenamiento, user.token);
     if (newEntreno) {
+      setAlertText("Entrenamiento Guardado");
+      setShowAlert(true);
+
       navigate("/perfil/entrenamientos");
     }
   };

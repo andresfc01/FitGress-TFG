@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -32,8 +32,11 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import { searchUsers } from "../../services/user";
 import { DateField } from "@mui/x-date-pickers";
 import { getPlantillas } from "../../services/plantillas";
+import { AppContext } from "../../App";
 
 const ComentarioTable = ({ comentarios: comentarioAll, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [comentarios, setComentarios] = useState([...comentarioAll]);
   const [searchComentarioName, setSearchComentarioName] = useState("");
   const [page, setPage] = useState(0);
@@ -117,6 +120,9 @@ const ComentarioTable = ({ comentarios: comentarioAll, token }) => {
       );
 
       setDeleteConfirmation(null);
+
+      setAlertText("Comentario eliminado");
+      setShowAlert(true);
     }
   };
 
@@ -240,8 +246,8 @@ const ComentarioTable = ({ comentarios: comentarioAll, token }) => {
             <TableBody>
               {paginatedComentarios.map((comentario) => (
                 <TableRow key={comentario._id}>
-                  <TableCell>{comentario.user.username}</TableCell>
-                  <TableCell>{comentario.plantilla.nombre}</TableCell>
+                  <TableCell>{comentario.user?.username}</TableCell>
+                  <TableCell>{comentario.plantilla?.nombre}</TableCell>
                   <TableCell>{comentario.texto}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleEditClick(comentario._id)}>
@@ -303,6 +309,8 @@ const EditComentarioForm = ({
   onUpdateComentario,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedComentario, setEditedComentario] = useState({ ...comentario });
   const [users, setUsers] = useState(undefined);
   const [plantillas, setPlantillas] = useState(undefined);
@@ -357,6 +365,9 @@ const EditComentarioForm = ({
     if (savedComentario) {
       setEditedComentario(savedComentario);
       onUpdateComentario(editedComentario);
+
+      setAlertText("Comentario guardado");
+      setShowAlert(true);
     }
     onSave();
   };
@@ -418,6 +429,8 @@ const CreateComentarioForm = ({
   onUpdateComentario,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [newComentario, setNewComentario] = useState({ ...comentario });
   const [users, setUsers] = useState(undefined);
   const [plantillas, setPlantillas] = useState(undefined);
@@ -471,6 +484,9 @@ const CreateComentarioForm = ({
     if (savedComentario) {
       setNewComentario(saveComentario); // Actualiza el usuario en la tabla
       onUpdateComentario(newComentario);
+
+      setAlertText("Comentario guardado");
+      setShowAlert(true);
     }
     onSave();
   };

@@ -66,7 +66,7 @@ const Form = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const navigate = useNavigate();
-  const { setUser } = useContext(AppContext);
+  const { setUser, setShowAlert } = useContext(AppContext);
   const { userRegister, registerUser } = useRegister();
   const [fase, setFase] = useState(0);
   const [error, setError] = useState(null);

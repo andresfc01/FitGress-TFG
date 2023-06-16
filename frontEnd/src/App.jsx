@@ -29,12 +29,17 @@ import CrudEntrenamiento from "./routes/admin/crudEntrenamiento";
 import CrudPeso from "./routes/admin/crudPeso";
 import CrudComentario from "./routes/admin/crudComentario";
 import Breadcrumbs from "./components/Breadcrumbs";
+import AlertaExito from "./components/alertaExito/alertaExito";
 import { getInfoToken } from "./services/user";
 
 export const AppContext = createContext();
 
 function App() {
   const client = new QueryClient();
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertTime, setAlertTime] = useState(5);
+  const [alertText, setAlertText] = useState("Acción realizada con exito");
+  const [alertTypeSuccess, setAlertTypeSuccess] = useState(true);
   const [user, setUser] = useState(null);
   const ref = useRef();
 
@@ -61,9 +66,25 @@ function App() {
   }, [user]);
 
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider
+      value={{
+        user,
+        setUser,
+        setShowAlert,
+        setAlertTime,
+        setAlertText,
+        setAlertTypeSuccess,
+      }}
+    >
       <QueryClientProvider client={client}>
         <BrowserRouter>
+          {showAlert && (
+            <AlertaExito
+              tiempo={alertTime}
+              texto={alertText}
+              tipoSuccess={alertTypeSuccess}
+            />
+          )}
           <Breadcrumbs />
           <Header />
           <div id="App">

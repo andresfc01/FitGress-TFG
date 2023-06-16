@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -31,8 +31,11 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 import { searchUsers } from "../../services/user";
 import { DateField } from "@mui/x-date-pickers";
+import { AppContext } from "../../App";
 
 const PesoTable = ({ pesos: pesoAll, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [pesos, setPesos] = useState([...pesoAll]);
   const [searchPesoName, setSearchPesoName] = useState("");
   const [page, setPage] = useState(0);
@@ -108,6 +111,9 @@ const PesoTable = ({ pesos: pesoAll, token }) => {
       setPesos(pesos.filter((peso) => peso?._id !== deleteConfirmation));
 
       setDeleteConfirmation(null);
+
+      setAlertText("Peso eliminado");
+      setShowAlert(true);
     }
   };
 
@@ -284,6 +290,8 @@ const PesoTable = ({ pesos: pesoAll, token }) => {
 };
 
 const EditPesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedPeso, setEditedPeso] = useState({ ...peso });
   const [users, setUsers] = useState(undefined);
 
@@ -319,6 +327,9 @@ const EditPesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
     if (savedPeso) {
       setEditedPeso(savedPeso);
       onUpdatePeso(editedPeso);
+
+      setAlertText("Peso guardado");
+      setShowAlert(true);
     }
     onSave();
   };
@@ -364,6 +375,8 @@ const EditPesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
 };
 
 const CreatePesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [newPeso, setNewPeso] = useState({ ...peso });
   const [users, setUsers] = useState(undefined);
 
@@ -405,6 +418,9 @@ const CreatePesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
     if (savedPeso) {
       setNewPeso(savePeso); // Actualiza el usuario en la tabla
       onUpdatePeso(newPeso);
+
+      setAlertText("Peso guardado");
+      setShowAlert(true);
     }
     onSave();
   };

@@ -6,6 +6,19 @@
   top: 16%;
   right: 2%;
   animation: slideInFromRight 0.75s ease-in-out;
+
+  z-index: 9999;
+}
+.alertaError {
+  background-color: rgb(159, 97, 97);
+  padding: 1rem 2rem;
+  border-radius: 7px;
+  position: absolute;
+  top: 16%;
+  right: 2%;
+  animation: slideInFromRight 0.75s ease-in-out;
+
+  z-index: 9999;
 }
 
 .fadeOut {

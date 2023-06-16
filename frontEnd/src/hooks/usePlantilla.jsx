@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import {
   getPlantilla,
@@ -11,8 +11,11 @@ import {
   getComentariosPlantilla,
   saveComentario,
 } from "../services/comentarios";
+import { AppContext } from "../App";
 
 export function usePlantilla({ id, user }) {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [plantilla, setPlantilla] = useState(undefined);
   const enumDias = ["L", "M", "X", "J", "V", "S", "D"];
   const [nombre, setNombre] = useState("");
@@ -123,6 +126,9 @@ export function usePlantilla({ id, user }) {
     if (editable) {
       const updatedPlantilla = await savePlantilla(plantilla, user.token);
       setPlantilla(updatedPlantilla);
+
+      setAlertText("Plantilla guardada");
+      setShowAlert(true);
     }
     setEditable(!editable);
   };
@@ -168,6 +174,8 @@ export function usePlantilla({ id, user }) {
 
     const newPlantilla = await savePlantilla(plantillaCopia, user.token);
     if (newPlantilla) {
+      setAlertText("Plantilla copiada");
+      setShowAlert(true);
       navigate("/plantillas");
       //setPlantilla(newPlantilla);
     }
@@ -269,6 +277,9 @@ export function usePlantilla({ id, user }) {
       newComentario.plantilla = plantilla;
       setComentarios([...comentarios, newComentario]);
       setAddComentario(false);
+
+      setAlertText("Comentario publicado");
+      setShowAlert(true);
     }
   };
 

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { contextPlantilla } from "../routes/nuevaPlantilla/nuevaPlantilla";
 import { savePlantilla } from "../services/plantillas";
+import { AppContext } from "../App";
 
 export function useNuevaPlantillaDatos(datos) {
   const [privado, setPrivado] = useState(datos?.privado ?? false);
@@ -102,10 +103,11 @@ export function useNuevaPlantillaDatos(datos) {
 }
 
 export function useNuevaPlantillaEjercicios() {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [ejercicios, setEjercicios] = useState([]);
   const [addEjercicio, setAddEjercicio] = useState(false);
   const [selectedEjercicio, setSelectedEjercicio] = useState(null);
-  const [showSuccess, setShowSuccess] = useState(false);
 
   const plantilla = useRef({});
 
@@ -124,7 +126,8 @@ export function useNuevaPlantillaEjercicios() {
     const newPlantilla = await savePlantilla(plantilla.current, token);
     if (newPlantilla) {
       plantilla.current = newPlantilla;
-      setShowSuccess(true);
+      setAlertText("Plantilla guardada");
+      setShowAlert(true);
     }
   };
 
@@ -262,7 +265,5 @@ export function useNuevaPlantillaEjercicios() {
     selectedEjercicio,
     handleDuplicateEjercicio,
     handleSave,
-    showSuccess,
-    setShowSuccess,
   };
 }

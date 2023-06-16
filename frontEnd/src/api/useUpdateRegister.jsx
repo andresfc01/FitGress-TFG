@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { URL_UPDATE } from "./urls";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../App";
 
 export const useUpdateUser = () => {
   const navigate = useNavigate();
+  const { setShowAlert, setAlertText } = useContext(AppContext);
 
   const [userUpdate, setUserUpdate] = useState({});
 
@@ -23,6 +25,9 @@ export const useUpdateUser = () => {
 
     if (response.status === 200) {
       userObj.user = body;
+
+      setAlertText("Perfil actualizado");
+      setShowAlert(true);
     } else {
       userObj.message = body?.message;
     }

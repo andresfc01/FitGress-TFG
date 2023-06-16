@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -35,8 +35,11 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 import { searchUsers } from "../../services/user";
 import { DateField } from "@mui/x-date-pickers";
+import { AppContext } from "../../App";
 
 const PlantillaTable = ({ plantillas: plantillaAll, token }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [plantillas, setPlantillas] = useState([...plantillaAll]);
   const [searchPlantillaName, setSearchPlantillaName] = useState("");
   const [page, setPage] = useState(0);
@@ -118,6 +121,9 @@ const PlantillaTable = ({ plantillas: plantillaAll, token }) => {
       );
 
       setDeleteConfirmation(null);
+
+      setAlertText("Plantilla eliminada");
+      setShowAlert(true);
     }
   };
 
@@ -349,6 +355,8 @@ const EditPlantillaForm = ({
   onUpdatePlantilla,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [editedPlantilla, setEditedPlantilla] = useState({ ...plantilla });
   const [users, setUsers] = useState(undefined);
 
@@ -409,6 +417,9 @@ const EditPlantillaForm = ({
     if (savedPlantilla) {
       setEditedPlantilla(savedPlantilla);
       onUpdatePlantilla(editedPlantilla);
+
+      setAlertText("Plantilla guardada");
+      setShowAlert(true);
     }
     onSave();
   };
@@ -512,6 +523,8 @@ const CreatePlantillaForm = ({
   onUpdatePlantilla,
   token,
 }) => {
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const [newPlantilla, setNewPlantilla] = useState({
     user: { _id: "646b8ae253b2fa401a743f06" },
     nombre: "",
@@ -556,6 +569,9 @@ const CreatePlantillaForm = ({
     if (savedPlantilla) {
       setNewPlantilla(savePlantilla); // Actualiza el usuario en la tabla
       onUpdatePlantilla(newPlantilla);
+
+      setAlertText("Plantilla guardada");
+      setShowAlert(true);
     }
     onSave();
   };

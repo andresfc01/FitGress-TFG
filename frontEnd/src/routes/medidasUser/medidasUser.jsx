@@ -16,6 +16,8 @@ const partesCuerpo = ["brazo", "muslo", "gemelo", "pecho", "cintura", "cadera"];
 
 export default function App() {
   isLogged();
+  const { setShowAlert, setAlertText } = useContext(AppContext);
+
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
   const [objetivo, setObjetivo] = useState(undefined);
@@ -77,7 +79,11 @@ export default function App() {
     const updatedMedida = updatedMedidas.find(
       (medida) => medida._id === medidaId
     );
-    saveMedida(updatedMedida, user.token);
+    const savedMedida = saveMedida(updatedMedida, user.token);
+    if (savedMedida) {
+      setAlertText("Medida guardada");
+      setShowAlert(true);
+    }
   };
 
   const handleDeleteMedida = (medidaId) => {
@@ -108,14 +114,19 @@ export default function App() {
 
       const result = await saveMedida(medidaData, user.token);
 
-      // Agregar el nuevo medida al array de medidas en el estado
-      setMedidas([result, ...medidas]);
-      setUltimasMedidas(obtenerUltimasMedidas([result, ...medidas]));
+      if (result) {
+        // Agregar el nuevo medida al array de medidas en el estado
+        setMedidas([result, ...medidas]);
+        setUltimasMedidas(obtenerUltimasMedidas([result, ...medidas]));
 
-      // Cerrar el modal y reiniciar el estado del nuevo medida
-      setIsModalOpen(false);
-      setNewMedida("");
-      setSelectedParte("");
+        // Cerrar el modal y reiniciar el estado del nuevo medida
+        setIsModalOpen(false);
+        setNewMedida("");
+        setSelectedParte("");
+
+        setAlertText("Medida guardada");
+        setShowAlert(true);
+      }
     } catch (error) {
       console.error("Error al guardar el medida:", error);
       // Manejar el error de guardar el medida en el servidor
