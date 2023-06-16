@@ -25,6 +25,7 @@ export const useRegister = () => {
     if (response.status === 200) {
       userObj.user = body;
       setAlertText("Usuario registrado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
       sendEmailRegistro(userObj?.user);
     } else {

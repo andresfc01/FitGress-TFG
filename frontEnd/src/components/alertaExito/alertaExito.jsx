@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function App({
   texto = "Acción realizada con exito",
-  tiempo = 5,
+  tiempo = 4,
   tipoSuccess = true,
 }) {
   const { setShowAlert } = useContext(AppContext);

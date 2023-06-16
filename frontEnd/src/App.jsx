@@ -30,6 +30,7 @@ import CrudPeso from "./routes/admin/crudPeso";
 import CrudComentario from "./routes/admin/crudComentario";
 import Breadcrumbs from "./components/Breadcrumbs";
 import AlertaExito from "./components/alertaExito/alertaExito";
+import RestauraContrasena from "./routes/restaurarContrasena/restauraContrasena";
 import { getInfoToken } from "./services/user";
 
 export const AppContext = createContext();
@@ -121,6 +122,10 @@ function App() {
               <Route
                 path="/perfil/entrenamientos"
                 element={<EntrenamientosUser />}
+              />
+              <Route
+                path="/perfil/restauraContrasena"
+                element={<RestauraContrasena />}
               />
               <Route path="/perfil/" element={<Perfil />} />
               <Route path="/register" element={<Register />} />

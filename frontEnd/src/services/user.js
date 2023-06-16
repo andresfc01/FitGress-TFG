@@ -62,6 +62,23 @@ export const saveUser = async (datos, token) => {
     }
   }
 };
+export const changePassword = async (email, password) => {
+  const url = "http://localhost:3000/api/user/changePassword";
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": "token",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    return response.status;
+  } catch (e) {
+    console.error(e);
+    throw new Error("Error saving plantilla");
+  }
+};
 
 export const deleteUser = async (id, token) => {
   const url = "http://localhost:3000/api/user/";

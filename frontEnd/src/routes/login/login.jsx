@@ -75,7 +75,9 @@ const Form = () => {
         </div>
 
         <input type="submit" value="Iniciar sesion" className="btnPrincipal" />
-
+        <Link to={"/perfil/restauraContrasena"}>
+          ¿Has olvidado tu contraseña?
+        </Link>
         <Link to={"/register"}>Crear cuenta</Link>
       </form>
     </>

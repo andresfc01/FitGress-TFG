@@ -103,6 +103,33 @@ const update = async (req, res, next) => {
   } */
 };
 
+const changePassword = async (req, res, next) => {
+  try {
+    console.log("asdasdsa");
+    const { email, password } = req.body;
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    // Actualizar la contraseña del usuario
+    user.password = await User.encryptPassword(password);
+    user = await user.save();
+
+    if (!user) {
+      return res
+        .status(500)
+        .json({ message: "Error al guardar la contraseña" });
+    }
+
+    res.status(200).json({ message: "Contraseña actualizada correctamente" });
+  } catch (error) {
+    res.status(500).json({ message: "Error al actualizar la contraseña" });
+  }
+};
+
 /**
  * Borro una user por id
  * @param {*} req
@@ -118,4 +145,4 @@ const remove = async (req, res, next) => {
   }
 };
 
-module.exports = { getAll, getById, create, update, remove };
+module.exports = { getAll, getById, create, update, remove, changePassword };

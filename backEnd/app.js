@@ -43,6 +43,9 @@ var pesoRouter = require("./routes/peso.routes");
 app.use("/api/peso", pesoRouter);
 
 var userRouter = require("./routes/user.routes");
+const UserCtrl = require("./controllers/user.controller");
+
+app.put("/api/user/changePassword", UserCtrl.changePassword);
 app.use("/api/user", userRouter);
 
 var grupoMuscularRouter = require("./routes/grupoMuscular.routes");
