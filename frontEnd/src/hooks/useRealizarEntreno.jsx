@@ -9,6 +9,7 @@ import {
 import Plantilla from "../components/plantilla/plantilla";
 import { saveEntreno } from "../services/entrenos";
 import { AppContext } from "../App";
+import { sendEmailEntrenoRealizado } from "../services/email";
 
 export function useRealizarEntreno({ idPlantilla, user }) {
   const navigate = useNavigate();
@@ -127,6 +128,8 @@ export function useRealizarEntreno({ idPlantilla, user }) {
     if (newEntreno) {
       setAlertText("Entrenamiento Guardado");
       setShowAlert(true);
+      
+      sendEmailEntrenoRealizado(user)
 
       navigate("/perfil/entrenamientos");
     }

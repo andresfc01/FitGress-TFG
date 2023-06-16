@@ -371,7 +371,6 @@ export default function Plantilla({
                       >
                         {editable && <FontAwesomeIcon icon={faSort} />}
                         <video
-                          label={console.log(obj)}
                           src={
                             "http://localhost:3000/" +
                             obj.ejercicio?.image?.imagePath

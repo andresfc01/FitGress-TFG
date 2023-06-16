@@ -40,9 +40,10 @@ export const savePlantilla = async (datos, token) => {
 };
 
 const toJSON = (objeto) => {
+  debugger;
   let seriesModificadas = objeto.series.map((serie) => ({
     ...serie,
-    ejercicio: serie.ejercicio._id,
+    ejercicio: serie?.ejercicio?._id,
   }));
 
   let obj = {

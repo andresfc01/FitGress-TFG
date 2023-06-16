@@ -9,6 +9,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
     "concurrently": "^6.2.2",
+    "emailjs-com": "^3.2.0",
     "yup": "^1.2.0"
   }
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { URL_REGISTER } from "./urls";
 import { AppContext } from "../App";
+import { sendEmailRegistro } from "../services/email";
 
 export const useRegister = () => {
   const { setShowAlert, setAlertText } = useContext(AppContext);
@@ -24,6 +25,7 @@ export const useRegister = () => {
       userObj.user = body;
       setAlertText("Usuario registrado");
       setShowAlert(true);
+      sendEmailRegistro(userObj?.user);
     } else {
       userObj.message = body?.message;
     }
