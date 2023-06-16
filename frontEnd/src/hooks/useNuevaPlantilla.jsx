@@ -103,7 +103,8 @@ export function useNuevaPlantillaDatos(datos) {
 }
 
 export function useNuevaPlantillaEjercicios() {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [ejercicios, setEjercicios] = useState([]);
   const [addEjercicio, setAddEjercicio] = useState(false);
@@ -127,6 +128,7 @@ export function useNuevaPlantillaEjercicios() {
     if (newPlantilla) {
       plantilla.current = newPlantilla;
       setAlertText("Plantilla guardada");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };

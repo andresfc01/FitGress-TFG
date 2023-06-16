@@ -16,7 +16,8 @@ const partesCuerpo = ["brazo", "muslo", "gemelo", "pecho", "cintura", "cadera"];
 
 export default function App() {
   isLogged();
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
@@ -82,6 +83,7 @@ export default function App() {
     const savedMedida = saveMedida(updatedMedida, user.token);
     if (savedMedida) {
       setAlertText("Medida guardada");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -125,6 +127,7 @@ export default function App() {
         setSelectedParte("");
 
         setAlertText("Medida guardada");
+        setAlertTypeSuccess(true);
         setShowAlert(true);
       }
     } catch (error) {

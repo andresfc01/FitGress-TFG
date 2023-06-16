@@ -31,7 +31,8 @@ import { searchGruposMusculares } from "../../services/gruposMusculares";
 import { AppContext } from "../../App";
 
 const EjercicioTable = ({ ejercicios: ejercicioAll, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [ejercicios, setEjercicios] = useState([...ejercicioAll]);
   const [searchEjercicioname, setSearchEjercicioname] = useState("");
@@ -116,6 +117,7 @@ const EjercicioTable = ({ ejercicios: ejercicioAll, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Comentario borrado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -326,7 +328,8 @@ const EditEjercicioForm = ({
   onUpdateEjercicio,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedEjercicio, setEditedEjercicio] = useState({ ...ejercicio });
   const [gruposMusculares, setGruposMusculares] = useState(undefined);
@@ -373,6 +376,7 @@ const EditEjercicioForm = ({
       onUpdateEjercicio(editedEjercicio);
 
       setAlertText("Ejercicio guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();
@@ -447,7 +451,8 @@ const CreateEjercicioForm = ({
   onUpdateEjercicio,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [newEjercicio, setNewEjercicio] = useState({ ...ejercicio });
   const [gruposMusculares, setGruposMusculares] = useState(undefined);
@@ -486,6 +491,7 @@ const CreateEjercicioForm = ({
       onUpdateEjercicio(newEjercicio);
 
       setAlertText("Ejercicio guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

@@ -1,17 +1,30 @@
 import { useContext, useEffect } from "react";
-import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../App";
 
-export async function esAdmin() {
+export function esAdmin() {
   const navigate = useNavigate();
-  const { user } = await useContext(AppContext);
+  const { user, setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
-  const esAdmin =
-    user?.roles &&
-    user?.roles.length > 0 &&
-    user?.roles.includes("640ed10308e23cd6654b5ebe");
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      const esAdmin =
+        user?.roles &&
+        user?.roles.length > 0 &&
+        user?.roles.includes("640ed10308e23cd6654b5ebe");
 
-  if (!esAdmin) {
-    navigate("/login");
-  }
+      if (!esAdmin) {
+        setAlertText("Debes de ser administrador");
+        setAlertTypeSuccess(false);
+        setShowAlert(true);
+
+        navigate("/login");
+      }
+    };
+
+    checkAdminStatus();
+  }, [navigate, user]);
+
+  return null; // Opcionalmente, puedes devolver algo aquí si es necesario
 }

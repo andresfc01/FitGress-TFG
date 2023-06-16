@@ -12,7 +12,8 @@ import { isLogged } from "../../components/isLogged";
 
 export default function App() {
   isLogged();
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const { user } = useContext(AppContext);
   const [id, setId] = useState(undefined);
@@ -55,6 +56,7 @@ export default function App() {
 
     if (savedPeso) {
       setAlertText("Peso guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -91,6 +93,7 @@ export default function App() {
         setNewPeso("");
 
         setAlertText("Peso guardado");
+        setAlertTypeSuccess(true);
         setShowAlert(true);
       }
     } catch (error) {

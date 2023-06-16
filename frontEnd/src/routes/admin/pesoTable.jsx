@@ -34,7 +34,8 @@ import { DateField } from "@mui/x-date-pickers";
 import { AppContext } from "../../App";
 
 const PesoTable = ({ pesos: pesoAll, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [pesos, setPesos] = useState([...pesoAll]);
   const [searchPesoName, setSearchPesoName] = useState("");
@@ -113,6 +114,7 @@ const PesoTable = ({ pesos: pesoAll, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Peso eliminado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -290,7 +292,8 @@ const PesoTable = ({ pesos: pesoAll, token }) => {
 };
 
 const EditPesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedPeso, setEditedPeso] = useState({ ...peso });
   const [users, setUsers] = useState(undefined);
@@ -329,6 +332,7 @@ const EditPesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
       onUpdatePeso(editedPeso);
 
       setAlertText("Peso guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();
@@ -375,7 +379,8 @@ const EditPesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
 };
 
 const CreatePesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [newPeso, setNewPeso] = useState({ ...peso });
   const [users, setUsers] = useState(undefined);
@@ -420,6 +425,7 @@ const CreatePesoForm = ({ peso, onSave, onCancel, onUpdatePeso, token }) => {
       onUpdatePeso(newPeso);
 
       setAlertText("Peso guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

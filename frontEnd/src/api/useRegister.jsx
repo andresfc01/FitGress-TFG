@@ -5,7 +5,8 @@ import { AppContext } from "../App";
 import { sendEmailRegistro } from "../services/email";
 
 export const useRegister = () => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
   const [userRegister, setUserRegister] = useState({});
 
   const postFormData = async (formData) => {

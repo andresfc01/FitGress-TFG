@@ -34,7 +34,8 @@ import { DateField } from "@mui/x-date-pickers";
 import { AppContext } from "../../App";
 
 const MedidaTable = ({ medidas: medidaAll, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [medidas, setMedidas] = useState([...medidaAll]);
   const [searchMedidaName, setSearchMedidaName] = useState("");
@@ -117,6 +118,7 @@ const MedidaTable = ({ medidas: medidaAll, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Medida borrada");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -310,7 +312,8 @@ const EditMedidaForm = ({
   onUpdateMedida,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedMedida, setEditedMedida] = useState({ ...medida });
   const [users, setUsers] = useState(undefined);
@@ -349,6 +352,7 @@ const EditMedidaForm = ({
       onUpdateMedida(editedMedida);
 
       setAlertText("Medida guardada");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();
@@ -418,7 +422,8 @@ const CreateMedidaForm = ({
   onUpdateMedida,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [newMedida, setNewMedida] = useState({ ...medida });
   const [users, setUsers] = useState(undefined);
@@ -463,6 +468,7 @@ const CreateMedidaForm = ({
       onUpdateMedida(newMedida);
 
       setAlertText("Medida guardada");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

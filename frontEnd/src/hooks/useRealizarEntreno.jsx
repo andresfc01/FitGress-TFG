@@ -13,7 +13,8 @@ import { sendEmailEntrenoRealizado } from "../services/email";
 
 export function useRealizarEntreno({ idPlantilla, user }) {
   const navigate = useNavigate();
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [plantilla, setPlantilla] = useState(undefined);
   const [selectedSerie, setSelectedSerie] = useState(0);
@@ -127,9 +128,10 @@ export function useRealizarEntreno({ idPlantilla, user }) {
     const newEntreno = await saveEntreno(entrenamiento, user.token);
     if (newEntreno) {
       setAlertText("Entrenamiento Guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
-      
-      sendEmailEntrenoRealizado(user)
+
+      sendEmailEntrenoRealizado(user);
 
       navigate("/perfil/entrenamientos");
     }

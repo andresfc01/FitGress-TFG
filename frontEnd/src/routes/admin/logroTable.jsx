@@ -30,7 +30,8 @@ import { NumberField } from "react-admin";
 import { AppContext } from "../../App";
 
 const LogroTable = ({ logros: logroAll, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [logros, setLogros] = useState([...logroAll]);
   const [searchLogroname, setSearchLogroname] = useState("");
@@ -109,6 +110,7 @@ const LogroTable = ({ logros: logroAll, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Logro borrado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -303,7 +305,8 @@ const LogroTable = ({ logros: logroAll, token }) => {
 };
 
 const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedLogro, setEditedLogro] = useState({ ...logro });
   useEffect(() => {
@@ -329,6 +332,7 @@ const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
       onUpdateLogro(editedLogro);
 
       setAlertText("Logro guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();
@@ -393,7 +397,8 @@ const EditLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
 };
 
 const CreateLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [newLogro, setNewLogro] = useState({ ...logro });
   useEffect(() => {
@@ -425,6 +430,7 @@ const CreateLogroForm = ({ logro, onSave, onCancel, onUpdateLogro, token }) => {
       onUpdateLogro(newLogro);
 
       setAlertText("Logro guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

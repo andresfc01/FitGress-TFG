@@ -39,7 +39,8 @@ import { getPlantillasUserPopulated } from "../../services/plantillas";
 import { AppContext } from "../../App";
 
 const EntrenamientoTable = ({ entrenamientos: entrenamientoAll, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [entrenamientos, setEntrenamientos] = useState([...entrenamientoAll]);
   const [searchEntrenamientoName, setSearchEntrenamientoName] = useState("");
@@ -126,6 +127,7 @@ const EntrenamientoTable = ({ entrenamientos: entrenamientoAll, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Entrenamiento borrado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -356,7 +358,8 @@ const EditEntrenamientoForm = ({
   onUpdateEntrenamiento,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedEntrenamiento, setEditedEntrenamiento] = useState({
     ...entrenamiento,
@@ -409,6 +412,7 @@ const EditEntrenamientoForm = ({
       onUpdateEntrenamiento(editedEntrenamiento);
 
       setAlertText("Entrenamiento guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

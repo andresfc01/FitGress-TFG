@@ -33,7 +33,8 @@ import { NumberField } from "react-admin";
 import { AppContext } from "../../App";
 
 const GrupoMuscularTable = ({ gruposMusculares: grupoMuscularAll, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [gruposMusculares, setGruposMusculares] = useState([
     ...grupoMuscularAll,
@@ -123,6 +124,7 @@ const GrupoMuscularTable = ({ gruposMusculares: grupoMuscularAll, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Grupo Muscular eliminado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -304,7 +306,8 @@ const EditGrupoMuscularForm = ({
   onUpdateGrupoMuscular,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedGrupoMuscular, setEditedGrupoMuscular] = useState({
     ...grupoMuscular,
@@ -341,6 +344,7 @@ const EditGrupoMuscularForm = ({
       onUpdateGrupoMuscular(editedGrupoMuscular);
 
       setAlertText("Grupo Muscular guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();
@@ -378,7 +382,8 @@ const CreateGrupoMuscularForm = ({
   onUpdateGrupoMuscular,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [newGrupoMuscular, setNewGrupoMuscular] = useState({
     ...grupoMuscular,
@@ -415,6 +420,7 @@ const CreateGrupoMuscularForm = ({
       onUpdateGrupoMuscular(newGrupoMuscular);
 
       setAlertText("Grupo Muscular guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

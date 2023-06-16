@@ -14,7 +14,8 @@ import {
 import { AppContext } from "../App";
 
 export function usePlantilla({ id, user }) {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [plantilla, setPlantilla] = useState(undefined);
   const enumDias = ["L", "M", "X", "J", "V", "S", "D"];
@@ -128,6 +129,7 @@ export function usePlantilla({ id, user }) {
       setPlantilla(updatedPlantilla);
 
       setAlertText("Plantilla guardada");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     setEditable(!editable);
@@ -175,6 +177,7 @@ export function usePlantilla({ id, user }) {
     const newPlantilla = await savePlantilla(plantillaCopia, user.token);
     if (newPlantilla) {
       setAlertText("Plantilla copiada");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
       navigate("/plantillas");
       //setPlantilla(newPlantilla);
@@ -279,6 +282,7 @@ export function usePlantilla({ id, user }) {
       setAddComentario(false);
 
       setAlertText("Comentario publicado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };

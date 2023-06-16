@@ -1,14 +1,25 @@
 import { useContext, useEffect } from "react";
-import { AppContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../App";
 
-export async function isLogged() {
+export function isLogged() {
   const navigate = useNavigate();
-  const { user } = await useContext(AppContext);
+  const { user, setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
-  const isLogged = user && user?.roles && user?.roles.length > 0;
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (!user) {
+        setAlertText("Debes de iniciar sesión");
+        setAlertTypeSuccess(false);
+        setShowAlert(true);
 
-  if (!isLogged) {
-    navigate("/login");
-  }
+        navigate("/login");
+      }
+    };
+
+    checkAdminStatus();
+  }, [navigate, user]);
+
+  return null; // Opcionalmente, puedes devolver algo aquí si es necesario
 }

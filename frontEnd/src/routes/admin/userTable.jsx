@@ -29,7 +29,8 @@ import { deleteUser, saveUser } from "../../services/user";
 import { AppContext } from "../../App";
 
 const UserTable = ({ users: usuarios, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [users, setUsers] = useState([]);
   const [searchUsername, setSearchUsername] = useState("");
@@ -106,6 +107,7 @@ const UserTable = ({ users: usuarios, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Usuario eliminado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -295,7 +297,8 @@ const UserTable = ({ users: usuarios, token }) => {
 };
 
 const EditUserForm = ({ user, onSave, onCancel, onUpdateUser, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedUser, setEditedUser] = useState({ ...user });
   useEffect(() => {
@@ -315,6 +318,7 @@ const EditUserForm = ({ user, onSave, onCancel, onUpdateUser, token }) => {
       onUpdateUser(editedUser); // Actualiza el usuario en la tabla
 
       setAlertText("Usuario guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

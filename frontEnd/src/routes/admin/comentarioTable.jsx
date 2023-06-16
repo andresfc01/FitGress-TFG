@@ -35,7 +35,8 @@ import { getPlantillas } from "../../services/plantillas";
 import { AppContext } from "../../App";
 
 const ComentarioTable = ({ comentarios: comentarioAll, token }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [comentarios, setComentarios] = useState([...comentarioAll]);
   const [searchComentarioName, setSearchComentarioName] = useState("");
@@ -122,6 +123,7 @@ const ComentarioTable = ({ comentarios: comentarioAll, token }) => {
       setDeleteConfirmation(null);
 
       setAlertText("Comentario eliminado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
   };
@@ -309,7 +311,8 @@ const EditComentarioForm = ({
   onUpdateComentario,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [editedComentario, setEditedComentario] = useState({ ...comentario });
   const [users, setUsers] = useState(undefined);
@@ -367,6 +370,7 @@ const EditComentarioForm = ({
       onUpdateComentario(editedComentario);
 
       setAlertText("Comentario guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();
@@ -429,7 +433,8 @@ const CreateComentarioForm = ({
   onUpdateComentario,
   token,
 }) => {
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [newComentario, setNewComentario] = useState({ ...comentario });
   const [users, setUsers] = useState(undefined);
@@ -486,6 +491,7 @@ const CreateComentarioForm = ({
       onUpdateComentario(newComentario);
 
       setAlertText("Comentario guardado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     }
     onSave();

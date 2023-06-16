@@ -6,7 +6,8 @@ import { AppContext } from "../App";
 
 export const useUpdateUser = () => {
   const navigate = useNavigate();
-  const { setShowAlert, setAlertText } = useContext(AppContext);
+  const { setShowAlert, setAlertText, setAlertTypeSuccess } =
+    useContext(AppContext);
 
   const [userUpdate, setUserUpdate] = useState({});
 
@@ -27,6 +28,7 @@ export const useUpdateUser = () => {
       userObj.user = body;
 
       setAlertText("Perfil actualizado");
+      setAlertTypeSuccess(true);
       setShowAlert(true);
     } else {
       userObj.message = body?.message;
