@@ -85,7 +85,9 @@ export default function App() {
 
             <FontAwesomeIcon icon={faArrowDown} />
             {menuPerfil && (
-              <div className={styles.menuPerfil}>
+              <div
+                className={`${styles.menuPerfil} ${styles.menuPerfilVisible}`}
+              >
                 <Link to={"perfil"}>
                   <FontAwesomeIcon icon={faUser} /> Perfil
                 </Link>
