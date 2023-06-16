@@ -5,7 +5,7 @@ import "../../css/error.css";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { useUpdateUser } from "../../api/useUpdateRegister";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { isLogged } from "../../components/isLogged";
 
 const Form = () => {
@@ -254,6 +254,10 @@ const Form = () => {
         </div>
         {selectedFile && <img src={image} />}
 
+        <Link to={"/perfil/restauraContrasena"}>
+          ¿Has olvidado tu contraseña?
+        </Link>
+        
         <button type="submit">Guardar</button>
       </form>
     </>
