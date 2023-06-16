@@ -118,11 +118,14 @@ export default function Plantilla({
             ) : (
               <h2>{newPlantilla.nombre}</h2>
             )}
-            <img
-              src={"http://localhost:3000/" + newPlantilla?.image?.imagePath}
-              alt=""
-              className={showDetails ? styles.imgDetails : ""}
-            />
+
+            {newPlantilla?.image?.imagePath ? (
+              <img
+                src={`http://localhost:3000/${newPlantilla?.image?.imagePath}`}
+              />
+            ) : (
+              <img src={`/src/assets/images/imgPlantilla.jpeg`} />
+            )}
 
             <div className={styles.info}>
               {!editable && (
