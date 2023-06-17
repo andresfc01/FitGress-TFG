@@ -108,8 +108,10 @@ export default function Plantilla({
 
           <div
             className={`${styles.plantilla} ${
-              !showDetails ? styles.animPlantilla : ""
-            } ${!showDetails ? styles.hoverPlantilla : ""}`}
+              showDetails ? styles.plantillaDetails : ""
+            } ${!showDetails ? styles.animPlantilla : ""} ${
+              !showDetails ? styles.hoverPlantilla : ""
+            }`}
           >
             {editable ? (
               <div className={styles.divNombreEdit}>

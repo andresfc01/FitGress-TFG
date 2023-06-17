@@ -5,6 +5,7 @@ import style from "./styles.module.css";
 import {
   faCheckCircle,
   faRightFromBracket,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -27,7 +28,7 @@ export default function App({
         addFadeOut && style.fadeOut
       }`}
     >
-      <FontAwesomeIcon icon={faCheckCircle} /> {texto}
+      <FontAwesomeIcon icon={tipoSuccess ? faCheckCircle : faX} /> {texto}
     </div>
   );
 }

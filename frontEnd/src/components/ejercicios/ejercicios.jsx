@@ -25,7 +25,6 @@ export default function Ejercicios({
     search: "",
     sort: true,
   });
-
   const pathImg = "http://localhost:3000/";
 
   const [verTodo, setVerTodo] = useState(false);

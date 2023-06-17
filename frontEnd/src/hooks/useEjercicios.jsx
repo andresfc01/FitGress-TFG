@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { searchEjercicios } from "../services/ejercicios";
 import { searchGruposMusculares } from "../services/gruposMusculares";
+import { set } from "date-fns";
 
 export function useEjercicios({ busqueda, sort }) {
   const [ejercicios, setEjercicios] = useState([]);
@@ -14,6 +15,7 @@ export function useEjercicios({ busqueda, sort }) {
 
   async function fetchEjercicios() {
     var newEjercicios = await searchEjercicios();
+    console.log(newEjercicios);
     if (sort) {
       newEjercicios = newEjercicios.sort((a, b) =>
         a.nombre.localeCompare(b.nombre)

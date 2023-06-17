@@ -10,11 +10,16 @@
   flex-wrap: wrap;
   justify-content: center;
 
-  max-width: 77rem;
+  width: 27rem;
   gap: 1rem;
   border: 1px solid invisible;
   transition: 0.5s;
 }
+
+.plantillaDetails {
+  width: 90% !important;
+}
+
 .animPlantilla {
   opacity: 0;
   animation: fadeAndMove 0.6s ease-in-out forwards;
