@@ -8,7 +8,7 @@ var Ejercicio = require("../models/Ejercicio.model");
  */
 const getAll = async (req, res, next) => {
   try {
-    let ejercicios = await Ejercicio.find();
+    let ejercicios = await Ejercicio.find().populate("grupoMuscular");
     res.status(200).json(ejercicios);
   } catch (error) {
     res.status(401).json(error);

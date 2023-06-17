@@ -80,7 +80,7 @@ export default function Ejercicios({
         </div>
       </section>
 
-      <div className={style.ejercicios}>
+      <section className={style.ejercicios}>
         {ejercicios.length == 0 ? (
           <p>No se han encontrado resultados</p>
         ) : (
@@ -106,7 +106,7 @@ export default function Ejercicios({
             })}
           </>
         )}
-      </div>
+      </section>
       {ejercicios && ejercicios.length > 8 && (
         <div className={style.divMas}>
           <button className="btnPrincipal" onClick={() => setVerTodo(!verTodo)}>

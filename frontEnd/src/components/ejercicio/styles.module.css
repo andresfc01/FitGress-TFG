@@ -15,6 +15,11 @@
   animation: fadeAndMove 0.6s ease-in-out forwards;
   transition: 0.5s;
 }
+.ejercicio p {
+  margin: 0 0 1rem 0;
+  padding: 0;
+  color: var(--text-main);
+}
 
 @keyframes fadeAndMove {
   0% {

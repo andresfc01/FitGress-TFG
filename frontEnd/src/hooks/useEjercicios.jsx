@@ -60,7 +60,9 @@ export function useEjercicios({ busqueda, sort }) {
     //si no esta vacio filtro por grupo
     if (grupoMuscular !== "") {
       const filteredEjercicios = allEjercicios.current.filter(
-        (ejercicio) => ejercicio.grupoMuscular == grupoMuscular
+        (ejercicio) =>
+          ejercicio.grupoMuscular == grupoMuscular ||
+          ejercicio.grupoMuscular?._id == grupoMuscular
       );
       setEjercicios(filteredEjercicios);
       //si esta vacio
