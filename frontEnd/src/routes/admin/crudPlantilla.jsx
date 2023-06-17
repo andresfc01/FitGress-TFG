@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Plantillas</h2>
+      <h1>Administración Plantillas</h1>
       {plantillas && (
         <PlantillaTable
           plantillas={plantillas}

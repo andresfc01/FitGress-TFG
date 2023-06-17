@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Logros</h2>
+      <h1>Administración Logros</h1>
       {logros && <LogroTable logros={logros} token={user?.token}></LogroTable>}
     </>
   );

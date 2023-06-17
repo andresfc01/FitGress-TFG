@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Grupos Musculares</h2>
+      <h1>Administración Grupos Musculares</h1>
       {gruposMusculares && (
         <GrupoMuscularTable
           gruposMusculares={gruposMusculares}

@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Pesos</h2>
+      <h1>Administración Pesos</h1>
       {pesos && <PesoTable pesos={pesos} token={user?.token}></PesoTable>}
     </>
   );

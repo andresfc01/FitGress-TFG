@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Comentarios</h2>
+      <h1>Administración Comentarios</h1>
       {comentarios && (
         <ComentarioTable
           comentarios={comentarios}

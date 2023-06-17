@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Usuarios</h2>
+      <h1>Administración Usuarios</h1>
       {users && <UserTable users={users} token={user?.token}></UserTable>}
     </>
   );

@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Medidas</h2>
+      <h1>Administración Medidas</h1>
       {medidas && (
         <MedidaTable medidas={medidas} token={user?.token}></MedidaTable>
       )}

@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <>
-      <h2>Administración Entrenamientos</h2>
+      <h1>Administración Entrenamientos</h1>
       {entrenamientos && (
         <EntrenamientoTable
           entrenamientos={entrenamientos}
