@@ -46,7 +46,7 @@ export default function App() {
               <h2>{user.username}</h2>
               <small>{user.email}</small>
             </div>
-            <Link to={"/editPerfil"}>
+            <Link to={"/perfil/editar"}>
               <p>⚙️</p>
             </Link>
           </div>

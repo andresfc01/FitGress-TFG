@@ -110,7 +110,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/explorar" element={<Plantillas />} />
               <Route path="/plantillas" element={<PlantillasUser />} />
-              <Route path="/editPerfil" element={<EditPerfil />} />
+              <Route path="/perfil/editar" element={<EditPerfil />} />
               <Route path="/plantilla/:id" element={<Plantilla />} />
               <Route
                 path="/realizarEntreno/:id"

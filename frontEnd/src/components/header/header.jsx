@@ -91,7 +91,7 @@ export default function App() {
                 <Link to={"perfil"}>
                   <FontAwesomeIcon icon={faUser} /> Perfil
                 </Link>
-                <Link to={"editPerfil"}>
+                <Link to={"/perfil/editar"}>
                   <FontAwesomeIcon icon={faPencil} /> Editar Perfil
                 </Link>
                 <hr />
