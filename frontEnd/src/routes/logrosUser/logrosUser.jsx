@@ -22,19 +22,6 @@ export default function App() {
   const [logrosMedida, setLogrosMedida] = useState(undefined);
 
   useEffect(() => {
-    if (logrosPeso) {
-      const lPesoCant = logrosPeso.filter(
-        (logro) => logro.subCategoria === "cant"
-      );
-      setLogrosPesoCant(lPesoCant);
-      const lPesoPorcent = logrosPeso.filter(
-        (logro) => logro.subCategoria === "porcent"
-      );
-      setLogrosPesoPorcent(lPesoPorcent);
-    }
-  }, [logrosPeso]);
-
-  useEffect(() => {
     const fetchLogros = async () => {
       try {
         const result = await getLogros();
@@ -77,6 +64,19 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (logrosPeso) {
+      const lPesoCant = logrosPeso.filter(
+        (logro) => logro.subCategoria === "cant"
+      );
+      setLogrosPesoCant(lPesoCant);
+      const lPesoPorcent = logrosPeso.filter(
+        (logro) => logro.subCategoria === "porcent"
+      );
+      setLogrosPesoPorcent(lPesoPorcent);
+    }
+  }, [logrosPeso]);
+
+  useEffect(() => {
     if (logros) {
       const logrosP = logros.filter((logro) => logro.categoria === "peso");
       const logrosE = logros.filter(
@@ -88,6 +88,7 @@ export default function App() {
       setLogrosMedida(logrosM);
     }
   }, [logros]);
+
   return (
     <div className={styles.divLogros}>
       {logrosPeso && pesos && (
@@ -100,17 +101,18 @@ export default function App() {
             {user?.objetivoFisico === "Ganancia de peso" ? "ganados" : ""}.
           </h4>
           <div className={styles.logros}>
-            {logrosPesoCant.map((logro) => {
-              return (
-                <Logro
-                  key={logro.nombre}
-                  logro={logro}
-                  datos={pesos}
-                  objetivo={user?.objetivoFisico}
-                  pesoObjetivo={user?.pesoObjetivo}
-                />
-              );
-            })}
+            {logrosPesoCant &&
+              logrosPesoCant.map((logro) => {
+                return (
+                  <Logro
+                    key={logro.nombre}
+                    logro={logro}
+                    datos={pesos}
+                    objetivo={user?.objetivoFisico}
+                    pesoObjetivo={user?.pesoObjetivo}
+                  />
+                );
+              })}
           </div>
           <h4>
             Porcentaje de kg{" "}
@@ -119,17 +121,18 @@ export default function App() {
             objetivo físico.
           </h4>
           <div className={styles.logros}>
-            {logrosPesoPorcent.map((logro) => {
-              return (
-                <Logro
-                  key={logro.nombre}
-                  logro={logro}
-                  datos={pesos}
-                  objetivo={user?.objetivoFisico}
-                  pesoObjetivo={user?.pesoObjetivo}
-                />
-              );
-            })}
+            {logrosPesoPorcent &&
+              logrosPesoPorcent.map((logro) => {
+                return (
+                  <Logro
+                    key={logro.nombre}
+                    logro={logro}
+                    datos={pesos}
+                    objetivo={user?.objetivoFisico}
+                    pesoObjetivo={user?.pesoObjetivo}
+                  />
+                );
+              })}
           </div>
         </>
       )}
@@ -139,16 +142,17 @@ export default function App() {
           <h2>Logros Entrenamientos</h2>
           <h4>Cantidad de entrenamientos realizados</h4>
           <div className={styles.logros}>
-            {logrosEntrenamiento.map((logro) => {
-              return (
-                <Logro
-                  key={logro.nombre}
-                  logro={logro}
-                  datos={entrenamientos}
-                  objetivo={user?.objetivoFisico}
-                />
-              );
-            })}
+            {logrosEntrenamiento &&
+              logrosEntrenamiento.map((logro) => {
+                return (
+                  <Logro
+                    key={logro.nombre}
+                    logro={logro}
+                    datos={entrenamientos}
+                    objetivo={user?.objetivoFisico}
+                  />
+                );
+              })}
           </div>
         </>
       )}
@@ -162,17 +166,18 @@ export default function App() {
             {user?.objetivoFisico === "Ganancia de peso" ? "ganados" : ""}.
           </h4>
           <div className={styles.logros}>
-            {logrosMedida.map((logro) => {
-              return (
-                <Logro
-                  key={logro.nombre}
-                  logro={logro}
-                  datos={medidas}
-                  objetivo={user?.objetivoFisico}
-                  pesoObjetivo={user?.pesoObjetivo}
-                />
-              );
-            })}
+            {logrosMedida &&
+              logrosMedida.map((logro) => {
+                return (
+                  <Logro
+                    key={logro.nombre}
+                    logro={logro}
+                    datos={medidas}
+                    objetivo={user?.objetivoFisico}
+                    pesoObjetivo={user?.pesoObjetivo}
+                  />
+                );
+              })}
           </div>
         </>
       )}

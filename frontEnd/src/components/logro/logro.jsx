@@ -8,7 +8,7 @@ export default function Logro({
   pesoObjetivo,
 } = props) {
   function compruebaLogro(logro) {
-    if (datos.length === 0) {
+    if (!datos || datos.length === 0) {
       return false;
     }
     //calculo el logro por categoria
@@ -100,6 +100,7 @@ export default function Logro({
 
     return false;
   }
+
   const logroConseguido = compruebaLogro(logro);
 
   const pathImg = "http://localhost:3000/" + logro.image.imagePath;

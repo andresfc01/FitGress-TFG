@@ -28,7 +28,7 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newMedida, setNewMedida] = useState("");
   const [selectedParte, setSelectedParte] = useState("");
-  const [parte, setParte] = useState("");
+  const [parte, setParte] = useState("cintura");
   const [medidasParte, setMedidasParte] = useState("");
 
   useEffect(() => {

@@ -16,6 +16,35 @@
   transition: 0.5s;
 }
 
+.divImgPlantilla {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+}
+
+.divImgPlantilla > div > img {
+  object-fit: cover;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--selection);
+}
+.divImgPlantilla > div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+}
+.divImgPlantilla > div > p {
+  margin: 0;
+  padding: 0;
+}
+
 .plantillaDetails {
   width: 90% !important;
 }
@@ -170,7 +199,7 @@
   margin-right: 1rem;
   text-align: center;
 }
-.plantilla > img {
+.plantilla > div > img {
   object-fit: cover;
   width: 8rem;
   height: 8rem;
@@ -188,8 +217,7 @@
   width: 100%;
   text-align: center;
 }
-.plantilla > div > h2 {
-}
+
 .plantilla > div > label {
   text-align: center;
   width: 100%;

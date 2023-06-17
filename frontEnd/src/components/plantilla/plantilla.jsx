@@ -124,14 +124,25 @@ export default function Plantilla({
             ) : (
               <h2>{newPlantilla.nombre}</h2>
             )}
-
-            {newPlantilla?.image?.imagePath ? (
-              <img
-                src={`http://localhost:3000/${newPlantilla?.image?.imagePath}`}
-              />
-            ) : (
-              <img src={`/src/assets/images/imgPlantilla.jpeg`} />
-            )}
+            <div className={styles.divImgPlantilla}>
+              {newPlantilla?.image?.imagePath ? (
+                <img
+                  src={`http://localhost:3000/${newPlantilla?.image?.imagePath}`}
+                />
+              ) : (
+                <img src={`/src/assets/images/imgPlantilla.jpeg`} />
+              )}
+              <div>
+                {newPlantilla?.user?.image?.imagePath ? (
+                  <img
+                    src={`http://localhost:3000/${newPlantilla?.user?.image?.imagePath}`}
+                  />
+                ) : (
+                  <img src={`/src/assets/images/perfilUser.jpg`} />
+                )}
+                <p>{newPlantilla?.user?.username}</p>
+              </div>
+            </div>
 
             <div className={styles.info}>
               {!editable && (
