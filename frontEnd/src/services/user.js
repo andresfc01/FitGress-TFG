@@ -84,7 +84,7 @@ export const deleteUser = async (id, token) => {
   const url = "http://localhost:3000/api/user/";
 
   try {
-    const response = await fetch(url + plantilla._id, {
+    const response = await fetch(url + id, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

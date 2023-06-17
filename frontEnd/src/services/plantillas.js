@@ -40,7 +40,6 @@ export const savePlantilla = async (datos, token) => {
 };
 
 const toJSON = (objeto) => {
-  debugger;
   let seriesModificadas = objeto.series.map((serie) => ({
     ...serie,
     ejercicio: serie?.ejercicio?._id,
@@ -134,8 +133,7 @@ const toFormdata = (plantilla) => {
 };
 
 export const deletePlantilla = async (id, token) => {
-  const url = "http://localhost:3000/api/plantilla/";
-
+  const url = "http://localhost:3000/api/plantillaEntrenamiento/";
   try {
     const response = await fetch(url + id, {
       method: "DELETE",
