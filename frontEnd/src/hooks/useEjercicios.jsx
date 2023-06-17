@@ -15,7 +15,6 @@ export function useEjercicios({ busqueda, sort }) {
 
   async function fetchEjercicios() {
     var newEjercicios = await searchEjercicios();
-    console.log(newEjercicios);
     if (sort) {
       newEjercicios = newEjercicios.sort((a, b) =>
         a.nombre.localeCompare(b.nombre)

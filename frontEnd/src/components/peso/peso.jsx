@@ -58,13 +58,13 @@ export default function Peso({
       <div className={styles.peso}>
         {editing ? (
           <>
-          <label htmlFor="">Peso : </label>
+            <label htmlFor="">Peso : </label>
             <input
               type="text"
               value={newPeso}
               onChange={(e) => setNewPeso(e.target.value)}
             />
-            
+
             <p onClick={handleConfirmClick}>✅</p>
             <p onClick={handleDeleteClick}>❌</p>
           </>
@@ -78,10 +78,18 @@ export default function Peso({
             </small>
             <p
               className={
-                clasePeso === 1 ? styles.pesoCorrecto : styles.pesoIncorrecto
+                pesoAnt
+                  ? clasePeso === 1
+                    ? styles.pesoCorrecto
+                    : styles.pesoIncorrecto
+                  : ""
               }
             >
-              {diferencia > 0 ? `+${diferencia}kg.` : `${diferencia}kg.`}
+              {pesoAnt
+                ? diferencia > 0
+                  ? `+${diferencia}kg.`
+                  : `${diferencia}kg.`
+                : "0kg"}
             </p>
             <p className={styles.editar} onClick={handleEditClick}>
               ✏️

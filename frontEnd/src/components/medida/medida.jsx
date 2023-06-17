@@ -73,19 +73,25 @@ export default function Medida({
           <>
             <p>{parte}</p>
             <p>
-               <strong>{medida.medida}cm.</strong>
+              <strong>{medida.medida}cm.</strong>
             </p>
             <small>
               <i>{convertirFecha(medida.fecha)}</i>
             </small>
             <p
               className={
-                claseMedida === 1
-                  ? styles.medidaCorrecto
-                  : styles.medidaIncorrecto
+                medidaAnt
+                  ? claseMedida === 1
+                    ? styles.medidaCorrecto
+                    : styles.medidaIncorrecto
+                  : ""
               }
             >
-              {diferencia > 0 ? `+${diferencia}cm.` : `${diferencia}cm.`}
+              {medidaAnt
+                ? diferencia > 0
+                  ? `+${diferencia}kg.`
+                  : `${diferencia}kg.`
+                : "0kg"}
             </p>
             <p className={styles.editar} onClick={handleEditClick}>
               ✏️

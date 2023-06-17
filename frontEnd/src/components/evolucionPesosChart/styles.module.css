@@ -8,6 +8,17 @@
   align-items: center;
   border-radius: 7px;
   order: 1;
+  gap: 0.5rem;
+}
+.grafico p {
+  margin: 0;
+  padding: 0;
+}
+.selecPeriodo {
+  color: var(--selection);
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 .filtros {
   display: flex;

@@ -87,65 +87,69 @@ export default function LineChartTabs({ medidas }) {
   };
 
   return (
-    <div className={styles.grafico}>
-      {period == "" && <p>Selecciona un periodo</p>}
-      <div className={styles.filtros}>
-        <button
-          onClick={() => setPeriod("1M")}
-          className={period == "1M" ? "btnPrincipal" : ""}
-        >
-          1 Mes
-        </button>
-        <button
-          onClick={() => setPeriod("3M")}
-          className={period == "3M" ? "btnPrincipal" : ""}
-        >
-          3 Meses
-        </button>
-        <button
-          onClick={() => setPeriod("6M")}
-          className={period == "6M" ? "btnPrincipal" : ""}
-        >
-          6 Meses
-        </button>
-        <button
-          onClick={() => setPeriod("1Y")}
-          className={period == "1Y" ? "btnPrincipal" : ""}
-        >
-          1 Año
-        </button>
-        <button
-          onClick={() => setPeriod("total")}
-          className={period == "total" ? "btnPrincipal" : ""}
-        >
-          Total
-        </button>
-      </div>
-      {emptyData ? (
-        <p>No hay datos disponibles para el período seleccionado.</p>
-      ) : (
-        <LineChart width={400} height={300} data={filteredMedidas}>
-          <XAxis
-            dataKey="fecha"
-            tickFormatter={formatDate}
-            tick={{ fill: "var(--text-main)" }}
-          />
-          <YAxis
-            domain={[minY, maxY]}
-            tickFormatter={formatMedida}
-            tick={{ fill: "var(--text-main)" }}
-          />
-          <Tooltip />
-          <Legend verticalAlign="top" align="right" />
-          <Line
-            type="linear"
-            dataKey="medida"
-            stroke="var(--selection)"
-            strokeWidth={2}
-            dot={false}
-          />
-        </LineChart>
+    <>
+      {period == "" && (
+        <p className={styles.selecPeriodo}>Selecciona un periodo</p>
       )}
-    </div>
+      <div className={styles.grafico}>
+        <div className={styles.filtros}>
+          <button
+            onClick={() => setPeriod("1M")}
+            className={period == "1M" ? "btnPrincipal" : ""}
+          >
+            1 Mes
+          </button>
+          <button
+            onClick={() => setPeriod("3M")}
+            className={period == "3M" ? "btnPrincipal" : ""}
+          >
+            3 Meses
+          </button>
+          <button
+            onClick={() => setPeriod("6M")}
+            className={period == "6M" ? "btnPrincipal" : ""}
+          >
+            6 Meses
+          </button>
+          <button
+            onClick={() => setPeriod("1Y")}
+            className={period == "1Y" ? "btnPrincipal" : ""}
+          >
+            1 Año
+          </button>
+          <button
+            onClick={() => setPeriod("total")}
+            className={period == "total" ? "btnPrincipal" : ""}
+          >
+            Total
+          </button>
+        </div>
+        {emptyData ? (
+          <p>No hay datos disponibles para el período seleccionado.</p>
+        ) : (
+          <LineChart width={400} height={300} data={filteredMedidas}>
+            <XAxis
+              dataKey="fecha"
+              tickFormatter={formatDate}
+              tick={{ fill: "var(--text-main)" }}
+            />
+            <YAxis
+              domain={[minY, maxY]}
+              tickFormatter={formatMedida}
+              tick={{ fill: "var(--text-main)" }}
+            />
+            <Tooltip />
+            <Legend verticalAlign="top" align="right" />
+            <Line
+              type="linear"
+              dataKey="medida"
+              stroke="var(--selection)"
+              strokeWidth={2}
+              dot={false}
+            />
+          </LineChart>
+        )}
+      </div>
+    </>
   );
 }
