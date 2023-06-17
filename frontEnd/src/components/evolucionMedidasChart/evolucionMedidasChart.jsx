@@ -9,22 +9,24 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function LineChartTabs({ medidas }) {
   const [emptyData, setEmptyData] = useState(false);
   const [filteredMedidas, setFilteredMedidas] = useState([...medidas]);
   const [period, setPeriod] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
     handleFilter();
-  }, [period]);
+  }, [period, startDate, endDate]);
   // Función para formatear la fecha
   const formatDate = (dateString) => {
     const options = { day: "2-digit", month: "2-digit", year: "2-digit" };
     return new Date(dateString).toLocaleDateString("es-ES", options);
   };
-
-  const formatMedida = (medida) => `${medida}cm`;
 
   // Obtener los valores mínimos y máximos del eje Y
   const valoresMedida = filteredMedidas.map((item) => item.medida);
@@ -79,6 +81,70 @@ export default function LineChartTabs({ medidas }) {
         break;
     }
 
+    if (startDate && endDate) {
+      filteredData = filteredData.filter(
+        (item) =>
+          new Date(item.fecha) >= startDate && new Date(item.fecha) <= endDate
+      );
+    }
+
+    // Generar datos fake
+    if (filteredData.length > 0) {
+      const minDate = new Date(
+        Math.min(...filteredData.map((medida) => new Date(medida.fecha)))
+      );
+      const maxDate = new Date(
+        Math.max(...filteredData.map((medida) => new Date(medida.fecha)))
+      );
+
+      // Generar medidas ficticios entre las fechas existentes
+      const generatedData = [];
+      const currentDate = new Date(filteredData[0].fecha);
+
+      while (currentDate <= new Date()) {
+        const dataItem = filteredData.find(
+          (item) =>
+            new Date(item.fecha).setHours(0, 0, 0, 0) ===
+            currentDate.setHours(0, 0, 0, 0)
+        );
+
+        if (dataItem) {
+          generatedData.push(dataItem);
+        } else {
+          const previousData = filteredData.find(
+            (item) => new Date(item.fecha) < currentDate
+          );
+          const nextData = filteredData.find(
+            (item) => new Date(item.fecha) > currentDate
+          );
+
+          if (previousData && nextData) {
+            const previousDate = new Date(previousData.fecha);
+            const nextDate = new Date(nextData.fecha);
+            const timeDiff = nextDate.getTime() - previousDate.getTime();
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            const medidaDiff = nextData.medida - previousData.medida;
+            const medidaPerDay = medidaDiff / daysDiff;
+            const daysSincePrevious = Math.ceil(
+              (currentDate.getTime() - previousDate.getTime()) /
+                (1000 * 3600 * 24)
+            );
+            const generatedMedida =
+              previousData.medida + medidaPerDay * daysSincePrevious;
+
+            generatedData.push({
+              fecha: currentDate.toISOString(),
+              medida: generatedMedida,
+            });
+          }
+        }
+
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      filteredData = generatedData;
+    }
+
     // Verificar si los datos filtrados están vacíos
     setEmptyData(filteredData.length === 0 || filteredData.length === 1);
 
@@ -86,39 +152,88 @@ export default function LineChartTabs({ medidas }) {
     setFilteredMedidas(filteredData);
   };
 
+  const formatMedida = (medida) => `${medida.toFixed(1)}cm.`;
+
+  const handlePeriodClick = (selectedPeriod) => {
+    setPeriod(selectedPeriod);
+    setStartDate(null);
+    setEndDate(null);
+  };
+
+  const handleDateSelection = (date) => {
+    if (startDate === null) {
+      setStartDate(date);
+    } else if (endDate === null && date !== startDate) {
+      setEndDate(date);
+    } else {
+      // Ambas fechas están seleccionadas, deseleccionarlas
+      setStartDate(null);
+      setEndDate(null);
+    }
+
+    if (period !== "") {
+      setPeriod("");
+    }
+  };
+
+  const clearDates = () => {
+    setStartDate(null);
+    setEndDate(null);
+  };
+
   return (
     <>
       {period == "" && (
         <p className={styles.selecPeriodo}>Selecciona un periodo</p>
       )}
+      <div className={styles.filtroFechas}>
+        <label htmlFor="">Fecha inicio</label>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => handleDateSelection(date)}
+          placeholderText="Fecha de inicio"
+          dateFormat="dd/MM/yyyy"
+          className={styles.datePicker}
+          onClick={() => clearDates()}
+        />
+        <label htmlFor="">Fecha fin</label>
+        <DatePicker
+          selected={endDate}
+          onChange={(date) => handleDateSelection(date)}
+          placeholderText="Fecha de fin"
+          dateFormat="dd/MM/yyyy"
+          className={styles.datePicker}
+          onClick={() => clearDates()}
+        />
+      </div>
       <div className={styles.grafico}>
         <div className={styles.filtros}>
           <button
-            onClick={() => setPeriod("1M")}
+            onClick={() => handlePeriodClick("1M")}
             className={period == "1M" ? "btnPrincipal" : ""}
           >
             1 Mes
           </button>
           <button
-            onClick={() => setPeriod("3M")}
+            onClick={() => handlePeriodClick("3M")}
             className={period == "3M" ? "btnPrincipal" : ""}
           >
             3 Meses
           </button>
           <button
-            onClick={() => setPeriod("6M")}
+            onClick={() => handlePeriodClick("6M")}
             className={period == "6M" ? "btnPrincipal" : ""}
           >
             6 Meses
           </button>
           <button
-            onClick={() => setPeriod("1Y")}
+            onClick={() => handlePeriodClick("1Y")}
             className={period == "1Y" ? "btnPrincipal" : ""}
           >
             1 Año
           </button>
           <button
-            onClick={() => setPeriod("total")}
+            onClick={() => handlePeriodClick("total")}
             className={period == "total" ? "btnPrincipal" : ""}
           >
             Total
@@ -127,27 +242,35 @@ export default function LineChartTabs({ medidas }) {
         {emptyData ? (
           <p>No hay datos disponibles para el período seleccionado.</p>
         ) : (
-          <LineChart width={400} height={300} data={filteredMedidas}>
-            <XAxis
-              dataKey="fecha"
-              tickFormatter={formatDate}
-              tick={{ fill: "var(--text-main)" }}
-            />
-            <YAxis
-              domain={[minY, maxY]}
-              tickFormatter={formatMedida}
-              tick={{ fill: "var(--text-main)" }}
-            />
-            <Tooltip />
-            <Legend verticalAlign="top" align="right" />
-            <Line
-              type="linear"
-              dataKey="medida"
-              stroke="var(--selection)"
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
+          filteredMedidas && (
+            <LineChart width={400} height={300} data={filteredMedidas}>
+              <CartesianGrid strokeDasharray="6 6" opacity={0.3} />
+              <XAxis
+                dataKey="fecha"
+                tickFormatter={(fecha) => formatDate(fecha)}
+                tick={{ fill: "var(--text-main)" }}
+                type="category"
+              />
+              <YAxis
+                domain={["dataMin", "dataMax"]}
+                tickFormatter={formatMedida}
+                tick={{ fill: "var(--text-main)" }}
+              />
+              <Tooltip
+                labelFormatter={(label) => formatDate(label)}
+                formatter={(value) => `${formatMedida(value)}`}
+                labelStyle={{ color: "var(--background-input)" }}
+              />
+              <Legend verticalAlign="top" align="right" />
+              <Line
+                type="linear"
+                dataKey="medida"
+                stroke="var(--selection)"
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          )
         )}
       </div>
     </>

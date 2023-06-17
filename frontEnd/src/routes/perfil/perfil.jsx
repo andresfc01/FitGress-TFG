@@ -13,7 +13,7 @@ import { usePerfil } from "../../hooks/usePerfil";
 import { isLogged } from "../../components/isLogged";
 
 export default function App() {
-  isLogged();
+  /* isLogged(); */
   const { user } = useContext(AppContext);
   const rutaImg = "http://localhost:3000/" + user?.image?.imagePath;
   const {
