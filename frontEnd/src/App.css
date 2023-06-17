@@ -99,12 +99,29 @@
   font-size: xx-large;
   text-decoration: none;
   transition: 0.3s;
+
+  opacity: 0;
+  animation: fadeAndMove 0.6s ease-in-out forwards;
 }
 .enlaceAdmin:hover {
   text-decoration: none;
   background-color: var(--color-secondary);
   color: var(--text-main);
   font-size: x-large;
+}
+
+@keyframes fadeAndMove {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
 .descAdmin {
@@ -147,6 +164,19 @@
   justify-content: center;
 
   gap: 1rem;
+
+  opacity: 0;
+  animation: fadeAndMove 0.5s ease-in-out forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .formulario > div > label {
@@ -177,4 +207,41 @@
 .breadCrumbs p {
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  opacity: 0;
+  animation: aaa 0.5s ease-in-out forwards;
+  transition: 0.5s;
+}
+
+@keyframes aaa {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+input,
+select {
+  animation: bbb 0.3s ease-in-out forwards;
+  transition: 0.3s;
+}
+input:hover,
+select:hover {
+  background-color: var(--color-secondary);
+}
+
+@keyframes bbb {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }

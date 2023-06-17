@@ -12,7 +12,34 @@
 
   max-width: 77rem;
   gap: 1rem;
+  border: 1px solid invisible;
+  transition: 0.5s;
 }
+.animPlantilla {
+  opacity: 0;
+  animation: fadeAndMove 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeAndMove {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.animPlantilla:hover {
+  transform: scale(1.1);
+  background-color: var(--background-body);
+  border: 1px solid var(--selection);
+}
+
 .plantilla > h2 {
   width: 100%;
   text-align: center;

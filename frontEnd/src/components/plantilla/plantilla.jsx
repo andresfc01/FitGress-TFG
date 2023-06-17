@@ -106,7 +106,11 @@ export default function Plantilla({
             </>
           )}
 
-          <div className={styles.plantilla}>
+          <div
+            className={`${styles.plantilla} ${
+              !showDetails ? styles.animPlantilla : ""
+            } ${!showDetails ? styles.hoverPlantilla : ""}`}
+          >
             {editable ? (
               <div className={styles.divNombreEdit}>
                 <label htmlFor="">Nombre : </label>

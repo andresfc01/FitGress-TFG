@@ -7,7 +7,7 @@
   right: 2%;
   animation: slideInFromRight 0.75s ease-in-out;
 
-  z-index: 9999;
+  z-index: 100;
 }
 .alertaError {
   background-color: rgb(159, 97, 97);
@@ -18,7 +18,7 @@
   right: 2%;
   animation: slideInFromRight 0.75s ease-in-out;
 
-  z-index: 9999;
+  z-index: 100;
 }
 
 .fadeOut {

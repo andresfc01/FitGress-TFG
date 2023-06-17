@@ -18,13 +18,12 @@ export function esAdmin() {
         setAlertText("Debes de ser administrador");
         setAlertTypeSuccess(false);
         setShowAlert(true);
-
         navigate("/login");
       }
     };
 
     checkAdminStatus();
-  }, [navigate, user]);
+  }, [user]);
 
   return null; // Opcionalmente, puedes devolver algo aquí si es necesario
 }

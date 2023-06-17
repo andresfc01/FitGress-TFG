@@ -10,6 +10,30 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  opacity: 0;
+  animation: fadeAndMove 0.6s ease-in-out forwards;
+  transition: 0.5s;
+}
+
+@keyframes fadeAndMove {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.1);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.ejercicio:hover {
+  transform: scale(1.1);
+  background-color: var(--background-body);
+  border: 1px solid var(--selection);
 }
 
 .ejercicio video {
