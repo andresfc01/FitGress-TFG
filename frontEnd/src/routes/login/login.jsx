@@ -6,6 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import { useLogin } from "../../api/useLogin";
 import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Form = () => {
   const schema = yup.object().shape({
@@ -31,6 +33,7 @@ const Form = () => {
   const { setUser } = useContext(AppContext);
   const { userLogin, loginUser } = useLogin();
   const [error, setError] = useState(null);
+  const [typePassword, setTypePassword] = useState(true);
 
   useEffect(() => {
     if (userLogin?.status != 200) {
@@ -65,7 +68,15 @@ const Form = () => {
         </div>
         <div>
           <label htmlFor="">Contraseña</label>
-          <input type="password" {...register("password")} />
+          <input
+            type={typePassword ? "password" : "text"}
+            {...register("password")}
+          />
+          <FontAwesomeIcon
+            className="ojoContrasena"
+            icon={faEye}
+            onClick={() => setTypePassword(!typePassword)}
+          />
           <p
             className="msgError"
             style={{ display: errors.password ? "block" : "none" }}

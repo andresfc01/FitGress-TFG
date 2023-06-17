@@ -10,7 +10,11 @@ import Plantilla from "../../components/plantilla/plantilla";
 import { getPlantillasMasUsadas } from "../../services/plantillas";
 import styles from "./styles.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faArrowRight,
+  faEye,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Form = () => {
   const schema = yup.object().shape({
@@ -142,6 +146,9 @@ const Form = () => {
     }
   };
 
+  const [typePassword, setTypePassword] = useState(true);
+  const [typePassword2, setTypePassword2] = useState(true);
+
   return (
     <>
       {fase < 2 && (
@@ -188,13 +195,18 @@ const Form = () => {
                     {errors.email?.message}
                   </p>
                 </div>
-                <div>
+                <div className="divPassword">
                   <label htmlFor="password">Contraseña:</label>
                   <input
-                    type="password"
+                    type={typePassword ? "password" : "text"}
                     {...register("password")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <FontAwesomeIcon
+                    className="ojoContrasena"
+                    icon={faEye}
+                    onClick={() => setTypePassword(!typePassword)}
                   />
                   <p
                     className="msgError"
@@ -204,12 +216,17 @@ const Form = () => {
                   </p>
                 </div>
 
-                <div>
+                <div className="divPassword">
                   <label htmlFor="confirmPassword">Confirmar contraseña:</label>
                   <input
-                    type="password"
+                    type={typePassword2 ? "password" : "text"}
                     id="confirmPassword"
                     {...register("confirmPassword")}
+                  />
+                  <FontAwesomeIcon
+                    className="ojoContrasena"
+                    icon={faEye}
+                    onClick={() => setTypePassword2(!typePassword2)}
                   />
                   <p
                     className="msgError"

@@ -3,6 +3,8 @@ import { sendEmailRestaurarContrasena } from "../../services/email";
 import { changePassword } from "../../services/user";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 function generateRandomCode() {
   let code = "";
@@ -29,6 +31,9 @@ export default function App() {
   const [error, setError] = useState(undefined);
   const [contrasena, setContrasena] = useState("");
   const [contrasena2, setContrasena2] = useState("");
+
+  const [typePassword, setTypePassword] = useState(true);
+  const [typePassword2, setTypePassword2] = useState(true);
 
   useEffect(() => {
     if (fase == 1 && !emailEnviado) {
@@ -101,20 +106,30 @@ export default function App() {
         <div className="formulario">
           {error && <p className="msgError">{error}</p>}
           <p>Escribe tu nueva contraseña</p>
-          <div>
+          <div className="divPassword">
             <label htmlFor="">Contraseña</label>
             <input
-              type="password"
+              type={typePassword ? "password" : "text"}
               value={contrasena}
               onChange={(ev) => setContrasena(ev.target.value)}
             />
+            <FontAwesomeIcon
+              className="ojoContrasena"
+              icon={faEye}
+              onClick={() => setTypePassword(!typePassword)}
+            />
           </div>
-          <div>
+          <div className="divPassword">
             <label htmlFor="">Repite la contraseña</label>
             <input
-              type="password"
+              type={typePassword2 ? "password" : "text"}
               value={contrasena2}
               onChange={(ev) => setContrasena2(ev.target.value)}
+            />
+            <FontAwesomeIcon
+              className="ojoContrasena"
+              icon={faEye}
+              onClick={() => setTypePassword2(!typePassword2)}
             />
           </div>
           <button
