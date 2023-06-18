@@ -146,6 +146,7 @@ nav ul li a:hover {
 }
 
 .menuPerfilVisible {
+  z-index: 1000;
   opacity: 0;
   animation: fadeAndMove 0.6s ease-in-out forwards;
 }

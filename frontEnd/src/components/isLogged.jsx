@@ -8,18 +8,20 @@ export function isLogged() {
     useContext(AppContext);
 
   useEffect(() => {
-    const checkAdminStatus = async () => {
-      if (!user) {
-        setAlertText("Debes de iniciar sesión");
-        setAlertTypeSuccess(false);
-        setShowAlert(true);
+    if (user) {
+      checkAdminStatus();
+    }
+  }, [user]);
 
-        navigate("/login");
-      }
-    };
+  const checkAdminStatus = async () => {
+    if (!user) {
+      setAlertText("Debes de iniciar sesión");
+      setAlertTypeSuccess(false);
+      setShowAlert(true);
 
-    checkAdminStatus();
-  }, [navigate, user]);
+      navigate("/login");
+    }
+  };
 
   return null; // Opcionalmente, puedes devolver algo aquí si es necesario
 }
